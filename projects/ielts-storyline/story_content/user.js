@@ -2,10 +2,10 @@ function ExecuteScript(strId)
 {
   switch (strId)
   {
-      case "6QW71FFop9D":
+      case "6NqHSUXvzMi":
         Script1();
         break;
-      case "61KlsOcbTmO":
+      case "6b14kbzbDpl":
         Script2();
         break;
   }
@@ -36,7 +36,7 @@ var data =
   "&strategy_review=" + encodeURIComponent(player.GetVar("strategy_review")) +
   "&strategy_refinement=" + encodeURIComponent(player.GetVar("strategy_refinement")) +
   "&strategy_realigned=" + encodeURIComponent(player.GetVar("strategy_realigned")) +
-  "&gap_impact=" + encodeURIComponent(player.GetVar("gap_impact")) + 
+  "&gap_impact=" + encodeURIComponent(player.GetVar("gap_impact")) +
 
   "&improvement_attribution=" + encodeURIComponent(player.GetVar("improvement_attribution")) +
   "&difficulty_attribution=" + encodeURIComponent(player.GetVar("difficulty_attribution")) +
@@ -49,14 +49,12 @@ var data =
 
 fetch("https://script.google.com/macros/s/AKfycbxDbpb2y8wn1ssebSyDdebCkK2NlFR7zNQC8hLY3A6lB6lpDb2_5AtfM62qYQWORgw2Qg/exec", {
   method: "POST",
+  mode: "no-cors",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   },
   body: data
-})
-.then(res => res.text())
-.then(txt => alert("SUCCESS: " + txt))
-.catch(err => alert("ERROR: " + err));
+});
 }
 
 function Script2()
@@ -84,7 +82,7 @@ var data =
   "&strategy_review=" + encodeURIComponent(player.GetVar("strategy_review")) +
   "&strategy_refinement=" + encodeURIComponent(player.GetVar("strategy_refinement")) +
   "&strategy_realigned=" + encodeURIComponent(player.GetVar("strategy_realigned")) +
-  "&gap_impact=" + encodeURIComponent(player.GetVar("gap_impact")) + 
+  "&gap_impact=" + encodeURIComponent(player.GetVar("gap_impact")) +
 
   "&improvement_attribution=" + encodeURIComponent(player.GetVar("improvement_attribution")) +
   "&difficulty_attribution=" + encodeURIComponent(player.GetVar("difficulty_attribution")) +
@@ -97,13 +95,11 @@ var data =
 
 fetch("https://script.google.com/macros/s/AKfycbxDbpb2y8wn1ssebSyDdebCkK2NlFR7zNQC8hLY3A6lB6lpDb2_5AtfM62qYQWORgw2Qg/exec", {
   method: "POST",
+  mode: "no-cors",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
   },
   body: data
-})
-.then(res => res.text())
-.then(txt => alert("SUCCESS: " + txt))
-.catch(err => alert("ERROR: " + err));
+});
 }
 
