@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Improving IELTS Writing with Focus — Haifa Audrey Azzahra</title>
+  <meta name="description" content="Case study: A full-cycle Self-Regulated Learning experience for IELTS Writing Band 6.5 learners, built with Articulate Storyline 3 and a Claude AI writing coach." />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── PAGE-SPECIFIC ADDITIONS ── */
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 1.75rem 0;
+    }
+    .phase-card {
+      border-radius: 6px;
+      padding: 1.5rem;
+      border: 1px solid rgba(26,24,20,0.07);
+    }
+    .phase-card-forethought { background: #EEF6FB; border-top: 4px solid #2A7B9B; }
+    .phase-card-performance { background: #EBF5EE; border-top: 4px solid #2A7B4E; }
+    .phase-card-reflection  { background: #F5EEEB; border-top: 4px solid #7B4A2A; }
+    .phase-card-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    .phase-card-forethought .phase-card-label { color: #2A7B9B; }
+    .phase-card-performance .phase-card-label { color: #2A7B4E; }
+    .phase-card-reflection  .phase-card-label { color: #7B4A2A; }
+    .phase-card-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .phase-card p {
+      font-size: 0.82rem !important;
+      color: var(--ink-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    .tool-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.75rem 0;
+    }
+    .tool-card {
+      background: var(--white);
+      border: 1px solid rgba(26,24,20,0.08);
+      border-radius: 6px;
+      padding: 1.5rem;
+    }
+    .tool-card-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .tool-card p {
+      font-size: 0.82rem !important;
+      color: var(--ink-muted) !important;
+      line-height: 1.65 !important;
+      margin: 0 !important;
+    }
+
+    .var-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.82rem;
+    }
+    .var-table th {
+      background: var(--cobalt);
+      color: var(--white);
+      padding: 0.6rem 0.9rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .var-table td {
+      padding: 0.55rem 0.9rem;
+      border-bottom: 1px solid rgba(26,24,20,0.06);
+      color: var(--ink-muted);
+      vertical-align: top;
+    }
+    .var-table tr:nth-child(even) td { background: rgba(41,82,196,0.03); }
+    .var-table .phase-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2rem;
+    }
+    .badge-f { background: #EEF6FB; color: #2A7B9B; }
+    .badge-p { background: #EBF5EE; color: #2A7B4E; }
+    .badge-r { background: #F5EEEB; color: #7B4A2A; }
+
+    .dev-links {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+      margin: 1.5rem 0;
+    }
+    .dev-link {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 0.5rem 1rem;
+      border: 1.5px solid var(--cobalt);
+      color: var(--cobalt);
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .dev-link:hover { background: var(--cobalt); color: var(--white); }
+
+    .disclaimer-banner {
+      background: var(--ivory-dark);
+      border: 1px solid rgba(26,24,20,0.1);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2.5rem;
+      display: flex; gap: 0.75rem; align-items: flex-start;
+    }
+    .disclaimer-banner p {
+      font-size: 0.82rem !important;
+      color: var(--ink-muted) !important;
+      margin: 0 !important;
+      line-height: 1.65 !important;
+    }
+
+    @media (max-width: 700px) {
+      .phase-grid { grid-template-columns: 1fr; }
+      .tool-row   { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../index.html#work" class="active">Work</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PROJECT HERO -->
+  <div class="project-hero" style="background: linear-gradient(135deg, #1E3D96 0%, #2A7B7E 100%);">
+    <div class="project-hero-inner">
+      <p class="project-hero-breadcrumb">
+        <a href="../index.html">Home</a> &nbsp;/&nbsp;
+        <a href="../index.html#work">Work</a> &nbsp;/&nbsp;
+        Improving IELTS Writing with Focus
+      </p>
+      <h1 class="project-hero-title">Improving IELTS Writing with Focus</h1>
+      <p class="project-hero-sub">A full-cycle Self-Regulated Learning experience — designed from Zimmerman's SRL framework outward, using a two-tool ecosystem where Storyline manages the session architecture and an AI writing coach provides adaptive, essay-specific feedback.</p>
+    </div>
+  </div>
+
+  <!-- META STRIP -->
+  <div class="project-meta-strip" style="background: #172F75;">
+    <div class="project-meta-strip-inner">
+      <div>
+        <div class="meta-label">Tools</div>
+        <div class="meta-value">Storyline 3 · Claude Artifact · JS · Google Sheets</div>
+      </div>
+      <div>
+        <div class="meta-label">Audience</div>
+        <div class="meta-value">Band 6.5 IELTS learners (independent study)</div>
+      </div>
+      <div>
+        <div class="meta-label">Duration</div>
+        <div class="meta-value">1–3 hours per session</div>
+      </div>
+      <div>
+        <div class="meta-label">Format</div>
+        <div class="meta-value">Self-paced interactive module</div>
+      </div>
+      <div>
+        <div class="meta-label">Published</div>
+        <div class="meta-value">April 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="project-body">
+
+    <!-- MAIN CONTENT -->
+    <article class="project-content">
+
+      <div class="disclaimer-banner">
+        <span style="font-size:1rem;">📋</span>
+        <p><strong>Note:</strong> This is a conceptual project developed for this portfolio. The design, architecture, and evaluation framework are fully realised — the Storyline module and AI coach are functional prototypes.</p>
+      </div>
+
+      <h2>The Problem</h2>
+      <p>IELTS Academic Writing is the section most likely to hold Band 6.5 learners back. Unlike listening or reading, there is no single correct answer — performance is judged across four interdependent criteria (Task Achievement, Coherence &amp; Cohesion, Lexical Resource, and Grammatical Range &amp; Accuracy), under 60-minute time pressure, with Task 2 carrying double the weight (British Council, ETS, IDP: IELTS Australia, 2020).</p>
+      <p>In Indonesia, many learners prepare independently due to cost barriers. Resources are widely available, but without structure, independent preparation tends to produce inconsistent practice, poor effort allocation, and a cycle of repeated test attempts — financial strain, declining confidence, reduced motivation.</p>
+
+      <div class="callout">
+        <p>🎯 <strong>Design question:</strong> How do you give a self-studying learner the structure of a coached session — without a coach, an LMS, or a budget?</p>
+      </div>
+
+      <h2>Learning Needs Analysis</h2>
+      <p>The core gap addressed here is not a lack of knowledge of IELTS criteria. Many Band 6.5 learners can identify assessment criteria, yet struggle to apply them consistently under test conditions.</p>
+      <p>This points to a gap in self-regulation: the ability to plan deliberately, monitor performance in real time, and reflect accurately to adapt.</p>
+      <p>Grounded in Zimmerman's Self-Regulated Learning (SRL) framework, this solution operationalises three phases — Forethought, Performance, and Reflection — not as content to be taught, but as a cycle to be practiced. Rather than explaining what SRL is, every scene in the module requires learners to <em>do</em> what self-regulated learners do.</p>
+      <p>Through repeated use, the cycle strengthens goal-setting, reflection accuracy, and metacognitive calibration — key conditions for score improvement. This shifts learners from passive practice to intentional, data-informed learning.</p>
+
+      <h2>The Three-Phase Design</h2>
+
+      <div class="phase-grid">
+        <div class="phase-card phase-card-forethought">
+          <p class="phase-card-label">🔮 Phase 1</p>
+          <div class="phase-card-title">Forethought</div>
+          <p>Band gap analysis, scaffolded goal-setting with sentence stems, motivational grounding, and anxiety reframing. Learners diagnose before prescribing — identifying their own gap before setting a target.</p>
+        </div>
+        <div class="phase-card phase-card-performance">
+          <p class="phase-card-label">🛠 Phase 2</p>
+          <div class="phase-card-title">Performance</div>
+          <p>Learners submit a full essay to the AI writing coach, receive targeted gap analysis, and manually name their primary gap — a deliberate design choice that makes metacognition the action, not a side effect.</p>
+        </div>
+        <div class="phase-card phase-card-reflection">
+          <p class="phase-card-label">🔄 Phase 3</p>
+          <div class="phase-card-title">Reflection</div>
+          <p>Three sequential cognitive moves: evaluate accurately, decide adaptively, commit specifically. Every prompt targets a specific self-regulatory behaviour with a theoretical basis. No generic "how did it go?" questions.</p>
+        </div>
+      </div>
+
+      <h2>The Learning Ecosystem</h2>
+
+      <div class="tool-row">
+        <div class="tool-card">
+          <div class="tool-card-name">
+            <span style="font-size:1.1rem;">⚙️</span> Articulate Storyline 3
+          </div>
+          <p>Chosen for its persistent variable architecture — real-time learner-facing displays, conditional branching on learner-generated input, and session-to-session continuity via looping. The SRL scaffolding, session structure, and all 27 tracked variables live here.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-name">
+            <span style="font-size:1.1rem;">🤖</span> IELTS Writing Coach (Claude Artifact)
+          </div>
+          <p>Chosen because meaningful practice is needed to respond to the learner's actual writing, not pre-built generic exercises. The AI coach provides essay feedback, strategy recommendations, and targeted practice per criterion. The two tools do what each does best.</p>
+          <a href="https://claude.ai/public/artifacts/2665ead7-f4e5-4792-aa50-567f20ba7958" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.85rem;font-size:0.78rem;font-weight:600;color:var(--cobalt);border-bottom:1.5px solid var(--cobalt-pale);padding-bottom:2px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--cobalt)'" onmouseout="this.style.borderColor='var(--cobalt-pale)'">
+            Visit the Artifact
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </div>
+
+
+      <div class="tool-row">
+        <div class="tool-card">
+          <div class="tool-card-name">
+            <span style="font-size:1.1rem;">📊</span> JavaScript + Google Apps Script
+          </div>
+          <p>Chosen as the evaluation layer because the tool was designed for LMS-free, zero-cost deployment. A Google Apps Script Web App receives all 27 session variables via XMLHttpRequest from Storyline, writing each completed session as a new row — enabling longitudinal SRL tracking without infrastructure cost.</p>
+        </div>
+        <div class="tool-card">
+          <div class="tool-card-name">
+            <span style="font-size:1.1rem;">📋</span> Google Sheets
+          </div>
+          <p>The evaluation backend. Each completed session writes one row — timestamped, learner-named, with all Forethought, Performance, and Reflection variables stored in structured columns. Designed to surface SRL pattern changes across sessions.</p>
+        </div>
+      </div>
+
+      <h2>Learning Evaluation</h2>
+      <p><strong>Core question:</strong> Does repeated use of this tool build self-regulation in IELTS writing learners over time?</p>
+
+      <table class="var-table">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Representative indicators (across sessions)</th>
+            <th>Phase</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Goal quality</strong></td>
+            <td>Does <code>smart_goal_action</code> become more specific? Does <code>smart_goal_weeks</code> become more realistic?</td>
+            <td><span class="phase-badge badge-f">Forethought</span></td>
+          </tr>
+          <tr>
+            <td><strong>Self-diagnosis accuracy</strong></td>
+            <td>Does <code>criterion_focus</code> start matching <code>gap_identified</code> more often? Mismatches are expected early — expert self-regulators converge over time.</td>
+            <td><span class="phase-badge badge-p">Performance</span></td>
+          </tr>
+          <tr>
+            <td><strong>Anxiety &amp; self-efficacy trajectory</strong></td>
+            <td>Does the tone of <code>struggle_reframe</code> and <code>self_efficacy</code> become more confident over sessions?</td>
+            <td><span class="phase-badge badge-f">Forethought</span></td>
+          </tr>
+          <tr>
+            <td><strong>Reflection depth</strong></td>
+            <td>Do <code>improvement_attribution</code> responses shift from surface ("I did better") to causal ("I improved because I focused on topic sentences")?</td>
+            <td><span class="phase-badge badge-r">Reflection</span></td>
+          </tr>
+          <tr>
+            <td><strong>Adaptive behaviour</strong></td>
+            <td>Does <code>new_criterion_focus</code> show variety across sessions, or does the learner stay stuck on one criterion?</td>
+            <td><span class="phase-badge badge-r">Reflection</span></td>
+          </tr>
+          <tr>
+            <td><strong>Engagement</strong></td>
+            <td><code>session_count</code> tracks how many full cycles each learner completes; drop-off rate indicates where motivation breaks down.</td>
+            <td><span class="phase-badge badge-f">Forethought</span></td>
+          </tr>
+          <tr>
+            <td><strong>Correlation with score improvement</strong></td>
+            <td>Is there an increase in <code>current_band_score</code> following multiple sessions with enhanced SRL indicators?</td>
+            <td><span class="phase-badge badge-f">Forethought</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Development Materials</h2>
+      <p>The full development documentation is available below — including the Learning Experience Matrix, Claude Artifact build prompt, Google Apps Script, and Storyline JavaScript trigger.</p>
+      <div class="dev-links">
+        <a href="https://drive.google.com/file/d/18M70dS0JegjRNEiDiLkLS3KSs63fsdV3/view?usp=drive_link" target="_blank" class="dev-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Learning Experience Matrix
+        </a>
+        <a href="https://drive.google.com/file/d/1Pe1iKJ7uMWz8lj-e_9qTlfs6CVfgLFBx/view?usp=drive_link" target="_blank" class="dev-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Claude Artifact Prompt
+        </a>
+        <a href="https://drive.google.com/file/d/1yE9Rnbp66q5CmrVM7L5Kf3gK1nPvSkK6/view?usp=drive_link" target="_blank" class="dev-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Google Apps Script
+        </a>
+        <a href="https://drive.google.com/file/d/1D30qUOjr5vdHuIApDHiahU24uMFm1Cku/view?usp=drive_link" target="_blank" class="dev-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          JavaScript
+        </a>
+      </div>
+
+      <h2>The Storyline Module</h2>
+      <p>Upload your published Storyline files to <code>projects/storyline/</code> in your GitHub repository, then the embed below will become live. See the upload instructions at the bottom of this page.</p>
+
+      <!-- STORYLINE EMBED — replace src once uploaded -->
+      <div class="embed-container" id="storyline-embed" style="background:var(--ivory-dark); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:1rem;">
+        <div style="text-align:center; padding:3rem 2rem;">
+          <div style="font-size:2.5rem; margin-bottom:1rem;">🚧</div>
+          <p style="font-family:var(--serif); font-size:1.2rem; font-weight:600; color:var(--ink); margin-bottom:0.5rem;">Storyline module loading soon</p>
+          <p style="font-size:0.85rem; color:var(--ink-muted); max-width:400px; line-height:1.7;">Once the published Storyline files are uploaded to <code>projects/storyline/</code>, replace this block with the iframe below.</p>
+          <p style="font-size:0.78rem; color:var(--ink-light); margin-top:1.5rem; font-family:var(--mono);">
+            &lt;iframe src="../projects/storyline/story.html" ...&gt;
+          </p>
+        </div>
+      </div>
+      <!-- 
+        TO ACTIVATE: Delete the div above and uncomment this:
+        <div class="embed-container">
+          <iframe
+            src="../projects/storyline/story.html"
+            title="Improving IELTS Writing with Focus"
+            allowfullscreen
+            loading="lazy">
+          </iframe>
+        </div>
+      -->
+
+      <h2>Reflection</h2>
+
+      <p><strong>On the design process</strong></p>
+      <p>The pivotal moment was refining the approach from teaching about SRL to designing through it. During the course outline matrix development, every scene was reframed: does this prompt action or reflection, or just comprehension? That single question restructured the entire learning architecture.</p>
+
+      <p><strong>On the tool</strong></p>
+      <p>The current version provides one practice prompt per session. A production version would expand prompt variety and invest further in the Storyline UI/UX — developing a visual language that reinforces self-regulation: calm, focused, and intentionally unhurried. The interface should signal that this is a space for reflection, not speed. The goal would also be better visual cohesion between the Storyline module and the Claude artifact so they feel like one ecosystem rather than two adjacent tools.</p>
+
+      <p><strong>On what it means for learners</strong></p>
+      <p>This learning experience builds the internal process of self-regulation. But self-regulation doesn't mean learning alone — writing improves through feedback, diverse models, and engagement with a learning community. This tool is one part of a larger ecosystem. It doesn't replace the external environment, and it was never designed to.</p>
+
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="project-sidebar">
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Skills Demonstrated</p>
+        <span class="sidebar-tag">Learning Science</span>
+        <span class="sidebar-tag">Self-Regulated Learning</span>
+        <span class="sidebar-tag">Storyline 3</span>
+        <span class="sidebar-tag">AI Integration</span>
+        <span class="sidebar-tag">JavaScript</span>
+        <span class="sidebar-tag">Google Apps Script</span>
+        <span class="sidebar-tag">Learning Evaluation</span>
+        <span class="sidebar-tag">Cognitive Load Management</span>
+        <span class="sidebar-tag">Needs Analysis</span>
+        <span class="sidebar-tag">Instructional Writing</span>
+      </div>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Learning Objective</p>
+        <div class="outcome-item">
+          <div class="outcome-icon">🎯</div>
+          <div class="outcome-text">By the end of repeated sessions, learners will independently regulate their IELTS Writing practice — setting evidence-based goals, monitoring strategy use, and reflecting accurately to drive improvement toward Band 7+.</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Design Frameworks</p>
+        <div class="outcome-item">
+          <div class="outcome-icon">🧠</div>
+          <div class="outcome-text"><strong>Zimmerman's SRL Model</strong> — three-phase session architecture</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon">🎯</div>
+          <div class="outcome-text"><strong>Gollwitzer's Implementation Intentions</strong> — if-then goal planning in Reflection phase</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon">⚡</div>
+          <div class="outcome-text"><strong>Cognitive Load Theory</strong> — sentence stem scaffolding, one-concept-per-scene structure</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon">💬</div>
+          <div class="outcome-text"><strong>Motivational Interviewing</strong> — self-generated reasons displayed back to strengthen commitment</div>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <p class="sidebar-card-title">Variables Tracked</p>
+        <div style="text-align:center; margin-bottom:0.75rem;">
+          <span style="font-family:var(--serif); font-size:2.5rem; font-weight:700; color:var(--cobalt);">27</span>
+          <div style="font-size:0.78rem; color:var(--ink-muted);">session variables per cycle</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon" style="background:var(--cobalt-pale); font-size:0.7rem;">F</div>
+          <div class="outcome-text" style="font-size:0.78rem;">14 Forethought variables</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon" style="background:#EBF5EE; font-size:0.7rem;">P</div>
+          <div class="outcome-text" style="font-size:0.78rem;">5 Performance variables</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon" style="background:#F5EEEB; font-size:0.7rem;">R</div>
+          <div class="outcome-text" style="font-size:0.78rem;">8 Reflection variables</div>
+        </div>
+      </div>
+
+      <div style="text-align:center; padding: 1.5rem 0;">
+        <a href="../index.html#work" style="font-size:0.78rem;color:var(--ink-muted);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid rgba(26,24,20,0.2);padding-bottom:2px;">
+          ← Back to All Work
+        </a>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- HOW TO ADD YOUR STORYLINE MODULE -->
+  <div style="background:var(--cobalt); padding:3rem;">
+    <div style="max-width:var(--max-w); margin:0 auto;">
+      <p style="font-family:var(--mono);font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:0.75rem;">For Haifa — GitHub Upload Instructions</p>
+      <h3 style="font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--white);margin-bottom:1rem;">How to add your Storyline module to this page</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;">
+        <div style="background:rgba(255,255,255,0.08);border-radius:6px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;">STEP 1</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;margin:0;">In Storyline, click <strong>Publish → Web</strong>. Note the output folder location.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:6px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;">STEP 2</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;margin:0;">On GitHub, go to your repo → <strong>Add file → Upload files</strong>. Create path <code style="background:rgba(255,255,255,0.12);padding:0.1rem 0.3rem;border-radius:2px;">projects/storyline/</code> and upload all exported files.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:6px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;">STEP 3</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;margin:0;">In this file, find the comment block near "The Storyline Module" heading. Delete the placeholder div and uncomment the iframe.</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border-radius:6px;padding:1.25rem;">
+          <div style="font-family:var(--mono);font-size:0.7rem;color:rgba(255,255,255,0.5);margin-bottom:0.5rem;">STEP 4</div>
+          <p style="font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.7;margin:0;">Commit the updated HTML file. Wait 1–2 minutes → your module is live inside the case study.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
+    <div class="footer-copy">© 2026 · Built with intention.</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
+      <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const nav = document.getElementById('navLinks');
+    ham.addEventListener('click', () => nav.classList.toggle('open'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
