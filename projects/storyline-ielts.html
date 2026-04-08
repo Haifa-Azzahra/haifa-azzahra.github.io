@@ -467,4 +467,18 @@
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
 </body>
+
+  <script>
+(function() {
+const originalOpen = window.open;
+
+window.open = function(url, target, features) {
+if (url === "https://claude.ai/public/artifacts/2665ead7-f4e5-4792-aa50-567f20ba7958") {
+url = "https://haifa-azzahra.github.io/ielts-interactive-demo/";
+}
+return originalOpen.call(this, url, target, features);
+};
+})();
+</script>
+
 </html>
