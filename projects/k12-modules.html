@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>K-12 Learning Modules — Haifa Audrey Azzahra</title>
+  <meta name="description" content="Inquiry-based blended learning modules for Indonesian K-12 students" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .project-hero {
+      background: linear-gradient(135deg, #f5f1ed 0%, #e8dfd5 100%);
+      padding: 4rem 3rem 3rem;
+      border-bottom: 4px solid #7B5E3A;
+    }
+    .project-hero-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .project-hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .project-hero-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .project-hero-meta-item {
+      font-size: 0.85rem;
+    }
+    .project-hero-meta-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 0.25rem;
+    }
+    .project-hero-meta-value {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .project-hero-desc {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      max-width: 720px;
+    }
+    .project-section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 4rem 3rem;
+    }
+    .project-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .project-section h3 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 2rem 0 1rem;
+    }
+    .project-section p {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+    .project-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    .project-section li {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .project-section li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: #7B5E3A;
+      font-weight: 600;
+    }
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .snapshot-card {
+      background: var(--white);
+      border: 1px solid rgba(26,24,20,0.1);
+      border-radius: 6px;
+      padding: 1.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .snapshot-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .snapshot-card h4 {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .snapshot-card p {
+      font-size: 0.875rem;
+      color: var(--ink-muted);
+      line-height: 1.7;
+      margin-bottom: 0;
+    }
+    .reflection-box {
+      background: #f9f7f5;
+      border-left: 4px solid #7B5E3A;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+    .reflection-box h4 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+    .reflection-box p {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin-bottom: 0.75rem;
+    }
+    .question-list {
+      margin: 1.5rem 0;
+    }
+    .question-item {
+      background: var(--white);
+      border: 1px solid rgba(26,24,20,0.08);
+      border-radius: 4px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .question-item strong {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .question-item p {
+      font-size: 0.875rem;
+      color: var(--ink-muted);
+      margin-bottom: 0;
+    }
+    .context-box {
+      background: linear-gradient(135deg, #2A7B7E 0%, #2A7B7E 100%);
+      color: var(--white);
+      padding: 2.5rem;
+      border-radius: 8px;
+      margin: 3rem 0;
+    }
+    .context-box h3 {
+      color: var(--white);
+      margin-top: 0;
+    }
+    .context-box p {
+      color: rgba(255,255,255,0.9);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../index.html#work" class="active">Work</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="project-hero">
+    <div class="project-hero-inner">
+      <h1>Pre-School & K-12 Learning Modules for Sekolah.mu</h1>
+      <div class="project-hero-meta">
+        <div class="project-hero-meta-item">
+          <div class="project-hero-meta-label">Role</div>
+          <div class="project-hero-meta-value">Learning Designer</div>
+        </div>
+        <div class="project-hero-meta-item">
+          <div class="project-hero-meta-label">Timeline</div>
+          <div class="project-hero-meta-value">2021–2022</div>
+        </div>
+        <div class="project-hero-meta-item">
+          <div class="project-hero-meta-label">Audience</div>
+          <div class="project-hero-meta-value">Ages 3-11 (Pre-K to Year 6)</div>
+        </div>
+        <div class="project-hero-meta-item">
+          <div class="project-hero-meta-label">Status</div>
+          <div class="project-hero-meta-value">Archive</div>
+        </div>
+      </div>
+      <p class="project-hero-desc">
+        <strong>How can inquiry-based learning grounded in real-world contexts develop deeper thinking in Indonesian learners, and what role does blended learning design play in making that work?</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTEXT -->
+  <section class="project-section">
+    <h2>Context</h2>
+    <p>From 2021-2022, I worked at Sekolah.mu as Learning Strategist Intern and later as Learning Designer for Maths, English, Science, Motoric Skills, and Social-Emotional Learning modules. This experience gave me access to observe vision-driven learning design, effective collaboration among educators, and positive teacher-student interaction that supported deeper learning.</p>
+    
+    <p>Coming from 6 years of public school education focused on rote learning and scores, it was fulfilling to create learning experiences that contrasted mine. The fact that this happened during COVID-19 made me realize the importance of innovation mindset and resilience during crises—recognizing valuable learning moments and protecting them even when things aren't good.</p>
+
+    <div class="context-box">
+      <h3>Why This Matters</h3>
+      <ul style="list-style: none; padding: 0; margin: 1rem 0 0;">
+        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Providing access:</strong> Quality learning extending beyond one physical school</li>
+        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Redefining pedagogy:</strong> Moved away from passive transmission toward active competence-building</li>
+        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Redefining the learner:</strong> Students treated as developing humans with distinct needs, interests, and pathways</li>
+        <li style="margin-bottom: 0; padding-left: 0;"><strong style="color: white;">→ Real-life relevance:</strong> Shifted toward skills PISA and life both demand—only 18% of Indonesian students reached Level 2 in mathematics (2022 PISA), underlining the urgency to build learning experiences that develop reasoning and application, not just material coverage</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CORE INSIGHT -->
+  <section class="project-section" style="background: #f9f7f5; margin: 0; padding: 4rem 3rem;">
+    <div style="max-width: var(--max-w); margin: 0 auto;">
+      <h2>Core Insight</h2>
+      <p style="font-size: 1.05rem; color: var(--ink); font-weight: 500;">Inquiry-based learning grounded in real-world contexts helps students move from procedural thinking to transferable understanding.</p>
+      <p>In blended environments, this happens when:</p>
+      <ul style="margin-top: 1rem;">
+        <li>Async work introduces <strong>questions</strong>, not answers, and facilitation deepens thinking</li>
+        <li>Teachers build a positive environment with psychological safety</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- THREE EXAMPLES -->
+  <section class="project-section">
+    <h2>Three Example Snapshots</h2>
+    
+    <div class="snapshot-grid">
+      <div class="snapshot-card">
+        <h4>Science Module: Sparking Curiosity</h4>
+        <p><em>Architecture, History, and Arts</em></p>
+        <p>Rather than explaining sound waves immediately, students are led to ask: <em>Can we see sound?</em> This is followed by an at-home experiment where students generate evidence, then we formalize the concept together in live class.</p>
+      </div>
+
+      <div class="snapshot-card">
+        <h4>Math Module: Real-World First</h4>
+        <p><em>Geometry and Numbers</em></p>
+        <p>Students start with relevance: <em>Why do museum models look right?</em> This anchors abstract proportion work. Open-ended Padlet discussions before live class let students wonder aloud, so facilitators can address misconceptions.</p>
+      </div>
+
+      <div class="snapshot-card">
+        <h4>Social-Emotional Module</h4>
+        <p><em>Social Awareness</em></p>
+        <p>Students are introduced to gratitude by listening to stories, drawing people they care about, and speaking about why. The competency emerges from doing, not being told.</p>
+      </div>
+    </div>
+
+    <h3>The Blended Learning Piece</h3>
+    <p>In each module, asynchronous work does the heavy lifting of asking questions. Videos and interactive activities introduce 'puzzles' students need to solve. Live facilitation then becomes about enabling inquiry—facilitators listen to student thinking, ask follow-up questions, and help students see patterns. This separation allows students thinking time; it prevents facilitators from rushing to answers.</p>
+  </section>
+
+  <!-- REFLECTIONS -->
+  <section class="project-section" style="background: #f9f7f5; margin: 0; padding: 4rem 3rem;">
+    <div style="max-width: var(--max-w); margin: 0 auto;">
+      <h2>Reflections: Designing for Real Context, Not Ideal Conditions</h2>
+      <p>I designed inquiry-based, blended modules emphasizing deeper thinking and real-world relevance. This work taught me that strong pedagogy isn't enough—learning design succeeds or fails based on how well it accounts for real constraints: market positioning, user capacity, and systemic pressures.</p>
+
+      <div class="reflection-box">
+        <h4>Design Challenge: Scaffolding Inquiry in Different Cultural Contexts</h4>
+        <p>Inquiry-based learning doesn't transfer automatically across pedagogical cultures. Indonesian students are trained in procedural, answer-focused learning. Moving them from "I don't know the answer" to "I want to figure this out" requires deliberate scaffolding—not just interesting activities.</p>
+        <p>I learned that designing for inquiry means designing for the teacher's capacity too: What does a facilitator actually do in the moment to enable genuine inquiry rather than just run activities? This became especially complex when designing across age groups (preschool through Year 6), where scaffolding needs change dramatically.</p>
+      </div>
+
+      <div class="reflection-box">
+        <h4>Product Challenge: Positioning Pedagogy Within Market Realities</h4>
+        <p>These modules were positioned as electives. During COVID they thrived; post-COVID, enrollment patterns shifted. Families made rational choices based on competing priorities and what they valued most.</p>
+        <p>This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as <em>core</em> (directly supporting outcomes families care about) rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement.</p>
+      </div>
+
+      <div class="reflection-box">
+        <h4>Systems Challenge: Designing Around Constraints vs. Addressing Them</h4>
+        <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed <em>around</em> systemic pressures (test scores, admissions competition) rather than engaging with them.</p>
+        <p>I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUESTIONS -->
+  <section class="project-section">
+    <h2>Questions I'm Exploring Next</h2>
+    <div class="question-list">
+      <div class="question-item">
+        <strong>Can inquiry-based learning serve both deeper thinking AND measurable outcomes families care about—or are they fundamentally at odds?</strong>
+      </div>
+      <div class="question-item">
+        <strong>Who actually benefits from blended learning, and what supports do different students need to succeed in this format?</strong>
+      </div>
+      <div class="question-item">
+        <strong>How do I design for the real constraints families face—economic pressure, admissions stakes, limited home support—rather than the ideal scenario I assumed?</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- BACK LINK -->
+  <section class="project-section" style="text-align: center; padding: 3rem;">
+    <a href="../index.html#work" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--cobalt); font-weight: 600; font-size: 0.9rem; text-decoration: none;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to Portfolio
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
+    <div class="footer-copy">© 2025 · Built with intention.</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
+      <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const nav = document.getElementById('navLinks');
+    ham.addEventListener('click', () => nav.classList.toggle('open'));
+  </script>
+</body>
+</html>
