@@ -7,15 +7,14 @@
   <meta name="description" content="Inquiry-based blended learning modules for Indonesian K-12 students" />
   <link rel="stylesheet" href="../style.css" />
   <style>
+
+    /* ── HERO ── */
     .project-hero {
       background: linear-gradient(135deg, #f5f1ed 0%, #e8dfd5 100%);
       padding: 6rem 3rem 4rem;
       border-bottom: 4px solid #7B5E3A;
     }
-    .project-hero-inner {
-      max-width: 800px;
-      margin: 0 auto;
-    }
+    .project-hero-inner { max-width: 800px; margin: 0 auto; }
     .project-hero h1 {
       font-family: var(--serif);
       font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -33,9 +32,6 @@
       padding-bottom: 2rem;
       border-bottom: 1px solid rgba(26,24,20,0.15);
     }
-    .project-hero-meta-item {
-      font-size: 0.9rem;
-    }
     .project-hero-meta-label {
       font-family: var(--mono);
       font-size: 0.65rem;
@@ -44,25 +40,16 @@
       color: var(--ink-light);
       margin-bottom: 0.4rem;
     }
-    .project-hero-meta-value {
-      color: var(--ink);
-      font-weight: 600;
-    }
-    .project-hero-question {
-      font-size: 1.2rem;
-      color: var(--ink);
-      line-height: 1.6;
-      font-weight: 400;
-      font-style: italic;
-    }
+    .project-hero-meta-value { color: var(--ink); font-weight: 600; font-size: 0.9rem; }
+    .project-hero-question { font-size: 1.2rem; color: var(--ink); line-height: 1.6; font-style: italic; }
 
-    /* Article-style sections — narrow for prose */
-    .article-section {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 5rem 3rem;
-    }
-    .article-section h2 {
+    /* ── SECTION WRAPPERS ── */
+    .section-narrow { max-width: 680px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-wide   { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-bg     { background: #f9f7f5; }
+
+    /* ── TYPOGRAPHY ── */
+    .section-narrow h2, .section-wide h2 {
       font-family: var(--serif);
       font-size: clamp(1.8rem, 3vw, 2.4rem);
       font-weight: 600;
@@ -71,423 +58,163 @@
       letter-spacing: -0.01em;
       line-height: 1.25;
     }
-    .article-section h3 {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 3rem 0 1.25rem;
-      letter-spacing: -0.01em;
-    }
-    .article-section p {
+    .section-narrow p, .section-wide p {
       font-size: 1.05rem;
       color: var(--ink-muted);
       line-height: 1.75;
       margin-bottom: 1.5rem;
     }
-    .article-section p:last-child {
-      margin-bottom: 0;
-    }
-    .lead {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      color: var(--ink);
-      margin-bottom: 2rem;
-    }
+    .section-narrow p:last-child, .section-wide p:last-child { margin-bottom: 0; }
+    .lead { font-size: 1.15rem; line-height: 1.72; color: var(--ink); }
 
-    /* Core insight pullquote */
+    /* ── CORE INSIGHT ── */
     .core-insight-box {
-      background: var(--white);
       border-left: 5px solid #7B5E3A;
-      padding: 2.5rem;
-      margin: 3rem 0;
-      border-radius: 4px;
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0 0;
+      background: #fff;
+      border-radius: 0 4px 4px 0;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .core-insight-box p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: var(--ink);
-      margin-bottom: 1rem;
-      font-weight: 500;
-    }
-    .core-insight-box p:last-child {
-      margin-bottom: 0;
-      font-weight: 400;
-      font-size: 1.05rem;
-    }
+    .core-insight-box p { font-size: 1.1rem; color: var(--ink); font-weight: 500; margin-bottom: 1rem; }
+    .core-insight-box p:last-child { font-weight: 400; font-size: 1rem; margin-bottom: 0; }
 
-    /* Why This Matters */
-    .why-matters-section {
-      background: #f9f7f5;
-      padding: 5rem 3rem;
-      margin: 5rem 0 0 0;
-    }
-    .why-matters-inner {
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .why-matters-list {
-      list-style: none;
-      padding: 0;
-      margin: 2rem 0 0;
-    }
-    .why-matters-list > li {
-      font-size: 1.05rem;
+    /* ── WHY LIST ── */
+    .why-list { list-style: none; padding: 0; margin: 1.5rem 0 0; display: flex; flex-direction: column; gap: 1.5rem; }
+    .why-list > li {
+      font-size: 1rem;
       color: var(--ink-muted);
       line-height: 1.75;
-      margin-bottom: 2rem;
-      padding-left: 0;
+      padding-left: 1.25rem;
+      border-left: 2px solid rgba(123,94,58,0.25);
     }
-    .why-matters-list li strong {
-      color: var(--ink);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-    }
-    .why-matters-list ul {
-      margin-top: 1rem;
-      padding-left: 1.5rem;
-      list-style: disc;
-    }
-    .why-matters-list ul li {
-      margin-bottom: 0.75rem;
-      font-size: 0.95rem;
-    }
+    .why-list > li strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: 0.25rem; }
+    .why-list ul { margin-top: 0.75rem; padding-left: 1.25rem; list-style: disc; display: flex; flex-direction: column; gap: 0.5rem; }
+    .why-list ul li { border-left: none; padding-left: 0; font-size: 0.95rem; }
 
-    /* Competency flow snippet */
-    .competency-flow {
-      margin: 2.5rem 0 0;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .cf-row {
-      display: flex;
-      align-items: stretch;
-    }
-    .cf-card {
-      flex: 1;
-      border: 1px solid #e5e5e5;
-      border-radius: 10px;
-      padding: 1.1rem 1.2rem 1rem;
-      background: #fff;
-    }
+    /* ── COMPETENCY FLOW ── */
+    .competency-flow { margin: 2.5rem 0 0; font-family: 'DM Sans', sans-serif; }
+    .cf-row { display: flex; align-items: stretch; }
+    .cf-card { flex: 1; border: 1px solid #e5e5e5; border-radius: 10px; padding: 1.25rem; background: #fff; }
     .cf-teal   { border-top: 3px solid #1D9E75; }
     .cf-purple { border-top: 3px solid #7F77DD; }
     .cf-amber  { border-top: 3px solid #D4860A; }
-    .cf-label {
-      display: block;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.09em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .cf-teal   .cf-label { color: #0F6E56; }
+    .cf-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.09em; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .cf-teal .cf-label   { color: #0F6E56; }
     .cf-purple .cf-label { color: #534AB7; }
-    .cf-amber  .cf-label { color: #7A5000; }
-    .cf-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #1a1a1a;
-      margin: 0 0 0.5rem;
-      line-height: 1.4;
-    }
-    .cf-body {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.65;
-      margin: 0;
-    }
-    .cf-arrow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 0.6rem;
-      flex-shrink: 0;
-      font-size: 18px;
-      color: #bbb;
-      user-select: none;
-    }
-    .cf-loop {
-      margin-top: 0.75rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.7rem;
-      padding: 0.85rem 1.1rem;
-      background: #f8f8f6;
-      border-radius: 8px;
-      border: 1px solid #e5e5e5;
-    }
-    .cf-loop-icon {
-      font-size: 16px;
-      color: #D4860A;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .cf-loop-text {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-      margin: 0;
-    }
-    .cf-loop-text strong {
-      color: #1a1a1a;
-      font-weight: 600;
-    }
+    .cf-amber .cf-label  { color: #7A5000; }
+    .cf-title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin: 0 0 0.5rem; line-height: 1.4; }
+    .cf-body  { font-size: 13px; color: #555; line-height: 1.65; margin: 0; }
+    .cf-arrow { display: flex; align-items: center; justify-content: center; padding: 0 0.6rem; flex-shrink: 0; font-size: 18px; color: #bbb; user-select: none; }
+    .cf-loop { margin-top: 0.75rem; display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.85rem 1.1rem; background: #f8f8f6; border-radius: 8px; border: 1px solid #e5e5e5; }
+    .cf-loop-icon { font-size: 16px; color: #D4860A; flex-shrink: 0; margin-top: 1px; }
+    .cf-loop-text { font-size: 13px; color: #555; line-height: 1.6; margin: 0; }
+    .cf-loop-text strong { color: #1a1a1a; font-weight: 600; }
 
-    /* ── Module snapshots — wider layout ── */
-    .modules-section {
-      padding: 5rem 4rem;
-      background: var(--white);
-    }
-    .modules-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .modules-inner h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 3rem;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-    }
-    .module-grid {
-      display: grid;
-      gap: 3rem;
-    }
-
-    /* Each module card: image left, text right */
-    .module-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid rgba(26,24,20,0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
-      background: var(--white);
-    }
-    .module-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-    }
-    .module-card-media {
-      overflow: hidden;
-      background: #f5f1ed;
-    }
-    .module-card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .module-card-content {
-      padding: 2.5rem;
+    /* ── MODULE SNAPSHOTS ── */
+    .module-list { display: flex; flex-direction: column; gap: 4rem; margin-top: 0.5rem; }
+    .module-entry-header {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 1rem;
+      gap: 0.4rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(26,24,20,0.1);
+      margin-bottom: 1.25rem;
     }
     .module-tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: #7B5E3A;
-      background: rgba(123,94,58,0.08);
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-      width: fit-content;
     }
-    .module-card h4 {
+    .module-entry h3 {
       font-family: var(--serif);
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: var(--ink);
       margin: 0;
       line-height: 1.3;
     }
-    .module-card h4 em {
+    .module-entry h3 em {
+      display: block;
       font-style: italic;
       font-weight: 400;
-      color: var(--ink-light);
       font-size: 1rem;
-      display: block;
-      margin-top: 0.3rem;
-    }
-    .module-card p {
-      font-size: 1rem;
-      color: var(--ink-muted);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    /* Sample images inside a module card */
-    .module-samples {
-      margin-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .module-sample-img {
-      width: 100%;
-      border-radius: 6px;
-      border: 1px solid rgba(26,24,20,0.08);
-      display: block;
-    }
-    .module-sample-caption {
-      font-size: 0.8rem;
-      font-style: italic;
       color: var(--ink-light);
-      margin: 0;
+      margin-top: 0.2rem;
     }
-
-    /* Blended learning — slightly wider than pure prose */
-    .blended-section {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 5rem 3rem;
-    }
-    .blended-section h3 {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 0 0 1.25rem;
-      letter-spacing: -0.01em;
-    }
-    .blended-section p {
+    .module-entry-body {
       font-size: 1.05rem;
       color: var(--ink-muted);
       line-height: 1.75;
-      margin: 0;
+      margin: 0 0 2rem;
+      max-width: 640px;
     }
+    .module-entry-images { display: grid; gap: 1rem; }
+    .module-entry-images.two-col { grid-template-columns: 1fr 1fr; }
+    .module-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      border: 1px solid rgba(26,24,20,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+    .module-img-caption { font-size: 0.82rem; font-style: italic; color: var(--ink-light); margin-top: 0.5rem; }
 
-    /* Reflections — wider */
-    .reflections-section {
-      padding: 5rem 4rem;
-      background: var(--white);
+    /* ── BLENDED LEARNING ── */
+    .blended-box {
+      border-left: 5px solid #7B5E3A;
+      padding: 2rem 2.5rem;
+      background: #fff;
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-top: 1rem;
     }
-    .reflections-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .reflections-inner h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 1.5rem;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-    }
-    .reflections-inner .lead {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      color: var(--ink-muted);
-      margin-bottom: 2.5rem;
-      max-width: 760px;
-    }
-    .reflection-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
+    .blended-box p { font-size: 1.05rem; color: var(--ink-muted); line-height: 1.75; margin: 0; }
+
+    /* ── REFLECTIONS ── */
+    .reflection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
     .reflection-card {
-      background: #f9f7f5;
-      padding: 2rem;
-      border-radius: 8px;
-      border-top: 4px solid #7B5E3A;
-    }
-    .reflection-card h4 {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin: 0 0 1rem;
-      line-height: 1.35;
-    }
-    .reflection-card p {
-      font-size: 0.95rem;
-      color: var(--ink-muted);
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    /* Questions — wider */
-    .questions-section {
-      padding: 5rem 4rem 6rem;
-      background: #f9f7f5;
-    }
-    .questions-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .questions-inner h2 {
-      font-family: var(--serif);
-      font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 2.5rem;
-      letter-spacing: -0.01em;
-      line-height: 1.25;
-    }
-    .question-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-    .question-card {
-      background: var(--white);
-      border-top: 4px solid #7B5E3A;
+      background: #fff;
+      border: 1px solid rgba(26,24,20,0.08);
+      border-top: 3px solid #7B5E3A;
+      border-radius: 0 0 6px 6px;
       padding: 1.75rem;
-      border-radius: 4px;
+    }
+    .reflection-card h4 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--ink); margin: 0 0 1rem; line-height: 1.4; }
+    .reflection-card p  { font-size: 0.95rem; color: var(--ink-muted); line-height: 1.75; margin: 0; }
+
+    /* ── QUESTIONS ── */
+    .question-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .question-card {
+      background: #fff;
+      border: 1px solid rgba(26,24,20,0.08);
+      border-top: 3px solid #7B5E3A;
+      border-radius: 0 0 6px 6px;
+      padding: 1.75rem;
       font-size: 1rem;
       color: var(--ink);
       font-weight: 500;
       line-height: 1.7;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
 
-    /* Back link */
-    .back-section {
-      text-align: center;
-      padding: 4rem 3rem;
-      background: var(--white);
-    }
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      color: var(--cobalt);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: gap 0.2s;
-    }
+    /* ── BACK ── */
+    .back-section { text-align: center; padding: 4rem 2rem; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--cobalt); font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: gap 0.2s; }
     .back-link:hover { gap: 0.9rem; }
 
-    /* Responsive */
-    @media (max-width: 900px) {
-      .module-card { grid-template-columns: 1fr; }
-      .module-card-media { min-height: 220px; }
-      .reflection-grid,
-      .question-grid { grid-template-columns: 1fr; }
-      .modules-section,
-      .reflections-section,
-      .questions-section { padding-left: 2rem; padding-right: 2rem; }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .reflection-grid, .question-grid { grid-template-columns: 1fr; }
+      .module-entry-images.two-col { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
-      .project-hero { padding: 4rem 2rem 3rem; }
-      .article-section { padding: 3rem 2rem; }
-      .why-matters-section { padding: 3rem 2rem; }
-      .blended-section { padding: 3rem 2rem; }
+      .project-hero { padding: 4rem 1.5rem 3rem; }
+      .section-narrow, .section-wide { padding: 3rem 1.5rem; }
       .cf-row { flex-direction: column; gap: 0.6rem; }
-      .cf-arrow { transform: rotate(90deg); padding: 0; align-self: center; }
+      .cf-arrow { transform: rotate(90deg); padding: 0.2rem 0; align-self: center; }
     }
   </style>
 </head>
@@ -512,33 +239,31 @@
     <div class="project-hero-inner">
       <h1>Pre-School and K-12 Learning Modules for Sekolah.mu</h1>
       <div class="project-hero-meta">
-        <div class="project-hero-meta-item">
+        <div>
           <div class="project-hero-meta-label">Role</div>
           <div class="project-hero-meta-value">Learning Designer</div>
         </div>
-        <div class="project-hero-meta-item">
+        <div>
           <div class="project-hero-meta-label">Timeline</div>
           <div class="project-hero-meta-value">2021–2022</div>
         </div>
-        <div class="project-hero-meta-item">
+        <div>
           <div class="project-hero-meta-label">Audience</div>
-          <div class="project-hero-meta-value">Ages 3-11</div>
+          <div class="project-hero-meta-value">Ages 3–11</div>
         </div>
-        <div class="project-hero-meta-item">
+        <div>
           <div class="project-hero-meta-label">Status</div>
           <div class="project-hero-meta-value">Archive</div>
         </div>
       </div>
-      <p class="project-hero-question">
-        How can inquiry-based learning grounded in real-world contexts develop deeper thinking in Indonesian learners—and what role does blended learning design play in making that work?
-      </p>
+      <p class="project-hero-question">How can inquiry-based learning grounded in real-world contexts develop deeper thinking in Indonesian learners—and what role does blended learning design play in making that work?</p>
     </div>
   </section>
 
   <!-- CONTEXT -->
-  <section class="article-section">
+  <div class="section-narrow">
     <h2>Context</h2>
-    <p class="lead">From 2021-2022, I worked at Sekolah.mu as Learning Strategist Intern and later as Learning Designer for Maths, English, Science, Motoric Skills, and Social-Emotional Learning modules.</p>
+    <p class="lead">From 2021–2022, I worked at Sekolah.mu as Learning Strategist Intern and later as Learning Designer for Maths, English, Science, Motoric Skills, and Social-Emotional Learning modules.</p>
     <p>This experience served as an essential foundation for me, giving me access to observe vision-driven learning design, effective collaboration among educators, and positive teacher-student interaction that supported deeper learning.</p>
     <p>Coming from 6 years of public school education focused on rote learning and scores, it was fulfilling to create learning experiences that contrasted mine. The fact that this happened during COVID-19 made me realize the importance of innovation mindset and resilience during crises—recognizing valuable learning moments and protecting them even when things aren't good.</p>
     <p>As an intern, I was introduced to the learning philosophy: freedom to learn, collaborate, and create. These were later broken down into sub-competencies that had to be mapped to each blended learning module.</p>
@@ -546,43 +271,42 @@
       <p>My main finding: Inquiry-based learning grounded in real-world contexts helps students move from procedural thinking to transferable understanding.</p>
       <p>In blended environments, this happens when: 1) async work introduces questions, not answers, and facilitation deepens thinking, 2) teachers build a positive environment with psychological safety.</p>
     </div>
-  </section>
+  </div>
 
   <!-- WHY THIS MATTERS -->
-  <section class="why-matters-section">
-    <div class="why-matters-inner">
+  <div class="section-bg">
+    <div class="section-narrow">
       <h2>Why This Matters</h2>
-      <ul class="why-matters-list">
+      <ul class="why-list">
         <li><strong>Providing access</strong> Quality learning extending beyond one physical school.</li>
         <li><strong>Redefining pedagogy</strong> Moved away from passive transmission toward active competence-building.</li>
         <li><strong>Redefining the learner</strong> Students were treated as developing humans with distinct needs, interests, and pathways rather than a single average profile.</li>
         <li>
-          <strong>Emphasising real-life relevance</strong> Shifted the learning ecosystem toward the kind of skills PISA and life both demand.
+          <strong>Emphasising real-life relevance</strong>
+          Shifted the learning ecosystem toward the kind of skills PISA and life both demand.
           <ul>
             <li>PISA measures whether students can use what they know to solve unfamiliar problems, think critically, and communicate effectively—not just recall facts.</li>
             <li>Indonesia's 2022 results showed that only 18% of students reached at least Level 2 in mathematics, far below the OECD average, underlining how urgent it is to build learning experiences that develop reasoning and application, not only coverage of material.</li>
           </ul>
         </li>
       </ul>
-
-      <!-- Competency flow -->
       <div class="competency-flow">
         <div class="cf-row">
           <div class="cf-card cf-teal">
             <span class="cf-label">Philosophy</span>
-            <h4 class="cf-title">Competency-based learning, humanizing approach</h4>
+            <p class="cf-title">Competency-based learning, humanizing approach</p>
             <p class="cf-body">A framework that centres real skill development and treats every learner as a whole person with distinct needs, interests, and pathways.</p>
           </div>
           <div class="cf-arrow" aria-hidden="true">→</div>
           <div class="cf-card cf-purple">
             <span class="cf-label">Design &amp; facilitation</span>
-            <h4 class="cf-title">Modules aligned to competencies, built with students</h4>
+            <p class="cf-title">Modules aligned to competencies, built with students</p>
             <p class="cf-body">Learning designers map activities to chosen competencies. Facilitators co-construct knowledge with students, fostering psychological safety and a positive learning environment.</p>
           </div>
           <div class="cf-arrow" aria-hidden="true">→</div>
           <div class="cf-card cf-amber">
             <span class="cf-label">Student outcome</span>
-            <h4 class="cf-title">Skills that transfer beyond the classroom</h4>
+            <p class="cf-title">Skills that transfer beyond the classroom</p>
             <p class="cf-body">Students build the competencies PISA measures — critical thinking, problem-solving, communication — skills that hold up in real-life contexts.</p>
           </div>
         </div>
@@ -592,109 +316,111 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- THREE MODULE SNAPSHOTS -->
-  <section class="modules-section">
-    <div class="modules-inner">
-      <h2>Three Example Snapshots</h2>
-      <div class="module-grid">
+  <div class="section-wide">
+    <h2>Three Example Snapshots</h2>
+    <div class="module-list">
 
-        <!-- Science Module -->
-        <div class="module-card">
-          <div class="module-card-media">
+      <!-- Science -->
+      <div class="module-entry">
+        <div class="module-entry-header">
+          <span class="module-tag">Science</span>
+          <h3>Sparking Curiosity <em>Architecture, History, and Arts</em></h3>
+        </div>
+        <p class="module-entry-body">Rather than explaining sound waves immediately, students are led to ask: Can we see sound? This is followed by an at-home experiment where students generate evidence, then we formalize the concept together in live class.</p>
+        <div class="module-entry-images">
+          <div class="module-img-wrap">
             <img src="../assets/k12-science-module.png" alt="Science Module: Architecture, History, and Arts" />
           </div>
-          <div class="module-card-content">
-            <span class="module-tag">Science</span>
-            <h4>Sparking Curiosity <em>Architecture, History, and Arts</em></h4>
-            <p>Rather than explaining sound waves immediately, students are led to ask: Can we see sound? This is followed by an at-home experiment where students generate evidence, then we formalize the concept together in live class.</p>
-          </div>
         </div>
-
-        <!-- Math Module + proportion sample activities -->
-        <div class="module-card">
-          <div class="module-card-media">
-            <img src="../assets/k12-math-module.png" alt="Math Module: An exploration of geometry and numbers" />
-          </div>
-          <div class="module-card-content">
-            <span class="module-tag">Mathematics</span>
-            <h4>Real-World First <em>An exploration of geometry and numbers</em></h4>
-            <p>Students start with relevance: 'Why do museum models look right?' This anchors abstract proportion work. Open-ended Padlet discussions before live class let students wonder aloud, so facilitators can address misconceptions.</p>
-            <div class="module-samples">
-              <img src="../assets/k12-sample-activities.png" alt="Sample proportion activities in Genially" class="module-sample-img" />
-              <p class="module-sample-caption">Sample activities from the Proportion topic — interactive problems in Genially</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- SEL Module + learning matrix -->
-        <div class="module-card">
-          <div class="module-card-media">
-            <img src="../assets/k12-sel-module.png" alt="Social-Emotional Module: social awareness" />
-          </div>
-          <div class="module-card-content">
-            <span class="module-tag">Social-Emotional Learning</span>
-            <h4>Embedding in Daily Practice <em>Social awareness</em></h4>
-            <p>Students are introduced to gratitude by listening to stories, drawing people they care about, and speaking about why. The competency emerges from doing, not being told.</p>
-            <div class="module-samples">
-              <img src="../assets/k12-learning-matrix.png" alt="Sample from the Learning Matrix" class="module-sample-img" />
-              <p class="module-sample-caption">Learning matrix aligning activities to competencies</p>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- Math -->
+      <div class="module-entry">
+        <div class="module-entry-header">
+          <span class="module-tag">Mathematics</span>
+          <h3>Real-World First <em>An exploration of geometry and numbers</em></h3>
+        </div>
+        <p class="module-entry-body">Students start with relevance: 'Why do museum models look right?' This anchors abstract proportion work. Open-ended Padlet discussions before live class let students wonder aloud, so facilitators can address misconceptions.</p>
+        <div class="module-entry-images two-col">
+          <div class="module-img-wrap">
+            <img src="../assets/k12-math-module.png" alt="Math Module overview" />
+            <p class="module-img-caption">Module overview</p>
+          </div>
+          <div class="module-img-wrap">
+            <img src="../assets/k12-sample-activities.png" alt="Sample proportion activities in Genially" />
+            <p class="module-img-caption">Sample activities — interactive proportion problems in Genially</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEL -->
+      <div class="module-entry">
+        <div class="module-entry-header">
+          <span class="module-tag">Social-Emotional Learning</span>
+          <h3>Embedding in Daily Practice <em>Social awareness</em></h3>
+        </div>
+        <p class="module-entry-body">Students are introduced to gratitude by listening to stories, drawing people they care about, and speaking about why. The competency emerges from doing, not being told.</p>
+        <div class="module-entry-images two-col">
+          <div class="module-img-wrap">
+            <img src="../assets/k12-sel-module.png" alt="SEL Module overview" />
+            <p class="module-img-caption">Module overview</p>
+          </div>
+          <div class="module-img-wrap">
+            <img src="../assets/k12-learning-matrix.png" alt="Learning matrix aligning activities to competencies" />
+            <p class="module-img-caption">Learning matrix aligning activities to competencies</p>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </section>
+  </div>
 
   <!-- BLENDED LEARNING -->
-  <section class="blended-section">
-    <h3>The Blended Learning Piece</h3>
-    <p>In each module, asynchronous work does the heavy lifting of asking questions. Videos and interactive activities introduce 'puzzles' students need to solve. Live facilitation then becomes about enabling inquiry—facilitators listen to student thinking, ask follow-up questions, and help students see patterns. This separation allows students thinking time; it prevents facilitators from rushing to answers.</p>
-  </section>
+  <div class="section-bg">
+    <div class="section-narrow">
+      <h2>The Blended Learning Piece</h2>
+      <div class="blended-box">
+        <p>In each module, asynchronous work does the heavy lifting of asking questions. Videos and interactive activities introduce 'puzzles' students need to solve. Live facilitation then becomes about enabling inquiry—facilitators listen to student thinking, ask follow-up questions, and help students see patterns. This separation allows students thinking time; it prevents facilitators from rushing to answers.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- REFLECTIONS -->
-  <section class="reflections-section">
-    <div class="reflections-inner">
-      <h2>Reflections: Designing for Real Context, Not Ideal Conditions</h2>
-      <p class="lead">I designed inquiry-based, blended modules emphasizing deeper thinking and real-world relevance. This work taught me that strong pedagogy isn't enough—learning design succeeds or fails based on how well it accounts for real constraints: market positioning, user capacity, and systemic pressures.</p>
-      <div class="reflection-grid">
-        <div class="reflection-card">
-          <h4>Design challenge: Scaffolding inquiry in different cultural contexts</h4>
-          <p>Inquiry-based learning doesn't transfer automatically across pedagogical cultures. Indonesian students are trained in procedural, answer-focused learning. Moving them from "I don't know the answer" to "I want to figure this out" requires deliberate scaffolding—not just interesting activities. I learned that designing for inquiry means designing for the teacher's capacity too: What does a facilitator actually do in the moment to enable genuine inquiry rather than just run activities? This became especially complex when designing across age groups (preschool through Year 6), where scaffolding needs change dramatically.</p>
-        </div>
-        <div class="reflection-card">
-          <h4>Product challenge: Positioning pedagogy within market realities</h4>
-          <p>Framed as electives, these modules were received well during COVID but not after. When time constraints and competing priorities became clearer, families made choices based on what they valued most. This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as core (directly supporting outcomes families care about) rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement.</p>
-        </div>
-        <div class="reflection-card">
-          <h4>What it means for the pedagogy and education system</h4>
-          <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed around systemic pressures (test scores, admissions competition) rather than engaging with them. I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
-        </div>
+  <div class="section-wide">
+    <h2>Reflections: Designing for Real Context, Not Ideal Conditions</h2>
+    <p class="lead">I designed inquiry-based, blended modules emphasizing deeper thinking and real-world relevance. This work taught me that strong pedagogy isn't enough—learning design succeeds or fails based on how well it accounts for real constraints: market positioning, user capacity, and systemic pressures.</p>
+    <div class="reflection-grid">
+      <div class="reflection-card">
+        <h4>Design challenge: Scaffolding inquiry in different cultural contexts</h4>
+        <p>Inquiry-based learning doesn't transfer automatically across pedagogical cultures. Indonesian students are trained in procedural, answer-focused learning. Moving them from "I don't know the answer" to "I want to figure this out" requires deliberate scaffolding—not just interesting activities. I learned that designing for inquiry means designing for the teacher's capacity too: What does a facilitator actually do in the moment to enable genuine inquiry rather than just run activities? This became especially complex when designing across age groups (preschool through Year 6), where scaffolding needs change dramatically.</p>
+      </div>
+      <div class="reflection-card">
+        <h4>Product challenge: Positioning pedagogy within market realities</h4>
+        <p>Framed as electives, these modules were received well during COVID but not after. When time constraints and competing priorities became clearer, families made choices based on what they valued most. This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as core rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement.</p>
+      </div>
+      <div class="reflection-card">
+        <h4>System challenge: Defining valued competencies in education</h4>
+        <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed around systemic pressures (test scores, admissions competition) rather than engaging with them. I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- QUESTIONS -->
-  <section class="questions-section">
-    <div class="questions-inner">
+  <div class="section-bg">
+    <div class="section-wide">
       <h2>Questions I'm Exploring Next</h2>
       <div class="question-grid">
-        <div class="question-card">
-          Can inquiry-based learning be designed to serve both deeper thinking <em>and</em> measurable outcomes families care about—or are they fundamentally at odds?
-        </div>
-        <div class="question-card">
-          Who actually benefits from blended learning, and what supports do different students need to succeed in this format?
-        </div>
-        <div class="question-card">
-          How do I design for the real constraints families face—economic pressure, admissions stakes, limited home support—rather than the ideal scenario I assumed?
-        </div>
+        <div class="question-card">Can inquiry-based learning be designed to serve both deeper thinking <em>and</em> measurable outcomes families care about—or are they fundamentally at odds?</div>
+        <div class="question-card">Who actually benefits from blended learning, and what supports do different students need to succeed in this format?</div>
+        <div class="question-card">How do I design for the real constraints families face—economic pressure, admissions stakes, limited home support—rather than the ideal scenario I assumed?</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- BACK LINK -->
+  <!-- BACK -->
   <section class="back-section">
     <a href="../index.html#work" class="back-link">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 8H3M7 12l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
