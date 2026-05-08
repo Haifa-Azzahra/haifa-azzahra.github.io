@@ -102,10 +102,10 @@
     </button>
     
     <div class="carousel-track-container">
-      <div class="projects-grid carousel-track">
+      <div class="carousel-track">
 
         <!-- Project 1: EI Genially -->
-        <div class="project-card carousel-slide fade-up">
+        <div class="project-card carousel-slide">
           <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2A7B7E; border-bottom: 4px solid #2A7B7E;">
             <span class="card-thumb-label">Live</span>
             <img src="assets/ei-cover-3.png" alt="EI project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -126,7 +126,7 @@
         </div>
 
         <!-- Project 2: Storyline IELTS SRL -->
-        <div class="project-card carousel-slide fade-up">
+        <div class="project-card carousel-slide">
           <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2952C4; border-bottom: 4px solid #2952C4;">
             <span class="card-thumb-label">Live</span>
             <img src="assets/ielts-cover-4.png" alt="IELTS project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -148,7 +148,7 @@
         </div>
 
         <!-- Project 3: PM -->
-        <div class="project-card carousel-slide fade-up">
+        <div class="project-card carousel-slide">
           <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #C4633A; border-bottom: 4px solid #C4633A;">
             <span class="card-thumb-label">Featured</span>
             <img src="assets/pm-cover-3.png" alt="PM project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -169,7 +169,7 @@
         </div>
 
         <!-- Project 4: K-12 Modules -->
-        <div class="project-card carousel-slide fade-up">
+        <div class="project-card carousel-slide">
           <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #7B5E3A; border-bottom: 4px solid #7B5E3A;">
             <span class="card-thumb-label">Archive</span>
             <img src="assets/k12-cover.png" alt="K-12 modules cover" style="width:100%;height:100%;object-fit:cover;display:block;">
@@ -264,62 +264,104 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.15 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Carousel
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    const nextButton = document.querySelector('.carousel-next');
+    const prevButton = document.querySelector('.carousel-prev');
+    const dotsContainer = document.querySelector('.carousel-dots');
+
+    if (track && slides.length > 0) {
+      let currentIndex = 0;
+      
+      const getSlidesPerView = () => {
+        return window.innerWidth > 1024 ? 3 : (window.innerWidth > 768 ? 2 : 1);
+      };
+
+      let slidesPerView = getSlidesPerView();
+      const maxIndex = Math.max(0, slides.length - slidesPerView);
+
+      // Create dots
+      const dotsNeeded = Math.ceil(slides.length / slidesPerView);
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < dotsNeeded; i++) {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          currentIndex = Math.min(i * slidesPerView, maxIndex);
+          moveToSlide(currentIndex);
+        });
+        dotsContainer.appendChild(dot);
+      }
+
+      const dots = Array.from(dotsContainer.children);
+
+      const moveToSlide = (index) => {
+        const slideWidth = slides[0].offsetWidth;
+        const gap = 32; // 2rem gap
+        const offset = index * (slideWidth + gap);
+        track.style.transform = `translateX(-${offset}px)`;
+        
+        const activeDotIndex = Math.floor(index / slidesPerView);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeDotIndex);
+        });
+
+        // Update button states
+        prevButton.style.opacity = currentIndex === 0 ? '0.3' : '1';
+        prevButton.style.cursor = currentIndex === 0 ? 'not-allowed' : 'pointer';
+        nextButton.style.opacity = currentIndex >= maxIndex ? '0.3' : '1';
+        nextButton.style.cursor = currentIndex >= maxIndex ? 'not-allowed' : 'pointer';
+      };
+
+      nextButton.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+          currentIndex = Math.min(currentIndex + slidesPerView, maxIndex);
+          moveToSlide(currentIndex);
+        }
+      });
+
+      prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex = Math.max(currentIndex - slidesPerView, 0);
+          moveToSlide(currentIndex);
+        }
+      });
+
+      // Handle window resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          const newSlidesPerView = getSlidesPerView();
+          if (newSlidesPerView !== slidesPerView) {
+            slidesPerView = newSlidesPerView;
+            currentIndex = 0;
+            
+            // Recreate dots
+            const newDotsNeeded = Math.ceil(slides.length / slidesPerView);
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < newDotsNeeded; i++) {
+              const dot = document.createElement('button');
+              dot.classList.add('carousel-dot');
+              if (i === 0) dot.classList.add('active');
+              dot.addEventListener('click', () => {
+                currentIndex = Math.min(i * slidesPerView, maxIndex);
+                moveToSlide(currentIndex);
+              });
+              dotsContainer.appendChild(dot);
+            }
+            
+            moveToSlide(0);
+          }
+        }, 250);
+      });
+
+      // Initial state
+      moveToSlide(0);
+    }
   </script>
-<script>
-  // Existing hamburger and fade-up code...
-
-  // Carousel
-  const track = document.querySelector('.carousel-track');
-  const slides = Array.from(track.children);
-  const nextButton = document.querySelector('.carousel-next');
-  const prevButton = document.querySelector('.carousel-prev');
-  const dotsContainer = document.querySelector('.carousel-dots');
-
-  const slidesPerView = window.innerWidth > 1024 ? 3 : (window.innerWidth > 640 ? 2 : 1);
-  const slideWidth = slides[0].getBoundingClientRect().width + 32; // including gap
-  let currentIndex = 0;
-
-  // Create dots
-  const dotsNeeded = Math.ceil(slides.length / slidesPerView);
-  for (let i = 0; i < dotsNeeded; i++) {
-    const dot = document.createElement('button');
-    dot.classList.add('carousel-dot');
-    if (i === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => {
-      currentIndex = i * slidesPerView;
-      moveToSlide(currentIndex);
-    });
-    dotsContainer.appendChild(dot);
-  }
-
-  const dots = Array.from(dotsContainer.children);
-
-  const moveToSlide = (index) => {
-    track.style.transform = `translateX(-${index * slideWidth}px)`;
-    updateDots();
-  };
-
-  const updateDots = () => {
-    const activeDotIndex = Math.floor(currentIndex / slidesPerView);
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === activeDotIndex);
-    });
-  };
-
-  nextButton.addEventListener('click', () => {
-    if (currentIndex < slides.length - slidesPerView) {
-      currentIndex += slidesPerView;
-      moveToSlide(currentIndex);
-    }
-  });
-
-  prevButton.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex -= slidesPerView;
-      moveToSlide(currentIndex);
-    }
-  });
-</script>
-  
 </body>
 </html>
