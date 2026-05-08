@@ -265,5 +265,61 @@
     }, { threshold: 0.15 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
   </script>
+<script>
+  // Existing hamburger and fade-up code...
+
+  // Carousel
+  const track = document.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const nextButton = document.querySelector('.carousel-next');
+  const prevButton = document.querySelector('.carousel-prev');
+  const dotsContainer = document.querySelector('.carousel-dots');
+
+  const slidesPerView = window.innerWidth > 1024 ? 3 : (window.innerWidth > 640 ? 2 : 1);
+  const slideWidth = slides[0].getBoundingClientRect().width + 32; // including gap
+  let currentIndex = 0;
+
+  // Create dots
+  const dotsNeeded = Math.ceil(slides.length / slidesPerView);
+  for (let i = 0; i < dotsNeeded; i++) {
+    const dot = document.createElement('button');
+    dot.classList.add('carousel-dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => {
+      currentIndex = i * slidesPerView;
+      moveToSlide(currentIndex);
+    });
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = Array.from(dotsContainer.children);
+
+  const moveToSlide = (index) => {
+    track.style.transform = `translateX(-${index * slideWidth}px)`;
+    updateDots();
+  };
+
+  const updateDots = () => {
+    const activeDotIndex = Math.floor(currentIndex / slidesPerView);
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeDotIndex);
+    });
+  };
+
+  nextButton.addEventListener('click', () => {
+    if (currentIndex < slides.length - slidesPerView) {
+      currentIndex += slidesPerView;
+      moveToSlide(currentIndex);
+    }
+  });
+
+  prevButton.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex -= slidesPerView;
+      moveToSlide(currentIndex);
+    }
+  });
+</script>
+  
 </body>
 </html>
