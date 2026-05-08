@@ -44,7 +44,7 @@
     .project-hero-question { font-size: 1.2rem; color: var(--ink); line-height: 1.6; font-style: italic; }
 
     /* ── SECTION WRAPPERS ── */
-    .section-narrow { max-width: 680px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-narrow { max-width: 860px; margin: 0 auto; padding: 5rem 2rem; }
     .section-wide   { max-width: 1080px; margin: 0 auto; padding: 5rem 2rem; }
     .section-bg     { background: #f9f7f5; }
 
@@ -175,7 +175,7 @@
     .blended-box p { font-size: 1.05rem; color: var(--ink-muted); line-height: 1.75; margin: 0; }
 
     /* ── REFLECTIONS ── */
-    .reflection-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .reflection-grid { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
     .reflection-card {
       background: #fff;
       border: 1px solid rgba(26,24,20,0.08);
@@ -187,7 +187,7 @@
     .reflection-card p  { font-size: 0.95rem; color: var(--ink-muted); line-height: 1.75; margin: 0; }
 
     /* ── QUESTIONS ── */
-    .question-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .question-grid { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
     .question-card {
       background: #fff;
       border: 1px solid rgba(26,24,20,0.08);
@@ -207,7 +207,6 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
-      .reflection-grid, .question-grid { grid-template-columns: 1fr; }
       .module-entry-images.two-col { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
@@ -402,7 +401,7 @@
         <p>Framed as electives, these modules were received well during COVID but not after. When time constraints and competing priorities became clearer, families made choices based on what they valued most. This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as core rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement.</p>
       </div>
       <div class="reflection-card">
-        <h4>System challenge: Defining valued competencies in education</h4>
+        <h4>What it means for the pedagogy and education system</h4>
         <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed around systemic pressures (test scores, admissions competition) rather than engaging with them. I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
       </div>
     </div>
