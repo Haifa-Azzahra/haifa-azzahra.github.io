@@ -411,34 +411,157 @@
   <section class="why-matters-section">
     <div class="why-matters-inner">
       <h2>Why This Matters</h2>
-      <ul class="why-matters-list">
-        <li>
-          <strong>Providing access</strong>
-          Quality learning extending beyond one physical school
-        </li>
-        <li>
-          <strong>Redefining pedagogy</strong>
-          Moved away from passive transmission toward active competence-building
-        </li>
-        <li>
-          <strong>Redefining the learner</strong>
-          Students were treated as developing humans with distinct needs, interests, and pathways rather than a single average profile
-        </li>
-        <li>
-          <strong>Emphasize on real-life relevance</strong>
-          Shifted the learning ecosystem toward the kind of skills PISA and life both demand
-          <ul>
-            <li>PISA measures whether students can use what they know to solve unfamiliar problems, think critically, and communicate effectively—not just recall facts</li>
-            <li>Indonesia's 2022 results showed that only 18% of students reached at least Level 2 in mathematics, far below the OECD average, underlining how urgent it is to build learning experiences that develop reasoning and application, not only coverage of material</li>
-          </ul>
-        </li>
-      </ul>
-      <div class="why-matters-callout">
-        <strong>Competency-based learning, humanizing approach</strong> → Learning designers incorporate this in modules, align activities with chosen competencies & Facilitators build knowledge with students, creating a positive learning environment → Students gain skills valued by PISA, transferable to real-life contexts.
-      </div>
-    </div>
-  </section>
+      <!-- =====================================================
+  DROP-IN SNIPPET: Competency-based learning flow
+  Replace the bolded sentence block in k12-modules.html
+  with this section. No external dependencies needed.
+  ===================================================== -->
 
+<div class="competency-flow">
+  <div class="cf-row">
+
+    <div class="cf-card cf-teal">
+      <span class="cf-label">Philosophy</span>
+      <h4 class="cf-title">Competency-based learning, humanizing approach</h4>
+      <p class="cf-body">A framework that centres real skill development and treats every learner as a whole person with distinct needs, interests, and pathways.</p>
+    </div>
+
+    <div class="cf-arrow" aria-hidden="true">→</div>
+
+    <div class="cf-card cf-purple">
+      <span class="cf-label">Design &amp; facilitation</span>
+      <h4 class="cf-title">Modules aligned to competencies, built with students</h4>
+      <p class="cf-body">Learning designers map activities to chosen competencies. Facilitators co-construct knowledge with students, fostering psychological safety and a positive learning environment.</p>
+    </div>
+
+    <div class="cf-arrow" aria-hidden="true">→</div>
+
+    <div class="cf-card cf-amber">
+      <span class="cf-label">Student outcome</span>
+      <h4 class="cf-title">Skills that transfer beyond the classroom</h4>
+      <p class="cf-body">Students build the competencies PISA measures — critical thinking, problem-solving, communication — skills that hold up in real-life contexts.</p>
+    </div>
+
+  </div>
+
+  <div class="cf-loop">
+    <span class="cf-loop-icon" aria-hidden="true">↻</span>
+    <p class="cf-loop-text"><strong>The loop:</strong> Real-world relevance motivates inquiry → inquiry deepens understanding → deeper understanding builds transferable competence.</p>
+  </div>
+</div>
+
+<style>
+.competency-flow {
+  margin: 2rem 0;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Three-card row ── */
+.cf-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+}
+
+.cf-card {
+  flex: 1;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 1.1rem 1.2rem 1rem;
+  background: #fff;
+}
+
+/* Coloured top accent */
+.cf-teal   { border-top: 3px solid #1D9E75; }
+.cf-purple { border-top: 3px solid #7F77DD; }
+.cf-amber  { border-top: 3px solid #D4860A; }
+
+/* Stage label */
+.cf-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.cf-teal   .cf-label { color: #0F6E56; }
+.cf-purple .cf-label { color: #534AB7; }
+.cf-amber  .cf-label { color: #7A5000; }
+
+/* Card title */
+.cf-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem;
+  line-height: 1.4;
+}
+
+/* Card body */
+.cf-body {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Arrow between cards */
+.cf-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.6rem;
+  flex-shrink: 0;
+  font-size: 18px;
+  color: #bbb;
+  user-select: none;
+}
+
+/* ── Loop summary strip ── */
+.cf-loop {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.85rem 1.1rem;
+  background: #f8f8f6;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+}
+
+.cf-loop-icon {
+  font-size: 16px;
+  color: #D4860A;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.cf-loop-text {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cf-loop-text strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* ── Responsive: stack on narrow screens ── */
+@media (max-width: 600px) {
+  .cf-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .cf-arrow {
+    transform: rotate(90deg);
+    padding: 0;
+    align-self: center;
+  }
+}
+</style>
   <!-- THREE MODULE EXAMPLES -->
   <section class="modules-section">
     <div class="modules-inner">
