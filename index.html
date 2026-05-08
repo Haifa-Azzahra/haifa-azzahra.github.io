@@ -90,102 +90,116 @@
     </div>
   </section>
 
-  <!-- WORK -->
-  <section class="section" id="work">
-    <p class="section-label">Portfolio</p>
-    <h2 class="section-heading">Selected <em>Work</em></h2>
-    <p class="section-sub">Each project below documents the problem, my design decisions, and the outcome — not just the final artifact.</p>
+<!-- WORK -->
+<section class="section" id="work">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-heading">Selected <em>Work</em></h2>
+  <p class="section-sub">Each project below documents the problem, my design decisions, and the outcome — not just the final artifact.</p>
 
-    <div class="projects-grid">
+  <div class="carousel-container">
+    <button class="carousel-btn carousel-prev" aria-label="Previous">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    
+    <div class="carousel-track-container">
+      <div class="projects-grid carousel-track">
 
-     <!-- Project 1: EI Genially -->
-<div class="project-card fade-up">
-  <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2A7B7E; border-bottom: 4px solid #2A7B7E;">
-    <span class="card-thumb-label">Live</span>
-    <img src="assets/ei-cover-3.png" alt="EI project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
-  </div>
-  <div class="card-body">
-    <div class="card-tags">
-      <span class="card-tag">Genially</span>
-      <span class="card-tag">Learning Science</span>
-      <span class="card-tag">AI Simulation</span>
+        <!-- Project 1: EI Genially -->
+        <div class="project-card carousel-slide fade-up">
+          <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2A7B7E; border-bottom: 4px solid #2A7B7E;">
+            <span class="card-thumb-label">Live</span>
+            <img src="assets/ei-cover-3.png" alt="EI project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Genially</span>
+              <span class="card-tag">Learning Science</span>
+              <span class="card-tag">AI Simulation</span>
+            </div>
+            <h3 class="card-title">EI for Navigating Difficult Conversations</h3>
+            <p class="card-desc">A crash course applying Goleman's 4 EI domains to workplace conflict. Includes a knowledge quiz and an AI-powered coaching simulation — theory into practice into reflection.</p>
+            <a href="projects/ei-conversations.html" class="card-link">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: Storyline IELTS SRL -->
+        <div class="project-card carousel-slide fade-up">
+          <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2952C4; border-bottom: 4px solid #2952C4;">
+            <span class="card-thumb-label">Live</span>
+            <img src="assets/ielts-cover-4.png" alt="IELTS project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Storyline 3</span>
+              <span class="card-tag">SRL</span>
+              <span class="card-tag">AI Coach</span>
+              <span class="card-tag">JavaScript</span>
+            </div>
+            <h3 class="card-title">Improving IELTS Writing with Focus</h3>
+            <p class="card-desc">A full-cycle SRL learning experience designed from Zimmerman's framework outward — a two-tool ecosystem where Storyline manages session architecture and an AI writing coach provides adaptive, essay-specific feedback.</p>
+            <a href="projects/storyline-ielts.html" class="card-link">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: PM -->
+        <div class="project-card carousel-slide fade-up">
+          <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #C4633A; border-bottom: 4px solid #C4633A;">
+            <span class="card-thumb-label">Featured</span>
+            <img src="assets/pm-cover-3.png" alt="PM project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Agile PM</span>
+              <span class="card-tag">Operations</span>
+              <span class="card-tag">Team L&D</span>
+            </div>
+            <h3 class="card-title">144-Course Live Programme: Design &amp; Delivery</h3>
+            <p class="card-desc">Led the end-to-end build of a 144 face-to-face and live-online course programme — from format redesign to cross-functional team coordination and quality assurance systems.</p>
+            <a href="about.html" class="card-link">
+              Read More on About
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 4: K-12 Modules -->
+        <div class="project-card carousel-slide fade-up">
+          <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #7B5E3A; border-bottom: 4px solid #7B5E3A;">
+            <span class="card-thumb-label">Archive</span>
+            <img src="assets/k12-cover.png" alt="K-12 modules cover" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div class="card-body">
+            <div class="card-tags">
+              <span class="card-tag">Blended Learning</span>
+              <span class="card-tag">Inquiry-Based</span>
+              <span class="card-tag">K-12</span>
+              <span class="card-tag">Indonesia</span>
+            </div>
+            <h3 class="card-title">Pre-School & K-12 Learning Modules</h3>
+            <p class="card-desc">Inquiry-based blended modules for Indonesian learners ages 3-11. Designed science, math, and social-emotional learning experiences that move students from procedural thinking to transferable understanding.</p>
+            <a href="projects/k12-modules.html" class="card-link">
+              View Case Study
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
-    <h3 class="card-title">EI for Navigating Difficult Conversations</h3>
-    <p class="card-desc">A crash course applying Goleman's 4 EI domains to workplace conflict. Includes a knowledge quiz and an AI-powered coaching simulation — theory into practice into reflection.</p>
-    <a href="projects/ei-conversations.html" class="card-link">
-      View Case Study
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-</div>
 
-<!-- Project 2: Storyline IELTS SRL -->
-<div class="project-card fade-up">
-  <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #2952C4; border-bottom: 4px solid #2952C4;">
-    <span class="card-thumb-label">Live</span>
-    <img src="assets/ielts-cover-4.png" alt="IELTS project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
+    <button class="carousel-btn carousel-next" aria-label="Next">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
   </div>
-  <div class="card-body">
-    <div class="card-tags">
-      <span class="card-tag">Storyline 3</span>
-      <span class="card-tag">SRL</span>
-      <span class="card-tag">AI Coach</span>
-      <span class="card-tag">JavaScript</span>
-    </div>
-    <h3 class="card-title">Improving IELTS Writing with Focus</h3>
-    <p class="card-desc">A full-cycle SRL learning experience designed from Zimmerman's framework outward — a two-tool ecosystem where Storyline manages session architecture and an AI writing coach provides adaptive, essay-specific feedback.</p>
-    <a href="projects/storyline-ielts.html" class="card-link">
-      View Case Study
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-</div>
 
-<!-- Project 3: PM -->
-<div class="project-card fade-up">
-  <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #C4633A; border-bottom: 4px solid #C4633A;">
-    <span class="card-thumb-label">Featured</span>
-    <img src="assets/pm-cover-3.png" alt="PM project cover" style="width:100%;height:100%;object-fit:cover;display:block;">
-  </div>
-  <div class="card-body">
-    <div class="card-tags">
-      <span class="card-tag">Agile PM</span>
-      <span class="card-tag">Operations</span>
-      <span class="card-tag">Team L&D</span>
-    </div>
-    <h3 class="card-title">144-Course Live Programme: Design &amp; Delivery</h3>
-    <p class="card-desc">Led the end-to-end build of a 144 face-to-face and live-online course programme — from format redesign to cross-functional team coordination and quality assurance systems.</p>
-    <a href="about.html" class="card-link">
-      Read More on About
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-</div>
-
-      <!-- Project 4: K-12 Modules -->
-<div class="project-card fade-up">
-  <div class="card-thumb" style="overflow:hidden; position:relative; border-top: 4px solid #7B5E3A; border-bottom: 4px solid #7B5E3A;">
-    <span class="card-thumb-label">Archive</span>
-    <img src="assets/k12-cover.png" alt="K-12 modules cover" style="width:100%;height:100%;object-fit:cover;display:block;">
-  </div>
-  <div class="card-body">
-    <div class="card-tags">
-      <span class="card-tag">Blended Learning</span>
-      <span class="card-tag">Inquiry-Based</span>
-      <span class="card-tag">K-12</span>
-      <span class="card-tag">Indonesia</span>
-    </div>
-    <h3 class="card-title">Pre-School & K-12 Learning Modules</h3>
-    <p class="card-desc">Inquiry-based blended modules for Indonesian learners ages 3-11. Designed science, math, and social-emotional learning experiences that move students from procedural thinking to transferable understanding.</p>
-    <a href="projects/k12-modules.html" class="card-link">
-      View Case Study
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
-</div>
-
-    </div>
-  </section>
+  <div class="carousel-dots"></div>
+</section>
 
   <!-- PHILOSOPHY STRIP -->
   <div style="background:var(--cobalt);padding:5rem 3rem;">
