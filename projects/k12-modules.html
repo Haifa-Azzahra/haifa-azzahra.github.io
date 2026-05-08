@@ -77,68 +77,110 @@
       margin-bottom: 1.25rem;
     }
     .project-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 1.5rem 0;
+      margin: 1rem 0;
+      padding-left: 1.5rem;
     }
     .project-section li {
       font-size: 0.95rem;
       color: var(--ink-muted);
       line-height: 1.8;
       margin-bottom: 0.75rem;
-      padding-left: 1.5rem;
-      position: relative;
     }
-    .project-section li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: #7B5E3A;
-      font-weight: 600;
-    }
-    .snapshot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    .snapshot-card {
-      background: var(--white);
-      border: 1px solid rgba(26,24,20,0.1);
-      border-radius: 6px;
-      padding: 1.5rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .snapshot-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    }
-    .snapshot-card h4 {
-      font-family: var(--serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.75rem;
-    }
-    .snapshot-card p {
-      font-size: 0.875rem;
-      color: var(--ink-muted);
-      line-height: 1.7;
-      margin-bottom: 0;
-    }
-    .reflection-box {
+    .why-matters-box {
       background: #f9f7f5;
       border-left: 4px solid #7B5E3A;
       padding: 2rem;
       margin: 2rem 0;
       border-radius: 4px;
     }
+    .why-matters-box h3 {
+      margin-top: 0;
+      color: var(--ink);
+    }
+    .why-matters-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+    .why-matters-box li {
+      margin-bottom: 1rem;
+      padding-left: 0;
+      color: var(--ink-muted);
+    }
+    .why-matters-box li strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+    .module-showcase {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      margin: 3rem 0;
+    }
+    .module-item {
+      background: var(--white);
+      border: 1px solid rgba(26,24,20,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .module-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-bottom: 1px solid rgba(26,24,20,0.1);
+    }
+    .module-item-content {
+      padding: 2rem;
+    }
+    .module-item h4 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 0.5rem;
+    }
+    .module-item h4 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--ink-light);
+      font-size: 1rem;
+      display: block;
+      margin-top: 0.25rem;
+    }
+    .module-item p {
+      font-size: 0.95rem;
+      color: var(--ink-muted);
+      line-height: 1.8;
+      margin: 0;
+    }
+    .sample-activities {
+      margin: 3rem 0;
+    }
+    .sample-activities img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 1px solid rgba(26,24,20,0.1);
+      margin: 1.5rem 0;
+    }
+    .reflection-section {
+      background: #f9f7f5;
+      margin: 0;
+      padding: 4rem 3rem;
+    }
+    .reflection-box {
+      background: var(--white);
+      border: 1px solid rgba(26,24,20,0.1);
+      padding: 2rem;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+    }
     .reflection-box h4 {
       font-family: var(--serif);
       font-size: 1.15rem;
       font-weight: 600;
       color: var(--ink);
-      margin-bottom: 0.75rem;
+      margin: 0 0 0.75rem;
     }
     .reflection-box p {
       font-size: 0.9rem;
@@ -146,40 +188,24 @@
       line-height: 1.8;
       margin-bottom: 0.75rem;
     }
-    .question-list {
-      margin: 1.5rem 0;
-    }
-    .question-item {
-      background: var(--white);
-      border: 1px solid rgba(26,24,20,0.08);
-      border-radius: 4px;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-    }
-    .question-item strong {
-      display: block;
-      font-size: 0.95rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-    .question-item p {
-      font-size: 0.875rem;
-      color: var(--ink-muted);
+    .reflection-box p:last-child {
       margin-bottom: 0;
     }
-    .context-box {
-      background: linear-gradient(135deg, #2A7B7E 0%, #2A7B7E 100%);
-      color: var(--white);
-      padding: 2.5rem;
-      border-radius: 8px;
-      margin: 3rem 0;
+    .question-list {
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
-    .context-box h3 {
-      color: var(--white);
-      margin-top: 0;
-    }
-    .context-box p {
-      color: rgba(255,255,255,0.9);
+    .question-item {
+      background: #f9f7f5;
+      border-left: 4px solid #7B5E3A;
+      padding: 1.5rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.7;
     }
   </style>
 </head>
@@ -202,7 +228,7 @@
   <!-- HERO -->
   <section class="project-hero">
     <div class="project-hero-inner">
-      <h1>Pre-School & K-12 Learning Modules for Sekolah.mu</h1>
+      <h1>Pre-School and K-12 Learning Modules for Sekolah.mu</h1>
       <div class="project-hero-meta">
         <div class="project-hero-meta-item">
           <div class="project-hero-meta-label">Role</div>
@@ -214,7 +240,7 @@
         </div>
         <div class="project-hero-meta-item">
           <div class="project-hero-meta-label">Audience</div>
-          <div class="project-hero-meta-value">Ages 3-11 (Pre-K to Year 6)</div>
+          <div class="project-hero-meta-value">Pre-K to Year 6 (Ages 3-11)</div>
         </div>
         <div class="project-hero-meta-item">
           <div class="project-hero-meta-label">Status</div>
@@ -222,7 +248,7 @@
         </div>
       </div>
       <p class="project-hero-desc">
-        <strong>How can inquiry-based learning grounded in real-world contexts develop deeper thinking in Indonesian learners, and what role does blended learning design play in making that work?</strong>
+        <strong>Main question:</strong> How can inquiry-based learning grounded in real-world contexts develop deeper thinking in Indonesian learners, and what role does blended learning design play in making that work?
       </p>
     </div>
   </section>
@@ -230,31 +256,29 @@
   <!-- CONTEXT -->
   <section class="project-section">
     <h2>Context</h2>
-    <p>From 2021-2022, I worked at Sekolah.mu as Learning Strategist Intern and later as Learning Designer for Maths, English, Science, Motoric Skills, and Social-Emotional Learning modules. This experience gave me access to observe vision-driven learning design, effective collaboration among educators, and positive teacher-student interaction that supported deeper learning.</p>
+    <p>From 2021-2022, I was involved in Sekolah.mu as Learning Strategist Intern and later as Learning Designer for Maths, English, Science, Motoric Skills, and Social-Emotional Learning modules. This experience served as an essential foundation for me, giving me access to observe: vision-driven learning design, effective collaboration among educators, and positive teacher-student interaction that supported deeper learning.</p>
     
-    <p>Coming from 6 years of public school education focused on rote learning and scores, it was fulfilling to create learning experiences that contrasted mine. The fact that this happened during COVID-19 made me realize the importance of innovation mindset and resilience during crises—recognizing valuable learning moments and protecting them even when things aren't good.</p>
+    <p>From someone who experienced 6 years of public school education, I feel it was fulfilling to create learning experiences that contrasted mine: not focused on rote learning, not focused on scores. The fact that this happened during COVID-19 also made me realize the importance of innovation mindset and resilience during crises. Not only that it instilled a sense of hope in me as a learning designer, but it models that even when things are not good, we must recognize valuable learning moments and protect it.</p>
 
-    <div class="context-box">
+    <p>As an intern, I was introduced to the learning philosophy: freedom to learn, collaborate, and create. These are later broken down into sub-compentencies that must be mapped to each blended learning module.</p>
+
+    <h3>Core Insight</h3>
+    <p>My main finding was this: Inquiry-based learning grounded in real-world contexts helps students move from procedural thinking to transferable understanding. In blended environments, this happens when: 1) async work introduces questions, not answers, and facilitation deepens thinking, 2) teachers build a positive environment, with psychological safety.</p>
+
+    <div class="why-matters-box">
       <h3>Why This Matters</h3>
-      <ul style="list-style: none; padding: 0; margin: 1rem 0 0;">
-        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Providing access:</strong> Quality learning extending beyond one physical school</li>
-        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Redefining pedagogy:</strong> Moved away from passive transmission toward active competence-building</li>
-        <li style="margin-bottom: 0.75rem; padding-left: 0;"><strong style="color: white;">→ Redefining the learner:</strong> Students treated as developing humans with distinct needs, interests, and pathways</li>
-        <li style="margin-bottom: 0; padding-left: 0;"><strong style="color: white;">→ Real-life relevance:</strong> Shifted toward skills PISA and life both demand—only 18% of Indonesian students reached Level 2 in mathematics (2022 PISA), underlining the urgency to build learning experiences that develop reasoning and application, not just material coverage</li>
+      <ul>
+        <li><strong>Providing access</strong> - quality learning extending beyond one physical school</li>
+        <li><strong>Redefining pedagogy</strong> - moved away from passive transmission toward active competence-building</li>
+        <li><strong>Redefining the learner</strong> - students were treated as developing humans with distinct needs, interests, and pathways rather than a single average profile</li>
+        <li><strong>Emphasize on real-life relevance</strong> - shifted the learning ecosystem toward the kind of skills PISA and life both demand.
+          <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+            <li>PISA measures whether students can use what they know to solve unfamiliar problems, think critically, and communicate effectively, not just recall facts.</li>
+            <li>Indonesia's 2022 results showed that only 18% of students reached at least Level 2 in mathematics, far below the OECD average, which underlines how urgent it is to build learning experiences that develop reasoning and application, not only coverage of material.</li>
+          </ul>
+        </li>
       </ul>
-    </div>
-  </section>
-
-  <!-- CORE INSIGHT -->
-  <section class="project-section" style="background: #f9f7f5; margin: 0; padding: 4rem 3rem;">
-    <div style="max-width: var(--max-w); margin: 0 auto;">
-      <h2>Core Insight</h2>
-      <p style="font-size: 1.05rem; color: var(--ink); font-weight: 500;">Inquiry-based learning grounded in real-world contexts helps students move from procedural thinking to transferable understanding.</p>
-      <p>In blended environments, this happens when:</p>
-      <ul style="margin-top: 1rem;">
-        <li>Async work introduces <strong>questions</strong>, not answers, and facilitation deepens thinking</li>
-        <li>Teachers build a positive environment with psychological safety</li>
-      </ul>
+      <p style="margin-top: 1.5rem;"><strong>Competency-based learning, humanizing approach</strong> → Learning designers incorporate this in modules, aligns activities with chosen competencies & Facilitators build knowledge with students, creating a positive learning environment → Students gain skills valued by PISA, transferrable to real-life contexts.</p>
     </div>
   </section>
 
@@ -262,24 +286,41 @@
   <section class="project-section">
     <h2>Three Example Snapshots</h2>
     
-    <div class="snapshot-grid">
-      <div class="snapshot-card">
-        <h4>Science Module: Sparking Curiosity</h4>
-        <p><em>Architecture, History, and Arts</em></p>
-        <p>Rather than explaining sound waves immediately, students are led to ask: <em>Can we see sound?</em> This is followed by an at-home experiment where students generate evidence, then we formalize the concept together in live class.</p>
+    <div class="module-showcase">
+      <!-- Science Module -->
+      <div class="module-item">
+        <img src="../assets/k12-science-module.png" alt="Science Module: Architecture, History, and Arts" />
+        <div class="module-item-content">
+          <h4>Science Module - Sparking Curiosity <em>Architecture, History, and Arts</em></h4>
+          <p>In this module, rather than explaining sound waves immediately, students are led to ask: Can we see sound? This is followed by at-home experiement, where students generate evidence, then we formalize the concept together in live class.</p>
+        </div>
       </div>
 
-      <div class="snapshot-card">
-        <h4>Math Module: Real-World First</h4>
-        <p><em>Geometry and Numbers</em></p>
-        <p>Students start with relevance: <em>Why do museum models look right?</em> This anchors abstract proportion work. Open-ended Padlet discussions before live class let students wonder aloud, so facilitators can address misconceptions.</p>
+      <!-- Math Module -->
+      <div class="module-item">
+        <img src="../assets/k12-math-module.png" alt="Math Module: An exploration of geometry and numbers" />
+        <div class="module-item-content">
+          <h4>Math Module - Real-World First <em>An exploration of geometry and numbers</em></h4>
+          <p>Students start with relevance: 'Why do museum models look right?' This anchors abstract proportion work. Additionally, open-ended Padlet discussions before live class let students wonder aloud, so facilitators can address misconceptions.</p>
+        </div>
       </div>
 
-      <div class="snapshot-card">
-        <h4>Social-Emotional Module</h4>
-        <p><em>Social Awareness</em></p>
-        <p>Students are introduced to gratitude by listening to stories, drawing people they care about, and speaking about why. The competency emerges from doing, not being told.</p>
+      <!-- SEL Module -->
+      <div class="module-item">
+        <img src="../assets/k12-sel-module.png" alt="Social emotional module: social awareness" />
+        <div class="module-item-content">
+          <h4>Social-Emotional Module - Embedding in Daily Practice <em>Social awareness</em></h4>
+          <p>Students are introduced to gratitude by listening to stories, drawing people they care about, and speaking about why. The competency emerges from doing, not being told.</p>
+        </div>
       </div>
+    </div>
+
+    <!-- Sample Activities -->
+    <div class="sample-activities">
+      <h3>Sample Activities</h3>
+      <p style="font-style: italic; color: var(--ink-light); margin-bottom: 1.5rem;">These are excerpts from the Proportion topic. It begins with a video illustrating how proportions are used in daily life. Students then practice with a set of problems presented in Genially.</p>
+      <img src="../assets/k12-sample-activities.png" alt="Sample activities from the proportion topic" />
+      <img src="../assets/k12-learning-matrix.png" alt="Sample from the Learning Matrix" />
     </div>
 
     <h3>The Blended Learning Piece</h3>
@@ -287,27 +328,24 @@
   </section>
 
   <!-- REFLECTIONS -->
-  <section class="project-section" style="background: #f9f7f5; margin: 0; padding: 4rem 3rem;">
+  <section class="reflection-section">
     <div style="max-width: var(--max-w); margin: 0 auto;">
       <h2>Reflections: Designing for Real Context, Not Ideal Conditions</h2>
-      <p>I designed inquiry-based, blended modules emphasizing deeper thinking and real-world relevance. This work taught me that strong pedagogy isn't enough—learning design succeeds or fails based on how well it accounts for real constraints: market positioning, user capacity, and systemic pressures.</p>
+      <p>I designed inquiry-based, blended modules emphasizing deeper thinking and real-world relevance. This work taught me that strong pedagogy isn't enough. Learning design succeeds or fails based on how well it accounts for real constraints: market positioning, user capacity, and systemic pressures.</p>
 
       <div class="reflection-box">
-        <h4>Design Challenge: Scaffolding Inquiry in Different Cultural Contexts</h4>
-        <p>Inquiry-based learning doesn't transfer automatically across pedagogical cultures. Indonesian students are trained in procedural, answer-focused learning. Moving them from "I don't know the answer" to "I want to figure this out" requires deliberate scaffolding—not just interesting activities.</p>
-        <p>I learned that designing for inquiry means designing for the teacher's capacity too: What does a facilitator actually do in the moment to enable genuine inquiry rather than just run activities? This became especially complex when designing across age groups (preschool through Year 6), where scaffolding needs change dramatically.</p>
+        <h4>Design challenge: Scaffolding inquiry in different cultural contexts</h4>
+        <p>Inquiry-based learning doesn't transfer automatically across pedagogical cultures. Indonesian students are trained in procedural, answer-focused learning. Moving them from "I don't know the answer" to "I want to figure this out" requires deliberate scaffolding, not just interesting activities. I learned that designing for inquiry means designing for the teacher's capacity too: What does a facilitator actually do in the moment to enable genuine inquiry rather than just run activities? This became especially complex when designing across age groups (preschool through Year 6), where scaffolding needs change dramatically.</p>
       </div>
 
       <div class="reflection-box">
-        <h4>Product Challenge: Positioning Pedagogy Within Market Realities</h4>
-        <p>These modules were positioned as electives. During COVID they thrived; post-COVID, enrollment patterns shifted. Families made rational choices based on competing priorities and what they valued most.</p>
-        <p>This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as <em>core</em> (directly supporting outcomes families care about) rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement.</p>
+        <h4>Product challenge: Positioning pedagogy within market realities</h4>
+        <p>Framed as electives, these modules were received well during COVID but not after. When time constraints and competing priorities became clearer, families made choices based on what they valued most. This taught me hard questions about product-market fit: Does transformative pedagogy need to be framed as core (directly supporting outcomes families care about) rather than enrichment? I also realized I'd built in unvalidated assumptions about access: that families had conducive home environments, could support async work, and valued these competencies. When in-person structure disappeared post-COVID, many couldn't sustain engagement. I'm now asking: Was I designing for a broad market, or for a specific (advantaged) segment without realizing it?</p>
       </div>
 
       <div class="reflection-box">
-        <h4>Systems Challenge: Designing Around Constraints vs. Addressing Them</h4>
-        <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed <em>around</em> systemic pressures (test scores, admissions competition) rather than engaging with them.</p>
-        <p>I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
+        <h4>What it means for the pedagogy and education system</h4>
+        <p>I chose to emphasize inquiry, curiosity, and real-world application based on what I believed mattered. But I designed around systemic pressures (test scores, admissions competition) rather than engaging with them. I'm now questioning: Who decides what competencies matter? Families and schools operate under real stakes I didn't address. How durable are the competencies I designed for? Should they be revisited based on what users actually value, not just what pedagogy says is ideal?</p>
       </div>
     </div>
   </section>
@@ -317,13 +355,13 @@
     <h2>Questions I'm Exploring Next</h2>
     <div class="question-list">
       <div class="question-item">
-        <strong>Can inquiry-based learning serve both deeper thinking AND measurable outcomes families care about—or are they fundamentally at odds?</strong>
+        Can inquiry-based learning be designed to serve both deeper thinking <em>and</em> measurable outcomes families care about—or are they fundamentally at odds?
       </div>
       <div class="question-item">
-        <strong>Who actually benefits from blended learning, and what supports do different students need to succeed in this format?</strong>
+        Who actually benefits from blended learning, and what supports do different students need to succeed in this format?
       </div>
       <div class="question-item">
-        <strong>How do I design for the real constraints families face—economic pressure, admissions stakes, limited home support—rather than the ideal scenario I assumed?</strong>
+        How do I design for the real constraints families face—economic pressure, admissions stakes, limited home support—rather than the ideal scenario I assumed?
       </div>
     </div>
   </section>
