@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Catalyzing Skills Application — Haifa Audrey Azzahra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@400;500;600&family=DM+Mono&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cobalt:#2952C4;
+  --cobalt-dark:#1E3D96;
+  --cobalt-pale:#E8EEFB;
+  --ivory:#F5F0E6;
+  --ivory-dark:#EDE5D4;
+  --ink:#1A1814;
+  --ink-muted:#5C5750;
+  --ink-light:#9A9590;
+  --white:#FFFFFF;
+  --accent:#C4633A;
+  --accent-pale:#F5E3DA;
+  --teal:#2A7B7E;
+  --teal-pale:#E0F0F0;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --mono:'DM Mono',monospace;
+  --radius:10px;
+  --radius-sm:6px;
+}
+body{font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.7;font-size:15px}
+
+/* NAV */
+nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 40px;
+  border-bottom:1px solid var(--ivory-dark);
+  position:sticky;top:0;background:var(--ivory);z-index:100;
+}
+.nav-brand{font-family:var(--serif);font-size:16px;font-weight:600;text-decoration:none;color:var(--ink)}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-size:13px;color:var(--ink-muted);text-decoration:none;font-weight:500}
+.nav-links a:hover{color:var(--cobalt)}
+
+/* BREADCRUMB */
+.breadcrumb{
+  padding:11px 40px;font-size:13px;color:var(--ink-muted);
+  border-bottom:1px solid var(--ivory-dark);background:var(--ivory);
+}
+.breadcrumb a{color:var(--ink-muted);text-decoration:none}
+.breadcrumb a:hover{color:var(--cobalt)}
+.breadcrumb sep{margin:0 7px;color:var(--ink-light)}
+
+/* PAGE */
+.page{max-width:1080px;margin:0 auto;padding:0 40px 80px}
+
+/* HERO */
+.hero{padding:56px 0 36px;max-width:720px}
+.hero-eyebrow{
+  font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cobalt);margin-bottom:14px;
+}
+.hero h1{
+  font-family:var(--serif);font-size:38px;font-weight:700;line-height:1.18;
+  letter-spacing:-.3px;margin-bottom:16px;
+}
+.hero h1 em{font-style:italic;color:var(--cobalt)}
+.hero-sub{font-size:16px;color:var(--ink-muted);max-width:580px;line-height:1.75}
+
+/* META */
+.meta-row{
+  display:flex;flex-wrap:wrap;gap:0;
+  border-top:1px solid var(--ivory-dark);
+  border-bottom:1px solid var(--ivory-dark);
+  margin:32px 0 0;
+}
+.meta-item{
+  padding:14px 24px 14px 0;
+  margin-right:24px;
+  border-right:1px solid var(--ivory-dark);
+}
+.meta-item:first-child{padding-left:0}
+.meta-item:last-child{border-right:none}
+.meta-item label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-light);font-weight:600;margin-bottom:3px}
+.meta-item span{font-size:14px;font-weight:500;color:var(--ink)}
+
+/* COLUMNS */
+.cols{display:grid;grid-template-columns:1fr 268px;gap:64px;align-items:start;margin-top:52px}
+@media(max-width:760px){.cols{grid-template-columns:1fr}}
+
+/* ARTICLE */
+article h2{
+  font-family:var(--serif);font-size:24px;font-weight:700;
+  margin:48px 0 14px;line-height:1.25;
+}
+article h2:first-child{margin-top:0}
+article h2 em{font-style:italic;color:var(--cobalt)}
+article h3{font-family:var(--sans);font-size:14px;font-weight:600;margin:18px 0 7px;color:var(--ink)}
+article p{font-size:15px;color:var(--ink-muted);margin-bottom:14px;line-height:1.75}
+article p:last-child{margin-bottom:0}
+
+.pull{
+  border-left:3px solid var(--accent);
+  background:var(--accent-pale);
+  padding:14px 18px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:14px;color:#7a3a1f;margin:22px 0;line-height:1.65;
+  font-style:italic;
+}
+.pull strong{display:block;font-style:normal;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:5px;font-weight:600}
+
+/* CHAIN */
+.chain{
+  display:flex;align-items:center;flex-wrap:wrap;
+  background:var(--white);border:1px solid var(--ivory-dark);
+  border-radius:var(--radius);padding:14px 18px;margin:16px 0;
+  gap:0;
+}
+.cn{
+  font-size:13px;font-weight:500;padding:6px 14px;
+  background:var(--ivory);border:1px solid var(--ivory-dark);
+  border-radius:var(--radius-sm);color:var(--ink);white-space:nowrap;
+}
+.cn.mid{background:var(--cobalt-pale);color:var(--cobalt-dark);border-color:rgba(41,82,196,.22);font-weight:600}
+.ca{color:var(--ink-light);padding:0 8px;font-size:14px}
+
+hr.div{border:none;border-top:1px solid var(--ivory-dark);margin:44px 0}
+
+/* ACCORDIONS */
+.acc{
+  border:1px solid var(--ivory-dark);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:10px;background:var(--white);
+}
+.acc-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;cursor:pointer;user-select:none;
+  background:var(--white);transition:background .15s;
+}
+.acc-head:hover{background:var(--ivory)}
+.acc-left{display:flex;align-items:center;gap:12px}
+.acc-num{
+  width:26px;height:26px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;font-family:var(--mono);
+  background:var(--cobalt-pale);color:var(--cobalt-dark);
+}
+.acc.warm .acc-num{background:var(--accent-pale);color:var(--accent)}
+.acc.teal-acc .acc-num{background:var(--teal-pale);color:var(--teal)}
+.acc-num.step{background:var(--cobalt);color:var(--white);font-size:12px}
+.acc-title{font-size:14px;font-weight:600;color:var(--ink)}
+.acc-sub{font-size:12px;color:var(--ink-light);margin-top:1px}
+.acc-chev{font-size:18px;color:var(--ink-light);transition:transform .25s;line-height:1}
+.acc.open .acc-chev{transform:rotate(180deg)}
+.acc-body{
+  display:none;padding:16px 18px 20px;
+  border-top:1px solid var(--ivory-dark);
+  background:var(--ivory);
+  font-size:14px;color:var(--ink-muted);line-height:1.72;
+}
+.acc.open .acc-body{display:block}
+.acc-body ul{padding-left:18px}
+.acc-body li{margin-bottom:8px;line-height:1.65}
+.acc-body li strong{color:var(--ink);font-weight:500}
+.acc-pair{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:500px){.acc-pair{grid-template-columns:1fr}}
+
+/* RESULTS */
+.results{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+@media(max-width:500px){.results{grid-template-columns:1fr 1fr}}
+.r-card{
+  background:var(--white);border:1px solid var(--ivory-dark);
+  border-radius:var(--radius);padding:18px 14px;text-align:center;
+}
+.r-num{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--cobalt);line-height:1;margin-bottom:6px}
+.r-label{font-size:12px;color:var(--ink-muted);line-height:1.45}
+.r-note{font-size:13px;color:var(--ink-muted);margin-top:10px;font-style:italic}
+
+/* FLASHCARDS */
+.fc-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.fc-tab{
+  font-size:12px;font-weight:500;padding:6px 14px;
+  border:1px solid var(--ivory-dark);border-radius:20px;
+  background:var(--white);color:var(--ink-muted);cursor:pointer;transition:all .15s;
+  font-family:var(--sans);
+}
+.fc-tab.active{background:var(--cobalt);color:var(--white);border-color:var(--cobalt)}
+.fc-tab:hover:not(.active){border-color:var(--cobalt);color:var(--cobalt)}
+.fc-deck{display:none}
+.fc-deck.active{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:500px){.fc-deck.active{grid-template-columns:1fr}}
+.fc{perspective:1000px;cursor:pointer;height:170px}
+.fc-inner{width:100%;height:100%;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.4,0,.2,1);position:relative}
+.fc.flip .fc-inner{transform:rotateY(180deg)}
+.fc-f,.fc-b{
+  position:absolute;inset:0;backface-visibility:hidden;
+  border:1px solid var(--ivory-dark);border-radius:var(--radius);
+  padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
+}
+.fc-f{background:var(--white)}
+.fc-b{background:var(--cobalt-pale);transform:rotateY(180deg);border-color:rgba(41,82,196,.2)}
+.fc-hint{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-light);margin-bottom:7px;font-weight:500}
+.fc-q{font-size:13.5px;font-weight:500;line-height:1.55;color:var(--ink)}
+.fc-a{font-size:13px;color:var(--cobalt-dark);line-height:1.62}
+
+/* TABLE */
+.ctable{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+.ctable th{
+  text-align:left;padding:8px 12px;
+  font-size:11px;text-transform:uppercase;letter-spacing:.07em;
+  color:var(--ink-light);font-weight:600;
+  border-bottom:1px solid var(--ivory-dark);
+}
+.ctable td{padding:11px 12px;border-bottom:1px solid var(--ivory-dark);vertical-align:top;color:var(--ink-muted)}
+.ctable td:first-child{font-weight:500;color:var(--ink)}
+.ctable tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px;font-family:var(--sans)}
+.b-p{background:var(--accent-pale);color:var(--accent)}
+.b-pr{background:var(--cobalt-pale);color:var(--cobalt-dark)}
+.b-t{background:var(--teal-pale);color:var(--teal)}
+.b-c{background:#ece8f7;color:#4a3a9a}
+
+/* SIDEBAR */
+aside{position:sticky;top:72px}
+.aside-block{margin-bottom:34px}
+.aside-block h4{
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.09em;
+  color:var(--ink-light);margin-bottom:12px;
+}
+.pill-wrap{display:flex;flex-wrap:wrap;gap:7px}
+.pill{
+  font-size:12px;font-weight:500;padding:5px 11px;
+  border-radius:20px;background:var(--white);
+  color:var(--ink-muted);border:1px solid var(--ivory-dark);
+}
+.obj-list{display:flex;flex-direction:column;gap:11px}
+.obj-item{display:flex;gap:10px;align-items:flex-start}
+.obj-icon{font-size:15px;flex-shrink:0;margin-top:2px}
+.obj-text{font-size:13px;color:var(--ink-muted);line-height:1.55}
+.fw-list{display:flex;flex-direction:column;gap:12px}
+.fw-item strong{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.fw-item span{font-size:13px;color:var(--ink-muted);line-height:1.5}
+
+/* BACK */
+.back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;color:var(--ink-muted);text-decoration:none;
+  margin-top:44px;font-weight:500;
+}
+.back-link:hover{color:var(--cobalt)}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--ivory-dark);
+  padding:28px 40px;
+  display:flex;flex-direction:column;gap:5px;
+  background:var(--ivory);
+}
+footer strong{font-family:var(--serif);font-size:15px;font-weight:600}
+footer .copy{font-size:12px;color:var(--ink-light)}
+footer .flinks{display:flex;gap:16px;margin-top:4px}
+footer .flinks a{font-size:13px;color:var(--ink-muted);text-decoration:none;font-weight:500}
+footer .flinks a:hover{color:var(--cobalt)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="https://haifa-azzahra.github.io/index.html">Haifa Audrey Azzahra</a>
+  <div class="nav-links">
+    <a href="https://haifa-azzahra.github.io/index.html">Home</a>
+    <a href="https://haifa-azzahra.github.io/about.html">About</a>
+    <a href="https://haifa-azzahra.github.io/index.html#work">Work</a>
+    <a href="https://haifa-azzahra.github.io/contact.html">Contact</a>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <a href="https://haifa-azzahra.github.io/index.html">Home</a><sep>/</sep>
+  <a href="https://haifa-azzahra.github.io/index.html#work">Work</a><sep>/</sep>
+  Catalyzing Skills Application
+</div>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Case Study · Systems Thinking in L&D</div>
+    <h1>Catalyzing Skills Application — <em>A Systems Redesign for High-Volume Live Learning</em></h1>
+    <p class="hero-sub">A large-scale soft skills programme redesign under extreme volume pressure — shifting the organisational mental model from awareness to application inside a live, high-velocity production system.</p>
+    <div class="meta-row">
+      <div class="meta-item"><label>Role</label><span>ID Lead</span></div>
+      <div class="meta-item"><label>Timeline</label><span>3-month sprint</span></div>
+      <div class="meta-item"><label>Team</label><span>25 people</span></div>
+      <div class="meta-item"><label>Format</label><span>Short-form live sessions</span></div>
+      <div class="meta-item"><label>Scope</label><span>Full catalogue redesign</span></div>
+    </div>
+  </div>
+
+  <div class="cols">
+    <article>
+
+      <h2>The Context</h2>
+      <p>An organisation was actively redesigning its main learning product — a large catalogue of professional development and soft skills topics — transitioning from long-form pre-recorded courses into short-form live sessions. My role was leading the instructional design process, overseeing content architecture, quality standards, and the production workflow.</p>
+      <p>The ID team sat in the middle of a five-part delivery chain, dependent on SME inputs upstream and directly responsible for the facilitator experience downstream.</p>
+      <div class="chain">
+        <div class="cn">Leadership</div><span class="ca">→</span>
+        <div class="cn">SME</div><span class="ca">→</span>
+        <div class="cn mid">ID team</div><span class="ca">→</span>
+        <div class="cn">Facilitators</div><span class="ca">→</span>
+        <div class="cn">Learners</div>
+      </div>
+      <p>When leadership mandated a full catalogue iteration in a tight three-month window, I used the iceberg model as a diagnostic lens — to surface patterns to anticipate and uncover what needed to change.</p>
+      <div class="pull">
+        <strong>Guiding question</strong>
+        What does it take to design for skills application in real-life workplace contexts — inside a live, high-volume production system?
+      </div>
+
+      <hr class="div"/>
+
+      <h2>The Iceberg Model <em>Diagnosis</em></h2>
+      <p>Click each layer to expand. The iceberg reveals what was visible, what was recurring, and what needed to change.</p>
+
+      <div class="acc" id="a1">
+        <div class="acc-head" onclick="tog('a1')">
+          <div class="acc-left"><span class="acc-num">1</span><div><div class="acc-title">Observable events</div><div class="acc-sub">What we could see on the surface</div></div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">
+          <div class="acc-pair">
+            <div>
+              <h3>Sudden volume pressure</h3>
+              <ul>
+                <li>Leadership mandated a full catalogue iteration</li>
+                <li>Three-month window to redesign, create, test, and finalise</li>
+                <li>Expected to redesign the entire existing library all at once</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Quality & structural gaps</h3>
+              <ul>
+                <li>Passive activities, lower-order thinking quizzes, low-utility worksheets</li>
+                <li>A strict 60-minute structure introduced overnight: Theory → Case Study → Exercise → Q&A</li>
+                <li>Upstream SME inputs lacked practical behavioural frameworks</li>
+              </ul>
+            </div>
+          </div>
+          <div style="margin-top:14px">
+            <h3>Operational friction</h3>
+            <ul>
+              <li>ID capacity still anchored to a thorough ADDIE workflow built for a different product</li>
+              <li>Facilitators consistently received materials too close to live sessions, damaging delivery confidence</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc" id="a2">
+        <div class="acc-head" onclick="tog('a2')">
+          <div class="acc-left"><span class="acc-num">2</span><div><div class="acc-title">Patterns to anticipate</div><div class="acc-sub">Recurring cycles beneath the events</div></div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Volume–quality trade-off cycle:</strong> Each time volume targets spiked, quality shortcuts accumulated — creating a rework backlog that ultimately undermined the original speed gains.</li>
+            <li><strong>Awareness-level content ceiling:</strong> SME outputs consistently stopped at awareness (defining what learners should do), failing to scaffold the how.</li>
+            <li><strong>Mandate-driven development:</strong> Course direction was shaped by top-down mandates; user feedback and performance data had lesser influence.</li>
+            <li><strong>Rhythm collision:</strong> Deadline pressure repeatedly collided with the team's established ownership culture without a formal escalation path.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc teal-acc" id="a3">
+        <div class="acc-head" onclick="tog('a3')">
+          <div class="acc-left"><span class="acc-num">3</span><div><div class="acc-title">Design for change</div><div class="acc-sub">What needed to be restructured</div></div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Actionable scaffolding over dense theory</strong> — embed behavioural science directly into design templates; build case studies and exercises that push learners to apply skills immediately</li>
+            <li><strong>Lean workflow architecture</strong> — rebuild the sprint cycle to a 5–6 day maximum; create modular QA guidelines that explain the reasoning behind every standard</li>
+            <li><strong>Strategic stakeholder reframing</strong> — renegotiate the upstream SME mandate; frame operational changes around learner value and product risk to secure buy-in</li>
+            <li><strong>Working memory protection</strong> — ID leads consolidate and prioritise mid-sprint feedback before it reaches designers</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc teal-acc" id="a4">
+        <div class="acc-head" onclick="tog('a4')">
+          <div class="acc-left"><span class="acc-num">4</span><div><div class="acc-title">Desired transformation</div><div class="acc-sub">The system we were building toward</div></div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>From awareness to application</strong> — shift the product value proposition from passive consumption to practical exercises enabling learners to apply soft skills immediately, backed by post-course tools for self-directed growth</li>
+            <li><strong>From process mismatch to agile creation</strong> — transition from a heavy waterfall ADDIE review process to an optimised, high-velocity production sprint designed for short-form live content</li>
+            <li><strong>From execution silos to system alignment</strong> — align leadership expectations, SME outputs, and ID execution so the entire chain supports performance, not just output volume</li>
+            <li><strong>From reactive burnout to sustainable ownership</strong> — protect the team's psychological time and energy, modelling the human-centric design principles we deliver to learners</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="div"/>
+
+      <h2>The <em>Intervention</em></h2>
+      <p>The redesign came down to shifting the organisational mental model from courses for awareness to courses for application — inside a live, high-volume production system. Click each step to expand.</p>
+
+      <div class="acc" id="s1">
+        <div class="acc-head" onclick="tog('s1')">
+          <div class="acc-left"><span class="acc-num step">1</span><div class="acc-title">Align the upstream inputs</div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">Before any design work reached the team, I established a shared understanding with QA, SMEs, and senior leaders. The hardest part was negotiating changes to the SME report structure, as the shift was operationally costly. With the ID leads, I reframed the conversation around product risk and learner value — showing what would be lost if we maintained an awareness-only model.</div>
+      </div>
+
+      <div class="acc" id="s2">
+        <div class="acc-head" onclick="tog('s2')">
+          <div class="acc-left"><span class="acc-num step">2</span><div class="acc-title">Set the standards</div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">Rather than asking designers to memorise a new approach while working at extreme speed, I built it directly into their daily templates. Slides were restructured for higher-order thinking. Case studies were scaffolded using behavioural science principles. Exercises shifted from memory recall to direct implementation. The team's feedback was essential — the template was actively designed and redesigned throughout.</div>
+      </div>
+
+      <div class="acc" id="s3">
+        <div class="acc-head" onclick="tog('s3')">
+          <div class="acc-left"><span class="acc-num step">3</span><div class="acc-title">Develop the capabilities</div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">Team training modelled the exact design principles we wanted them to teach — focusing on the reasoning behind decisions, with hands-on practice paired with rapid QA feedback. The team was empowered to use AI tools (ChatGPT, Perplexity, Gemini) in course creation while owning the final output. The goal was true skill transfer, not strict compliance: if the team understood why a standard existed, they could adapt when facing unexpected design challenges.</div>
+      </div>
+
+      <div class="acc" id="s4">
+        <div class="acc-head" onclick="tog('s4')">
+          <div class="acc-left"><span class="acc-num step">4</span><div class="acc-title">Redesign the workflow</div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">With my co-lead, I rebuilt the sprint workflow to survive the three-month timeline: a tight 5–6 day maximum cycle per course including QA and proofreading, progress tracked via Asana, and QA guidelines rewritten to show the logic behind every standard. Sprint assignments were dynamically adapted to team strengths in real time.</div>
+      </div>
+
+      <div class="acc" id="s5">
+        <div class="acc-head" onclick="tog('s5')">
+          <div class="acc-left"><span class="acc-num step">5</span><div class="acc-title">Manage cognitive load internally</div></div>
+          <span class="acc-chev">⌄</span>
+        </div>
+        <div class="acc-body">When in-house trial feedback arrived during active production, passing it mid-sprint would have caused immediate cognitive overload. ID leads acted as an operational filter — consolidating raw feedback into actionable tasks during final reviews. I applied the same human-centric principles to our internal team that we designed for learners: protecting working memory during critical windows.</div>
+      </div>
+
+      <hr class="div"/>
+
+      <h2>The <em>Results</em></h2>
+      <div class="results">
+        <div class="r-card"><div class="r-num">100%</div><div class="r-label">Adoption of mandatory course structure across all redesigned courses</div></div>
+        <div class="r-card"><div class="r-num">100%</div><div class="r-label">Courses incorporating behavioural frameworks and practical application tools</div></div>
+        <div class="r-card"><div class="r-num">100%</div><div class="r-label">Courses meeting higher-order thinking standards</div></div>
+        <div class="r-card"><div class="r-num">95%</div><div class="r-label">Weekly delivery targets met within the 3-month production window</div></div>
+        <div class="r-card"><div class="r-num">100+</div><div class="r-label">In-house trial sessions establishing data-informed iteration cycles</div></div>
+        <div class="r-card"><div class="r-num">5%</div><div class="r-label">Gap intentional — adjusted for more specific learner segments</div></div>
+      </div>
+      <p class="r-note">The 5% delivery gap was a deliberate choice: content adjustments were made to target more specific learner segments, prioritising accuracy over arbitrary speed.</p>
+
+      <hr class="div"/>
+
+      <h2>Lessons Learned — <em>Flashcards</em></h2>
+      <p>Click any card to flip it. Switch themes using the filters below.</p>
+      <div class="fc-tabs">
+        <button class="fc-tab active" onclick="switchDeck('sys',this)">Systems thinking under pressure</button>
+        <button class="fc-tab" onclick="switchDeck('data',this)">Data-driven iteration</button>
+        <button class="fc-tab" onclick="switchDeck('change',this)">Change management at scale</button>
+      </div>
+
+      <div class="fc-deck active" id="deck-sys">
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What slows you down in a sprint — data gathering or poor prioritisation?</div></div><div class="fc-b"><div class="fc-a">Poor prioritisation. Data gathering doesn't slow you down. The key is clear communication about what signals matter right now — revision queue, feedback lag, scope stability.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">Are speed and rigour opposites in high-velocity production?</div></div><div class="fc-b"><div class="fc-a">No. They coexist when internal and external communication is clear about what data matters right now. In a 3-month sprint, measure only the signals that reveal system health.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">Is cross-team collaboration optional or structural?</div></div><div class="fc-b"><div class="fc-a">Structural. Map each team's pain points, constraints, and mandates early. Misalignment doesn't resolve itself — it cascades across the entire production chain.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What three signals reveal whether a production system is working?</div></div><div class="fc-b"><div class="fc-a">Revision queue depth, feedback lag, and scope stability. These expose system-level problems before they become delivery failures.</div></div></div></div>
+      </div>
+
+      <div class="fc-deck" id="deck-data">
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What bridges leadership vision and actual impact?</div></div><div class="fc-b"><div class="fc-a">Systematic feedback. Build mechanisms to gather input from learners, facilitators, and SMEs that validate direction — or surface adjustments needed.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What should be automated so humans can focus on judgement?</div></div><div class="fc-b"><div class="fc-a">Admin reporting, database updates, feedback sentiment analysis, and pattern detection — freeing your team to synthesise data and make critical decisions, not process it.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">Why is tracking team wellbeing as important as tracking delivery?</div></div><div class="fc-b"><div class="fc-a">Wellbeing is a performance variable. Cognitive load → decision quality. Attention fragmentation → rework cycles. Burnout → turnover and knowledge loss.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">How did feedback loops shift project direction?</div></div><div class="fc-b"><div class="fc-a">100+ in-house trial sessions moved the iteration cycle from leadership-driven direction to data-informed cycles — facilitator and learner feedback became the primary adjustment signal.</div></div></div></div>
+      </div>
+
+      <div class="fc-deck" id="deck-change">
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What are the four categories of change to track in any transformation?</div></div><div class="fc-b"><div class="fc-a">People (roles, skill gaps, capacity), Process (workflow changes, handoffs), Tools (software, templates, automation), and Culture (mindset shifts, ownership, decision autonomy).</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">How do you know if a process change is working if people aren't bought in?</div></div><div class="fc-b"><div class="fc-a">Culture metrics will show it before delivery metrics do — feedback update rates, decision autonomy, and escalation frequency flag the gap early.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">Why is risk and impact assessment non-negotiable?</div></div><div class="fc-b"><div class="fc-a">Map dependencies ruthlessly: which teams feed into your process, which processes feed into other teams' success, what external decisions affect your timeline. Gaps cascade.</div></div></div></div>
+        <div class="fc" onclick="this.classList.toggle('flip')"><div class="fc-inner"><div class="fc-f"><div class="fc-hint">Tap to flip</div><div class="fc-q">What's the right metric for tool adoption?</div></div><div class="fc-b"><div class="fc-a">Time-to-productivity and bug reports — not just whether the tool is installed. These tell you whether the problem is training design or tool design itself.</div></div></div></div>
+      </div>
+
+      <hr class="div"/>
+
+      <h2>Change Management <em>Tracker</em></h2>
+      <p>Four categories to track across any large-scale transformation. Filter by category.</p>
+      <div class="fc-tabs">
+        <button class="fc-tab active" onclick="filterTbl('all',this)">All</button>
+        <button class="fc-tab" onclick="filterTbl('people',this)">People</button>
+        <button class="fc-tab" onclick="filterTbl('process',this)">Process</button>
+        <button class="fc-tab" onclick="filterTbl('tools',this)">Tools</button>
+        <button class="fc-tab" onclick="filterTbl('culture',this)">Culture</button>
+      </div>
+      <table class="ctable" id="ctbl">
+        <thead><tr><th>Category</th><th>Examples from this project</th><th>What to track</th></tr></thead>
+        <tbody>
+          <tr data-c="people"><td><span class="badge b-p">People</span></td><td>New ID roles, SME capacity constraints, skill gaps in short-form live design</td><td>Readiness, training completion, retention</td></tr>
+          <tr data-c="process"><td><span class="badge b-pr">Process</span></td><td>5–6 day sprint cycles, SME report structure, facilitator handoff timing, QA guidelines</td><td>Cycle time, bottleneck movement, decision lag</td></tr>
+          <tr data-c="tools"><td><span class="badge b-t">Tools</span></td><td>Asana tracking, AI tools (ChatGPT, Perplexity, Gemini), redesigned design templates</td><td>Adoption, time-to-productivity, bug reports</td></tr>
+          <tr data-c="culture"><td><span class="badge b-c">Culture</span></td><td>Waterfall → agile mindset, data-informed iteration, ownership during transformation</td><td>Feedback update rate, decision autonomy, escalation frequency</td></tr>
+        </tbody>
+      </table>
+
+      <a class="back-link" href="https://haifa-azzahra.github.io/index.html#work">← Back to all work</a>
+
+    </article>
+
+    <aside>
+      <div class="aside-block">
+        <h4>Skills demonstrated</h4>
+        <div class="pill-wrap">
+          <span class="pill">Systems thinking</span>
+          <span class="pill">Instructional design</span>
+          <span class="pill">Agile PM</span>
+          <span class="pill">Behavioural science</span>
+          <span class="pill">Change management</span>
+          <span class="pill">Stakeholder alignment</span>
+          <span class="pill">QA framework design</span>
+          <span class="pill">Cognitive load theory</span>
+          <span class="pill">Sprint workflow design</span>
+          <span class="pill">AI-augmented production</span>
+          <span class="pill">Higher-order thinking design</span>
+          <span class="pill">Team capability development</span>
+        </div>
+      </div>
+
+      <div class="aside-block">
+        <h4>Design objectives</h4>
+        <div class="obj-list">
+          <div class="obj-item"><span class="obj-icon">🎯</span><span class="obj-text">Shift content from awareness to skills application within a live session format</span></div>
+          <div class="obj-item"><span class="obj-icon">⚙️</span><span class="obj-text">Rebuild the production sprint to survive a 3-month full-catalogue iteration</span></div>
+          <div class="obj-item"><span class="obj-icon">🤝</span><span class="obj-text">Align leadership, SME, ID, and facilitator chains around a shared quality standard</span></div>
+          <div class="obj-item"><span class="obj-icon">🧠</span><span class="obj-text">Protect team cognitive load during transformation — modelling what we designed for learners</span></div>
+        </div>
+      </div>
+
+      <div class="aside-block">
+        <h4>Design frameworks used</h4>
+        <div class="fw-list">
+          <div class="fw-item"><strong>Iceberg model</strong><span>Diagnostic lens for surfacing systemic patterns beneath visible events</span></div>
+          <div class="fw-item"><strong>Cognitive load theory</strong><span>Applied to both learner-facing content and internal team workflow</span></div>
+          <div class="fw-item"><strong>Agile sprint methodology</strong><span>5–6 day cycle with dynamic team assignment and modular QA</span></div>
+          <div class="fw-item"><strong>Behavioural science scaffolding</strong><span>Embedded directly into case study and exercise templates</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  <strong>Haifa Audrey Azzahra</strong>
+  <div class="flinks">
+    <a href="https://www.linkedin.com/in/haifa-audrey/">LinkedIn</a>
+    <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+  </div>
+  <span class="copy">© 2025 · Built with intention.</span>
+</footer>
+
+<script>
+function tog(id){document.getElementById(id).classList.toggle('open')}
+function switchDeck(name,btn){
+  document.querySelectorAll('.fc-deck').forEach(d=>d.classList.remove('active'));
+  document.getElementById('deck-'+name).classList.add('active');
+  btn.closest('.fc-tabs').querySelectorAll('.fc-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function filterTbl(cat,btn){
+  document.querySelectorAll('#ctbl tbody tr').forEach(r=>{
+    r.style.display=(cat==='all'||r.dataset.c===cat)?'':'none';
+  });
+  btn.closest('.fc-tabs').querySelectorAll('.fc-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
