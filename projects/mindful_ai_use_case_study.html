@@ -835,8 +835,12 @@ h1 { font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.1; margin: 6px 0 20
 
 /* Decision chain */
 .decision-chain { display: flex; flex-direction: column; gap: 10px; }
-.chain-item { background: var(--white); border: var(--edge); padding: 14px 16px; opacity: 0.65; transition: opacity 0.3s ease, border-color 0.3s ease; }
-.chain-item.active { opacity: 1; border-color: var(--cobalt); }
+.chain-item {
+  background: var(--white);
+  border: 1px solid var(--cobalt);
+  padding: 14px 16px;
+  opacity: 1;
+}
 .clabel { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--cobalt); margin-bottom: 4px; }
 .cval { font-size: 0.9rem; color: var(--ink); }
 
