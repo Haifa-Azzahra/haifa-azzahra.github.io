@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mindful AI Use — Thinking Clearly Under Pressure | LXD Case Study</title>
+<title>Mindful AI Use — Thinking Clearly Under Pressure | ID Case Study</title>
 <meta name="description" content="A scenario-based learning experience that helps managers use AI as a thinking partner rather than an Easy Button under pressure. iSpring Course Creation Contest 2026 — Best Gamification and Storytelling.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,479 +102,6 @@ section { position: relative; }
 .section-pad { padding: 72px 0; }
 @media (max-width: 900px) { .section-pad { padding: 48px 0; } }
 
-a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-.progress-bar {
-  position: fixed;
-  top: 0; left: 0;
-  height: 3px;
-  background: var(--accent);
-  width: 0%;
-  z-index: 1000;
-  transition: width 0.1s linear;
-}
-
-.topnav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 900;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 40px;
-  background: rgba(245,240,230,0.92);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(26,24,20,0.08);
-  transition: transform 0.35s ease, background 0.3s ease;
-}
-.topnav.hide { transform: translateY(-100%); }
-.topnav.on-dark {
-  background: rgba(30,61,150,0.92);
-  border-bottom-color: rgba(255,255,255,0.12);
-}
-.topnav.on-dark .brandmark, .topnav.on-dark .navlink { color: var(--white); }
-
-.brandmark {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  font-weight: 500;
-}
-
-.navlinks { display: flex; gap: 24px; list-style: none; margin: 0; padding: 0; }
-.navlink {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink-muted);
-  padding: 4px 0;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease, color 0.2s ease;
-}
-.navlink:hover { color: var(--cobalt); border-bottom-color: var(--cobalt); }
-
-.navtoggle {
-  display: none;
-  background: none; border: none;
-  cursor: pointer;
-  width: 32px; height: 24px;
-  position: relative;
-  padding: 0;
-}
-.navtoggle span {
-  position: absolute; left: 0; right: 0; height: 1.5px;
-  background: var(--ink);
-  transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
-}
-.navtoggle span:nth-child(1) { top: 3px; }
-.navtoggle span:nth-child(2) { top: 11px; }
-.navtoggle span:nth-child(3) { top: 19px; }
-.navtoggle.open span:nth-child(1) { top: 11px; transform: rotate(45deg); }
-.navtoggle.open span:nth-child(2) { opacity: 0; }
-.navtoggle.open span:nth-child(3) { top: 11px; transform: rotate(-45deg); }
-
-@media (max-width: 900px) {
-  .topnav { padding: 12px 20px; }
-  .navlinks {
-    position: fixed;
-    top: 51px; left: 0; right: 0;
-    flex-direction: column;
-    gap: 0;
-    background: var(--ivory);
-    border-bottom: 1px solid rgba(26,24,20,0.12);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .navlinks.open { max-height: 400px; }
-  .navlink { padding: 14px 20px; border-bottom: 1px solid rgba(26,24,20,0.08); width: 100%; display: block; }
-  .navtoggle { display: block; }
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 12px 22px;
-  border: 1px solid var(--ink);
-  color: var(--ink);
-  background: transparent;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-  min-height: 42px;
-}
-.btn:hover { background: var(--ink); color: var(--ivory); transform: translateY(-1px); }
-.btn-primary { background: var(--cobalt); border-color: var(--cobalt); color: var(--white); }
-.btn-primary:hover { background: var(--cobalt-dark); border-color: var(--cobalt-dark); color: var(--white); }
-.btn-on-dark { border-color: rgba(255,255,255,0.6); color: var(--white); }
-.btn-on-dark:hover { background: var(--white); color: var(--cobalt-dark); }
-
-.hero {
-  padding: 120px 0 60px;
-  background: radial-gradient(circle at 85% 15%, rgba(41,82,196,0.07), transparent 45%), var(--ivory);
-  border-bottom: var(--edge);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 48px;
-  align-items: center;
-}
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-}
-
-.hero h1 {
-  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
-  line-height: 1.05;
-  margin: 12px 0 16px;
-}
-.hero h1 .accent-word { color: var(--cobalt); font-style: italic; font-weight: 500; }
-
-.hero-award-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: var(--cobalt-pale);
-  border: 1px solid rgba(41,82,196,0.2);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--cobalt-dark);
-  margin-bottom: 8px;
-}
-
-.hero-sub {
-  font-size: 1.1rem;
-  color: var(--ink);
-  line-height: 1.5;
-  margin-bottom: 24px;
-}
-
-.hero-meta-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  background: var(--white);
-  padding: 24px;
-  border: var(--edge);
-}
-.hero-meta-item .k {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-bottom: 4px;
-}
-.hero-meta-item .v { font-size: 0.92rem; color: var(--ink); font-weight: 500; }
-
-.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
-
-.section-head {
-  margin-bottom: 36px;
-}
-.section-head h2 {
-  font-size: clamp(1.75rem, 3.2vw, 2.6rem);
-  line-height: 1.15;
-  margin-top: 6px;
-}
-
-.behavior-transformation {
-  background: var(--white);
-  border: var(--edge);
-  padding: 28px;
-  margin: 28px 0;
-}
-.transform-header {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-bottom: 20px;
-  text-align: center;
-}
-.transform-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 20px;
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .transform-grid { grid-template-columns: 1fr; gap: 16px; text-align: center; }
-}
-
-.transform-card {
-  padding: 20px;
-  border: 1px solid rgba(26,24,20,0.08);
-  background: var(--ivory);
-}
-.transform-card.mindful {
-  background: var(--cobalt-pale);
-  border-color: rgba(41,82,196,0.25);
-}
-.transform-title {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-  font-weight: 600;
-}
-.transform-card.reactive .transform-title { color: var(--accent); }
-.transform-card.mindful .transform-title { color: var(--cobalt-dark); }
-
-.flow-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .flow-pills { justify-content: center; }
-}
-
-.pill {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  padding: 6px 12px;
-  background: var(--white);
-  border: 1px solid rgba(26,24,20,0.12);
-  color: var(--ink);
-  white-space: nowrap;
-}
-.transform-card.mindful .pill {
-  border-color: rgba(41,82,196,0.2);
-  color: var(--cobalt-dark);
-}
-.pill-arrow {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--ink-light);
-}
-
-.transform-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  color: var(--cobalt);
-  font-weight: 500;
-}
-@media (max-width: 768px) {
-  .transform-divider { transform: rotate(90deg); margin: 8px 0; }
-}
-
-.research-callout {
-  border: 1px solid rgba(41,82,196,0.25);
-  background: var(--white);
-  margin: 32px 0;
-  overflow: hidden;
-}
-.callout-header {
-  background: var(--cobalt-pale);
-  padding: 16px 24px;
-  border-bottom: 1px solid rgba(41,82,196,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.callout-title {
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--cobalt-dark);
-  font-weight: 600;
-}
-.callout-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: rgba(26,24,20,0.08);
-}
-@media (max-width: 680px) {
-  .callout-grid { grid-template-columns: 1fr; }
-}
-
-.callout-track {
-  background: var(--white);
-  padding: 24px;
-}
-.track-label {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cobalt);
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-.track-headline {
-  font-family: var(--serif);
-  font-size: 1.35rem;
-  color: var(--ink);
-  margin-bottom: 8px;
-}
-.track-desc {
-  font-size: 0.9rem;
-  color: var(--ink-muted);
-  margin: 0;
-}
-
-.research-accordion {
-  border-top: 1px solid rgba(26,24,20,0.08);
-  background: var(--ivory);
-}
-.research-accordion summary {
-  cursor: pointer;
-  padding: 14px 24px;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--cobalt);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-}
-.research-accordion summary::-webkit-details-marker { display: none; }
-.research-accordion summary .plus { font-size: 1.1rem; font-weight: 300; }
-.research-accordion[open] summary .plus { transform: rotate(45deg); }
-.research-content {
-  padding: 20px 24px;
-  border-top: 1px dashed rgba(26,24,20,0.12);
-  background: var(--white);
-}
-.research-quote {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--ink);
-  line-height: 1.5;
-  margin-bottom: 16px;
-  border-left: 2px solid var(--cobalt);
-  padding-left: 16px;
-}
-
-.grid-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-  align-items: start;
-}
-@media (max-width: 840px) {
-  .grid-2col { grid-template-columns: 1fr; }
-}
-
-.content-card {
-  border: var(--edge);
-  background: var(--white);
-  padding: 28px;
-}
-
-.decision-chain { display: flex; flex-direction: column; gap: 0; }
-.chain-item {
-  border: var(--edge);
-  border-left: 3px solid var(--ink-light);
-  padding: 16px 20px;
-  background: var(--white);
-  cursor: pointer;
-  transition: border-color 0.2s ease, background 0.2s ease;
-}
-.chain-item + .chain-item { border-top: none; }
-.chain-item.active { border-left-color: var(--cobalt); background: var(--cobalt-pale); }
-.chain-item .clabel {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-light);
-  margin-bottom: 4px;
-}
-.chain-item.active .clabel { color: var(--cobalt-dark); }
-.chain-item .cval { font-size: 0.95rem; color: var(--ink); font-weight: 500; }
-
-.arch-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: rgba(26,24,20,0.12);
-  border: var(--edge);
-  margin-top: 24px;
-}
-@media (max-width: 880px) {
-  .arch-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px) {
-  .arch-grid { grid-template-columns: 1fr; }
-}
-
-.arch-card {
-  background: var(--white);
-  padding: 20px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-.arch-card:hover { background: var(--cobalt-pale); }
-.arch-card.active { background: var(--cobalt); color: var(--white); }
-.arch-card .stagenum {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: var(--ink-light);
-  margin-bottom: 8px;
-}
-.arch-card.active .stagenum { color: rgba(255,255,255,0.7); }
-.arch-card h4 {
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  margin-bottom: 4px;
-}
-.arch-card.active h4 { color: var(--white); }
-.arch-card .stagesub { font-size: 0.82rem; color: var(--ink-muted); }
-.arch-card.active .stagesub { color: rgba(255,255,255,0.85); }
-
-.arch-detail-panel {
-  margin-top: 16px;
-  background: var(--white);
-  border: var(--edge);
-  padding: 20px 24px;
-  display: none;
-}
-.arch-detail-panel.open { display: block; }
-
-.screenshot-gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 28px;
-}
-@media (max-width: 900px) {
-  .screenshot-gallery { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 500px) {
-  .screenshot-gallery { grid-template-columns: 1fr; }
-}
-
 .seq-card {
   border: var(--edge);
   background: var(--white);
@@ -590,11 +117,27 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+.seq-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.seq-img-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   padding: 12px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
 }
-.seq-card-shot span {
+.seq-img-fallback span {
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.06em;
@@ -1101,13 +644,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   background: var(--ink);
   color: var(--ivory);
   border: none;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; align-items: center; justify-content: justify;
   cursor: pointer;
   opacity: 0; pointer-events: none;
   transition: opacity 0.3s ease, transform 0.2s ease;
   z-index: 800;
 }
 .to-top.show { opacity: 1; pointer-events: auto; }
+
+/* Portfolio Back Link Styles */
+.portfolio-back-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 4px;
+  background: rgba(41, 82, 196, 0.08);
+  border: 1px solid rgba(41, 82, 196, 0.2);
+  transition: all 0.2s ease;
+}
+.portfolio-back-nav:hover {
+  background: var(--cobalt);
+  color: var(--white);
+  border-color: var(--cobalt);
+}
 </style>
 </head>
 <body>
@@ -1115,7 +682,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
 <div class="progress-bar" id="progressBar"></div>
 
 <nav class="topnav" id="topnav" aria-label="Primary Navigation">
-  <a href="#top" class="brandmark">Mindful AI Use — Case Study</a>
+  <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+    <a href="https://haifa-azzahra.github.io/index.html#work" class="portfolio-back-nav" title="Return to Haifa Az-Zahra's Portfolio">← Selected Work</a>
+    <a href="#top" class="brandmark">Mindful AI Use — Case Study</a>
+  </div>
   <button class="navtoggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
@@ -1336,31 +906,42 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
       <p id="archDetailText" style="font-size:1rem; color:var(--ink); margin-top:4px;">Learners experience the consequences of using AI reactively under tight deadlines, highlighting the critical thinking gap.</p>
     </div>
 
-    <!-- Screenshot Gallery Anchor Sequence -->
     <div style="margin-top:40px;">
       <span class="eyebrow">Course Screenshot Sequence (Click to Expand)</span>
       
       <div class="screenshot-gallery">
-        <div class="seq-card" onclick="openModal('01 · Scenario Trigger', 'Learners experience reactive AI consequences under pressure.')">
-          <div class="seq-card-shot"><span>[ Screenshot 01 ]</span></div>
+        <div class="seq-card" onclick="openModal('assets/1. Reactive Prompt.png', '01 · Scenario Trigger', 'Learners experience reactive AI consequences under pressure.')">
+          <div class="seq-card-shot">
+            <img src="assets/1. Reactive Prompt.PNG" alt="01 · Scenario Trigger" class="seq-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="seq-img-fallback"><span>[ Screenshot 01 ]</span></div>
+          </div>
           <div class="seq-card-num">01 / Trigger</div>
           <p class="seq-card-caption">Reactive AI use in a high-pressure workplace scenario.</p>
         </div>
 
-        <div class="seq-card" onclick="openModal('02 · Identifying the Gap', 'Learners pinpoint where critical thinking was bypassed.')">
-          <div class="seq-card-shot"><span>[ Screenshot 02 ]</span></div>
+        <div class="seq-card" onclick="openModal('assets/2. Missing Critical Step.png', '02 · Identifying the Gap', 'Learners pinpoint where critical thinking was bypassed.')">
+          <div class="seq-card-shot">
+            <img src="assets/2. Missing Critical Step.PNG" alt="02 · Identifying the Gap" class="seq-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="seq-img-fallback"><span>[ Screenshot 02 ]</span></div>
+          </div>
           <div class="seq-card-num">02 / Notice</div>
           <p class="seq-card-caption">Pinpointing the missed critical thinking gap.</p>
         </div>
 
-        <div class="seq-card" onclick="openModal('03 · STOP Method', 'Learners practice guided emotional pause before prompting.')">
-          <div class="seq-card-shot"><span>[ Screenshot 03 ]</span></div>
+        <div class="seq-card" onclick="openModal('assets/3. STOP Method.PNG', '03 · STOP Method', 'Learners practice guided emotional pause before prompting.')">
+          <div class="seq-card-shot">
+            <img src="assets/3. STOP Method.PNG" alt="03 · STOP Method" class="seq-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="seq-img-fallback"><span>[ Screenshot 03 ]</span></div>
+          </div>
           <div class="seq-card-num">03 / Regulate</div>
           <p class="seq-card-caption">Applying STOP method before generating prompts.</p>
         </div>
 
-        <div class="seq-card" onclick="openModal('04 · Critical Prompting', 'AI used as a partner to challenge assumptions.')">
-          <div class="seq-card-shot"><span>[ Screenshot 04 ]</span></div>
+        <div class="seq-card" onclick="openModal('assets/4. AI as Thinking Partner. PNG', '04 · Critical Prompting', 'AI used as a partner to challenge assumptions.')">
+          <div class="seq-card-shot">
+            <img src="assets/4. AI as Thinking Partner.PNG" alt="04 · Critical Prompting" class="seq-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="seq-img-fallback"><span>[ Screenshot 04 ]</span></div>
+          </div>
           <div class="seq-card-num">04 / Reasoning</div>
           <p class="seq-card-caption">Evaluating AI options and challenging assumptions.</p>
         </div>
@@ -1574,6 +1155,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
     <h2>AI can make decisions faster. <br>The designer's job is to make sure people are still thinking.</h2>
     
     <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:28px;">
+      <a class="btn btn-on-dark" href="https://haifa-azzahra.github.io/index.html#work">← Back to Portfolio (Selected Work)</a>
       <a class="btn btn-on-dark" href="https://course-contest2026.ispring.com/app/preview/e5dab874-4a26-11f1-9580-324d32898ed1" target="_blank" rel="noopener noreferrer">Explore the Full Course ↗</a>
       <a class="btn btn-on-dark" href="#top">Back to Top ↑</a>
     </div>
@@ -1587,7 +1169,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
   <div class="modal-box" onclick="event.stopPropagation()">
     <button class="modal-close" onclick="closeModal()">×</button>
     <div class="modal-shot-preview">
-      <span class="eyebrow" id="modalTitle">Course Screenshot</span>
+      <img id="modalImg" src="" alt="Course Screenshot Preview" class="seq-img" style="object-fit:contain; max-height:480px;" onerror="this.style.display='none'; document.getElementById('modalFallback').style.display='flex';">
+      <div id="modalFallback" style="display:none; flex-direction:column; align-items:center; justify-content:center; padding:20px; text-align:center;">
+        <span class="eyebrow" id="modalTitle">Course Screenshot</span>
+        <span style="font-family:var(--mono); font-size:0.72rem; color:var(--ink-muted); margin-top:6px;">assets/screenshot file preview</span>
+      </div>
     </div>
     <h3 id="modalCaptionTitle" style="font-size:1.1rem; margin-bottom:6px;">Screenshot Overview</h3>
     <p id="modalCaptionDesc" style="font-size:0.9rem; margin:0;">Detailed description of the course interaction scenario.</p>
@@ -1597,81 +1183,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible, [tabindex]:focus-v
 <button class="to-top" id="toTop" aria-label="Back to top" onclick="window.scrollTo({top:0, behavior:'smooth'})">↑</button>
 
 <script>
-(function(){
-  "use strict";
-
-  /* Progress bar */
-  var progressBar = document.getElementById('progressBar');
-  function updateProgress(){
-    var h = document.documentElement;
-    var scrollTop = h.scrollTop || document.body.scrollTop;
-    var height = h.scrollHeight - h.clientHeight;
-    var pct = height > 0 ? (scrollTop / height) * 100 : 0;
-    progressBar.style.width = pct + '%';
-  }
-
-  /* Nav hide and theme toggle */
-  var topnav = document.getElementById('topnav');
-  var lastY = window.scrollY;
-  var darkSections = document.querySelectorAll('.closing-section, .boundary-banner');
-
-  function updateNav(){
-    var y = window.scrollY;
-    if(y > lastY && y > 120){
-      topnav.classList.add('hide');
-    } else {
-      topnav.classList.remove('hide');
-    }
-    lastY = y;
-
-    var onDark = false;
-    darkSections.forEach(function(sec){
-      var r = sec.getBoundingClientRect();
-      if(r.top <= 40 && r.bottom >= 40){ onDark = true; }
-    });
-    topnav.classList.toggle('on-dark', onDark);
-  }
-
-  /* Mobile Nav */
-  var navToggle = document.getElementById('navToggle');
-  var navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', function(){
-    var isOpen = navLinks.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-
-  /* To Top button */
-  var toTop = document.getElementById('toTop');
-  function updateToTop(){
-    toTop.classList.toggle('show', window.scrollY > 600);
-  }
-
-  window.addEventListener('scroll', function(){
-    updateProgress();
-    updateNav();
-    updateToTop();
-  }, { passive: true });
-
-  /* Interactive Decision Chain */
-  var chainItems = document.querySelectorAll('.chain-item');
-  chainItems.forEach(function(item){
-    item.addEventListener('click', function(){
-      chainItems.forEach(function(ci){ ci.classList.remove('active'); });
-      item.classList.add('active');
-    });
-  });
-
-})();
-
-/* Stage selection logic */
-var stageData = [
-  { stage: "Stage 01 Focus", text: "Learners experience the consequences of using AI reactively under tight deadlines, highlighting the critical thinking gap." },
-  { stage: "Stage 02 Focus", text: "Learners apply the STOP method (Stop, Think, Observe, Proceed) to calm emotional speed before formulating AI prompts." },
-  { stage: "Stage 03 Focus", text: "AI acts as a challenger of assumptions, prompting learners to compare trade-offs rather than accept raw outputs." },
-  { stage: "Stage 04 Focus", text: "Learners review practical prompt templates and reflective decision tools to apply in their day-to-day work." }
-];
-
 function selectArchStage(idx, cardEl){
   var cards = document.querySelectorAll('.arch-card');
   cards.forEach(function(c){ c.classList.remove('active'); });
@@ -1682,7 +1193,19 @@ function selectArchStage(idx, cardEl){
 }
 
 /* Modal Lightbox Logic */
-function openModal(title, desc){
+function openModal(imgSrc, title, desc){
+  var modalImg = document.getElementById('modalImg');
+  var modalFallback = document.getElementById('modalFallback');
+  
+  if (imgSrc) {
+    modalImg.src = imgSrc;
+    modalImg.style.display = 'block';
+    modalFallback.style.display = 'none';
+  } else {
+    modalImg.style.display = 'none';
+    modalFallback.style.display = 'flex';
+  }
+
   document.getElementById('modalTitle').innerText = title;
   document.getElementById('modalCaptionTitle').innerText = title;
   document.getElementById('modalCaptionDesc').innerText = desc;
