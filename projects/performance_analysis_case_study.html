@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Performance Analysis in Practice — Haifa Audrey Azzahra</title>
+<meta name="description" content="A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue before deciding on an intervention. eLearning Designer's Academy — July 2026 Design Challenge." />
+<link rel="stylesheet" href="../style.css" />
+<style>
+
+  /* ---- page-specific additions, built on the site's existing tokens ---- */
+
+  /* course launch — screenshots + info, sitting inside project-content */
+  .launch-block{
+    display:grid;
+    grid-template-columns:3fr 2fr;
+    gap:2.5rem;
+    align-items:start;
+    margin:1.75rem 0 2.5rem;
+  }
+  @media (max-width:760px){
+    .launch-block{ grid-template-columns:1fr; gap:1.5rem; }
+  }
+
+  .launch-shots{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .launch-shot{
+    border:1px solid rgba(26,24,20,0.08);
+    border-radius:6px;
+    aspect-ratio:16/10;
+    background:var(--ivory-dark);
+    overflow:hidden;
+    position:relative;
+    box-shadow:0 8px 24px rgba(26,24,20,0.06);
+  }
+  .launch-shot img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .launch-shot .shot-fallback{
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:1.25rem;
+    font-family:var(--mono);
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-light);
+  }
+
+  .launch-info{
+    display:flex;
+    flex-direction:column;
+  }
+  .launch-meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.4rem;
+    margin-bottom:1rem;
+  }
+  .launch-info h3{
+    font-family:var(--serif);
+    font-size:1.35rem;
+    font-weight:600;
+    color:var(--ink);
+    line-height:1.3;
+    margin-bottom:0.75rem;
+  }
+  .launch-info p{
+    font-size:0.9rem;
+    color:var(--ink-muted);
+    line-height:1.75;
+    margin-bottom:0;
+  }
+  .launch-outcomes{
+    list-style:none;
+    padding:0;
+    margin:1.25rem 0 0;
+  }
+  .launch-outcomes li{
+    font-size:0.85rem;
+    color:var(--ink-muted);
+    line-height:1.65;
+    padding-left:1.25rem;
+    position:relative;
+    margin-bottom:0.4rem;
+  }
+  .launch-outcomes li::before{
+    content:'→';
+    position:absolute;
+    left:0;
+    color:var(--cobalt);
+    font-size:0.8rem;
+  }
+  .launch-cta{
+    margin-top:1.5rem;
+    padding-top:1.25rem;
+    border-top:1px solid rgba(26,24,20,0.08);
+  }
+  .launch-cta .sidebar-link-btn{ margin-top:0; }
+  .launch-note{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.68rem;
+    color:var(--ink-light);
+    margin-top:0.6rem;
+  }
+
+  /* three-stage compound visual — the problem statement */
+  .compound{
+    background:var(--white);
+    border:1px solid rgba(26,24,20,0.07);
+    border-radius:6px;
+    padding:2rem 0 0;
+    margin:1.75rem 0 1.5rem;
+  }
+  .compound-flex{ display:flex; align-items:stretch; }
+  .compound-stage{ flex:1; padding:0 1.75rem 2rem; }
+  .compound-stage:not(:first-child){ border-left:1px solid rgba(26,24,20,0.08); }
+  .compound-num{
+    font-family:var(--mono);
+    font-size:0.7rem;
+    letter-spacing:0.12em;
+    color:var(--ink-light);
+  }
+  .compound-icon-wrap{
+    height:3.25rem;
+    display:flex;
+    align-items:flex-end;
+    margin:1.25rem 0 0;
+    padding-bottom:1.1rem;
+    border-bottom:1px solid rgba(26,24,20,0.1);
+  }
+  .compound-icon{ width:2rem; height:2rem; color:var(--cobalt); overflow:visible; }
+  .compound-text{ font-size:0.88rem; color:var(--ink-muted); line-height:1.6; margin-top:1rem; }
+
+  @media (max-width:760px){
+    .compound-flex{ flex-direction:column; }
+    .compound-stage{ padding:0 1.75rem 1.75rem !important; border-left:none !important; }
+    .compound-stage:not(:first-child){ border-top:1px solid rgba(26,24,20,0.08); padding-top:1.75rem !important; }
+  }
+
+  /* accordion — secondary context */
+  details.accordion{
+    border-top:1px solid rgba(26,24,20,0.08);
+    padding:1rem 0;
+    margin-bottom:1.5rem;
+  }
+  details.accordion summary{
+    cursor:pointer;
+    font-family:var(--mono);
+    font-size:0.76rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--cobalt);
+    list-style:none;
+  }
+  details.accordion summary::-webkit-details-marker{ display:none; }
+  details.accordion .accordion-body{
+    margin-top:1rem;
+    background:var(--ivory);
+    border-radius:6px;
+    padding:1.25rem 1.5rem;
+    font-size:0.9rem;
+    color:var(--ink-muted);
+    line-height:1.75;
+  }
+
+  /* framework chip row */
+  .chip-row{ display:flex; flex-wrap:wrap; gap:0.4rem; margin:1rem 0 1.5rem; }
+
+  /* callout variant — terracotta accent for the "design choice" moment */
+  .callout.accent{
+    background:var(--accent-pale);
+    border-left-color:var(--accent);
+  }
+  .callout.accent p{ color:var(--accent); }
+  .callout .callout-label{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.65rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:0.5rem;
+    color:var(--cobalt-dark);
+  }
+  .callout.accent .callout-label{ color:var(--accent); }
+
+  /* reflection cards */
+  .reflect-card{
+    background:var(--white);
+    border:1px solid rgba(26,24,20,0.07);
+    border-radius:6px;
+    margin-bottom:1.25rem;
+    overflow:hidden;
+  }
+  .reflect-head{
+    padding:1.1rem 1.5rem;
+    border-bottom:1px solid rgba(26,24,20,0.07);
+    background:var(--ivory);
+  }
+  .reflect-head h4{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--ink);
+  }
+  .reflect-body{ display:grid; grid-template-columns:1fr 1fr; }
+  @media (max-width:640px){ .reflect-body{ grid-template-columns:1fr; } }
+  .reflect-col{ padding:1.25rem 1.5rem; }
+  .reflect-col + .reflect-col{ border-left:1px solid rgba(26,24,20,0.07); }
+  @media (max-width:640px){
+    .reflect-col + .reflect-col{ border-left:none; border-top:1px solid rgba(26,24,20,0.07); }
+  }
+  .reflect-col .rc-label{
+    display:block;
+    font-family:var(--mono);
+    font-size:0.62rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-light);
+    margin-bottom:0.5rem;
+  }
+  .reflect-col p{ font-size:0.85rem; color:var(--ink-muted); line-height:1.7; margin:0; }
+
+  .pull-quote{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    font-size:1.3rem;
+    color:var(--ink);
+    line-height:1.45;
+    max-width:32ch;
+    margin:0 0 1.75rem;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../index.html#work" class="active">Work</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PROJECT HERO -->
+  <section class="project-hero">
+    <div class="project-hero-inner">
+      <p class="project-hero-breadcrumb"><a href="../index.html#work">Work</a> / Performance Analysis in Practice</p>
+      <h1 class="project-hero-title">Performance Analysis in Practice</h1>
+      <p class="project-hero-sub">A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue &mdash; before they decide on a fix. eLearning Designer&rsquo;s Academy, July 2026 Design Challenge.</p>
+    </div>
+  </section>
+
+  <!-- META STRIP -->
+  <div class="project-meta-strip">
+    <div class="project-meta-strip-inner">
+      <div>
+        <div class="meta-label">Tool</div>
+        <div class="meta-value">Claude, Mighty, Articulate Rise</div>
+      </div>
+      <div>
+        <div class="meta-label">Audience</div>
+        <div class="meta-value">Leaders &amp; managers in fast-paced orgs</div>
+      </div>
+      <div>
+        <div class="meta-label">Format</div>
+        <div class="meta-value">Scrollable course</div>
+      </div>
+      <div>
+        <div class="meta-label">Framework</div>
+        <div class="meta-value">Mager &amp; Pipe&rsquo;s Performance Analysis</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="project-body">
+    <div class="project-content">
+
+      <h2 style="margin-top:0;">Start Here</h2>
+      <p>Articulate Review doesn&rsquo;t allow this course to be framed on another site, so it opens in its own tab &mdash; but everything below assumes you&rsquo;ve played through it first.</p>
+
+      <div class="launch-block fade-up">
+        <div class="launch-shots">
+          <div class="launch-shot">
+            <img
+              src="../assets/performance-analysis-cover.png"
+              alt="Screenshot of the Performance Analysis in Practice Rise 360 course, showing Marcus's scenario"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="shot-fallback">Add a course screenshot at<br>assets/performance-analysis-cover.png</div>
+          </div>
+          <div class="launch-shot">
+            <img
+              src="../assets/performance-analysis-cover-2.png"
+              alt="Screenshot of a decision point inside the Performance Analysis in Practice course"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="shot-fallback">Add a second screenshot at<br>assets/performance-analysis-cover-2.png</div>
+          </div>
+        </div>
+
+        <div class="launch-info">
+          <div class="launch-meta-row">
+            <span class="card-tag">15 min</span>
+            <span class="card-tag">Scenario-based</span>
+            <span class="card-tag">Rise 360</span>
+          </div>
+          <h3>Performance Analysis in Practice</h3>
+          <p>You&rsquo;re the manager. Marcus&rsquo;s numbers have slipped, and the easy explanations &mdash; skill, motivation, attitude &mdash; are all sitting right there. The course won&rsquo;t let you reach for one until you&rsquo;ve gathered the evidence.</p>
+          <ul class="launch-outcomes">
+            <li>Investigate Marcus&rsquo;s case through evidence, not assumptions</li>
+            <li>Apply Mager &amp; Pipe&rsquo;s framework at each decision point</li>
+            <li>Land on a coaching plan built on the real root cause</li>
+          </ul>
+          <div class="launch-cta">
+            <a class="sidebar-link-btn" href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener">Launch the Course &#8599;</a>
+            <span class="launch-note">Opens in a new tab &middot; 15 minutes</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>The Problem</h2>
+      <p class="pull-quote fade-up">&ldquo;How can managers diagnose the real cause of a performance issue before deciding on an intervention?&rdquo;</p>
+
+      <div class="compound fade-up">
+        <div class="compound-flex">
+          <div class="compound-stage">
+            <span class="compound-num">01</span>
+            <div class="compound-icon-wrap">
+              <svg class="compound-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="16" cy="16" r="9.5"/>
+                <line x1="22.7" y1="22.7" x2="33" y2="33"/>
+                <path d="M16 10.5 V16 L11.5 20.5"/>
+                <path d="M16 16 L20 20"/>
+              </svg>
+            </div>
+            <p class="compound-text">Not understanding the root cause of a performance issue</p>
+          </div>
+          <div class="compound-stage">
+            <span class="compound-num">02</span>
+            <div class="compound-icon-wrap">
+              <svg class="compound-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="17" cy="21" r="10.5"/>
+                <circle cx="17" cy="21" r="5.5"/>
+                <circle cx="17" cy="21" r="0.9" fill="currentColor" stroke="none"/>
+                <circle cx="28" cy="10" r="1.4" fill="currentColor" stroke="none"/>
+                <path d="M23 15 L27 11" stroke-dasharray="1.6 2.6"/>
+              </svg>
+            </div>
+            <p class="compound-text">Incorrect diagnosis of the performance problem</p>
+          </div>
+          <div class="compound-stage">
+            <span class="compound-num">03</span>
+            <div class="compound-icon-wrap">
+              <svg class="compound-icon" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 8 H23 V19 H12 L7 25 V19 H4 Z"/>
+                <path d="M16 17 H36 V28 H27 L31 34 V28 H16 Z"/>
+              </svg>
+            </div>
+            <p class="compound-text">Ineffective coaching conversations and interventions</p>
+          </div>
+        </div>
+      </div>
+
+      <details class="accordion fade-up">
+        <summary>Read more context on this +</summary>
+        <div class="accordion-body">
+          This challenge is particularly common in fast-paced work environments, where visible performance outcomes can mask underlying factors such as unclear expectations, workflow obstacles, competing priorities, or unintended incentives.
+        </div>
+      </details>
+
+      <h2>Learning Needs Analysis</h2>
+      <p>A review of common managerial practices revealed three key gaps:</p>
+      <ul>
+        <li><strong>Premature diagnosis</strong> &mdash; managers tend to rely on intuition or first impressions, quickly labeling problems as &ldquo;skill issues&rdquo; or &ldquo;motivation issues&rdquo; without collecting sufficient evidence.</li>
+        <li><strong>Limited diagnostic skills</strong> &mdash; many managers are familiar with giving feedback but have less experience systematically analyzing performance problems, identifying environmental barriers, or uncovering conflicting incentives.</li>
+        <li><strong>Need for structured decision-making tools</strong> &mdash; managers require practical frameworks that guide inquiry, encourage evidence gathering, and support more accurate coaching decisions.</li>
+      </ul>
+
+      <p>Mager and Pipe&rsquo;s Performance Analysis framework addresses these needs by providing a structured process to distinguish between:</p>
+      <div class="chip-row fade-up">
+        <span class="card-tag">Skill deficiencies</span>
+        <span class="card-tag">Motivation issues</span>
+        <span class="card-tag">Environmental obstacles</span>
+        <span class="card-tag">Unclear expectations</span>
+        <span class="card-tag">Reinforcing consequences</span>
+      </div>
+
+      <div class="callout fade-up">
+        <p>The learning need, therefore, was not to teach managers how to coach in general &mdash; it was to help them diagnose before they decide.</p>
+      </div>
+
+      <h2>My Approach</h2>
+      <p>I designed a 15-minute, scenario-based microlearning experience in Rise 360 centered around a single workplace case. Rather than presenting the framework through static content, learners step into the role of a manager investigating Marcus&rsquo;s performance issue. The interaction intentionally surfaces plausible but incomplete explanations &mdash; skill gaps, low motivation, poor personal accountability &mdash; before gradually revealing additional evidence, mirroring how real workplace decision-making rarely arrives with the full picture upfront.</p>
+
+      <ul>
+        <li><strong>Diagnostic framework</strong> &mdash; Mager &amp; Pipe&rsquo;s Performance Analysis, used as the throughline of the whole investigation.</li>
+        <li><strong>Coaching questions</strong> &mdash; prompts that push learners to gather evidence rather than guess at a cause.</li>
+        <li><strong>Decision points</strong> &mdash; moments built to challenge assumptions in the middle of the investigation, not after it.</li>
+        <li><strong>Progressive disclosure</strong> &mdash; information revealed gradually, to recreate the ambiguity of a real workplace case.</li>
+      </ul>
+
+      <div class="callout accent fade-up">
+        <span class="callout-label">Design Choice &middot; Core Principle</span>
+        <p>Effective coaching begins not with answers, but with better diagnosis.</p>
+      </div>
+
+      <h2>Reflection</h2>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-head"><h4>Designing for meaningful ambiguity</h4></div>
+        <div class="reflect-body">
+          <div class="reflect-col">
+            <span class="rc-label">What I Did</span>
+            <p>Designed Marcus&rsquo;s situation around several plausible explanations &mdash; skill, motivation, and accountability &mdash; so learners couldn&rsquo;t immediately identify the root cause.</p>
+          </div>
+          <div class="reflect-col">
+            <span class="rc-label">What I&rsquo;d Explore Further</span>
+            <p>Make the 1:1 coaching conversation more nuanced and tense, introducing competing perspectives and more ambiguous responses that require managers to navigate uncertainty before deciding how to respond.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-head"><h4>Making the framework necessary</h4></div>
+        <div class="reflect-body">
+          <div class="reflect-col">
+            <span class="rc-label">What I Did</span>
+            <p>Rather than teaching Mager &amp; Pipe as a framework to memorize, embedded it into the investigation of Marcus&rsquo;s performance problem &mdash; learners experience why structured diagnosis matters before deciding on an intervention.</p>
+          </div>
+          <div class="reflect-col">
+            <span class="rc-label">What I&rsquo;d Explore Further</span>
+            <p>Strengthen the connection between each diagnostic decision and its potential coaching consequence, making the value of the framework even more visible.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reflect-card fade-up">
+        <div class="reflect-head"><h4>Designing for a specific audience</h4></div>
+        <div class="reflect-body">
+          <div class="reflect-col">
+            <span class="rc-label">What I Did</span>
+            <p>Because the scenario was designed for a SaaS team, used technical workplace language and situations &mdash; sprint commitments, backend engineering, integrations, client escalations &mdash; to make the case feel authentic.</p>
+          </div>
+          <div class="reflect-col">
+            <span class="rc-label">What I&rsquo;d Explore Further</span>
+            <p>For a different audience, tone down the technical language and adapt the workplace context while preserving the underlying performance problem and diagnostic challenge.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="project-sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Course</div>
+        <a href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener" class="sidebar-link-btn">Launch the Course &#8599;</a>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Tags</div>
+        <span class="sidebar-tag">Performance Analysis</span>
+        <span class="sidebar-tag">Rise 360</span>
+        <span class="sidebar-tag">Behavioral Coaching</span>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">Takeaways</div>
+        <div class="outcome-item">
+          <div class="outcome-icon">01</div>
+          <div class="outcome-text">Diagnose before deciding &mdash; a structured process beats intuition.</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon">02</div>
+          <div class="outcome-text">Ambiguity, designed well, is what makes a framework necessary.</div>
+        </div>
+        <div class="outcome-item">
+          <div class="outcome-icon">03</div>
+          <div class="outcome-text">Authentic workplace language makes a scenario feel real.</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
+    <div class="footer-copy">&copy; 2025 &middot; Built with intention.</div>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
+      <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    const ham = document.getElementById('hamburger');
+    const nav = document.getElementById('navLinks');
+    if (ham && nav) ham.addEventListener('click', () => nav.classList.toggle('open'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
