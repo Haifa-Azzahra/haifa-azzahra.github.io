@@ -1,41 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Performance Analysis in Practice — Haifa Audrey Azzahra</title>
-<meta name="description" content="A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue before deciding on an intervention. eLearning Designer's Academy — July 2026 Design Challenge." />
-<link rel="stylesheet" href="../style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Performance Analysis in Practice — ID Case Study</title>
+<meta name="description" content="A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue before deciding on an intervention. eLearning Designer's Academy — July 2026 Design Challenge.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 
-  /* ---- page-specific additions, built on the site's existing tokens ---- */
+  :root{
+    --cobalt:#2952C4;
+    --cobalt-dark:#1E3D96;
+    --cobalt-pale:#E8EEFB;
+    --ivory:#F5F0E6;
+    --ivory-dark:#EDE5D4;
+    --ink:#1A1814;
+    --ink-muted:#4A4640;
+    --ink-light:#524E48;
+    --accent:#B84E25;
+    --accent-pale:#F8E8E0;
 
-  /* course launch — screenshots + info, sitting inside project-content */
-  .launch-block{
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --dur-hover:0.28s;
+    --dur-reveal:0.65s;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--ivory);
+    color:var(--ink);
+    font-family:'DM Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Playfair Display', serif;
+    color:var(--ink);
+    margin:0;
+    line-height:1.15;
+  }
+
+  p{ margin:0; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  img{ max-width:100%; display:block; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  .eyebrow{
+    font-family:'DM Mono', monospace;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    color:var(--cobalt);
+    display:block;
+    margin-bottom:14px;
+  }
+
+  .eyebrow.on-dark{ color:#AFC4EF; }
+  .eyebrow.accent{ color:var(--accent); }
+
+  h2.section-title{
+    font-size:clamp(1.7rem, 3.2vw, 2.5rem);
+    max-width:30ch;
+    font-weight:600;
+  }
+
+  .body-copy{
+    max-width:68ch;
+    color:var(--ink-muted);
+    font-size:1.02rem;
+  }
+
+  :focus-visible{
+    outline:2px solid var(--cobalt);
+    outline-offset:3px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(245,240,230,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(26,24,20,0.1);
+  }
+
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 32px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+
+  .nav-back{
+    font-family:'DM Mono', monospace;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-muted);
+    transition:color var(--dur-hover) var(--ease);
+  }
+  .nav-back:hover{ color:var(--cobalt); }
+
+  .nav-links{
+    display:flex;
+    gap:28px;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  .nav-links a{
+    font-family:'DM Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--ink-muted);
+    position:relative;
+    padding-bottom:4px;
+  }
+
+  .nav-links a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:1px;
+    width:0%;
+    background:var(--cobalt);
+    transition:width 0.3s var(--ease);
+  }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after{
+    width:100%;
+  }
+
+  .nav-links a.active{ color:var(--cobalt); }
+
+  @media (max-width:720px){
+    .nav-links{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+  }
+
+  .hero-kicker{
+    font-family:'DM Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-light);
+    margin-bottom:18px;
+  }
+
+  .hero-kicker a{ color:var(--cobalt); border-bottom:1px solid transparent; transition:border-color var(--dur-hover) var(--ease); }
+  .hero-kicker a:hover{ border-color:var(--cobalt); }
+
+  h1.hero-title{
+    font-size:clamp(2.4rem, 5.5vw, 4rem);
+    max-width:16ch;
+    font-weight:700;
+    margin-bottom:22px;
+  }
+
+  .hero-sub{
+    max-width:56ch;
+    font-size:1.15rem;
+    color:var(--ink-muted);
+    margin-bottom:36px;
+  }
+
+  .hero-actions{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:56px;
+  }
+
+  .btn{
+    font-family:'DM Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    padding:13px 22px;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    display:inline-block;
+    cursor:pointer;
+    transition:transform var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), color var(--dur-hover) var(--ease), background var(--dur-hover) var(--ease);
+  }
+  .btn:hover{
+    transform:translateY(-2px);
+    border-color:var(--cobalt);
+    color:var(--cobalt);
+  }
+
+  .btn-primary{
+    background:var(--cobalt);
+    border-color:var(--cobalt);
+    color:#fff;
+  }
+  .btn-primary:hover{
+    background:var(--cobalt-dark);
+    border-color:var(--cobalt-dark);
+    color:#fff;
+    transform:translateY(-2px);
+  }
+
+  .btn-on-dark{
+    border-color:rgba(255,255,255,0.65);
+    color:#fff;
+  }
+  .btn-on-dark:hover{
+    background:#fff;
+    color:var(--cobalt-dark);
+    border-color:#fff;
+    transform:translateY(-2px);
+  }
+
+  .meta-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid rgba(26,24,20,0.14);
+    border-left:1px solid rgba(26,24,20,0.14);
+  }
+  .meta-cell{
+    padding:18px 20px;
+    border-right:1px solid rgba(26,24,20,0.14);
+    border-bottom:1px solid rgba(26,24,20,0.14);
+  }
+  .meta-cell .meta-label{
+    font-family:'DM Mono', monospace;
+    font-size:0.65rem;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--cobalt);
+    display:block;
+    margin-bottom:8px;
+  }
+  .meta-cell .meta-value{
+    font-size:0.92rem;
+    color:var(--ink);
+  }
+
+  @media (max-width:720px){
+    .meta-grid{ grid-template-columns:1fr 1fr; }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding:88px 0; }
+  section.alt{ background:var(--ivory-dark); }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity var(--dur-reveal) var(--ease), transform var(--dur-reveal) var(--ease);
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .section-head{
+    margin-bottom:44px;
+  }
+
+  /* problem statement */
+  .problem-quote{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.3rem, 2.4vw, 1.7rem);
+    max-width:32ch;
+    color:var(--ink);
+    margin:28px 0 56px;
+  }
+
+  /* compound — three-stage editorial composition (replaces the dot/arrow timeline) */
+  .compound{
+    border-top:1px solid rgba(26,24,20,0.18);
+    padding-top:26px;
+    margin-bottom:40px;
+  }
+  .compound-flex{
+    display:flex;
+    align-items:stretch;
+  }
+  .compound-stage{
+    flex:1;
+    padding-right:36px;
+  }
+  .compound-stage:not(:first-child){
+    border-left:1px solid rgba(26,24,20,0.14);
+    padding-left:36px;
+  }
+  .compound-num{
+    font-family:'DM Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    color:var(--ink-light);
+  }
+  .compound-icon-wrap{
+    height:56px;
+    display:flex;
+    align-items:flex-end;
+    margin:24px 0 0;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(26,24,20,0.16);
+  }
+  .compound-icon{
+    width:34px;
+    height:34px;
+    color:var(--cobalt);
+    overflow:visible;
+  }
+  .compound-text{
+    font-size:0.96rem;
+    color:var(--ink-muted);
+    max-width:24ch;
+    margin-top:20px;
+  }
+
+  @media (max-width:760px){
+    .compound-flex{ flex-direction:column; }
+    .compound-stage{ padding:0 0 32px !important; border-left:none !important; }
+    .compound-stage:not(:first-child){ padding-top:32px !important; border-top:1px solid rgba(26,24,20,0.14); }
+    .compound-icon-wrap{ border-bottom:none; padding-bottom:0; height:auto; }
+  }
+
+  /* accordion */
+  details.accordion{
+    border-top:1px solid rgba(26,24,20,0.14);
+    padding:18px 0;
+  }
+  details.accordion summary{
+    cursor:pointer;
+    font-family:'DM Mono', monospace;
+    font-size:0.78rem;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    color:var(--cobalt);
+    list-style:none;
+  }
+  details.accordion summary::-webkit-details-marker{ display:none; }
+  details.accordion .accordion-body{
+    margin-top:18px;
+    background:var(--ivory-dark);
+    padding:22px 26px;
+    max-width:68ch;
+    color:var(--ink-muted);
+    font-size:0.96rem;
+    border-left:3px solid var(--cobalt);
+  }
+  section.alt details.accordion .accordion-body{
+    background:var(--ivory);
+  }
+
+  /* cards */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .card-grid.two{ grid-template-columns:repeat(2, 1fr); }
+
+  @media (max-width:860px){
+    .card-grid, .card-grid.two{ grid-template-columns:1fr; }
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid rgba(26,24,20,0.12);
+    padding:26px 24px;
+    transition:transform var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), box-shadow var(--dur-hover) var(--ease);
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    border-color:var(--cobalt);
+    box-shadow:0 14px 26px -18px rgba(26,24,20,0.35);
+  }
+  .card h3{
+    font-size:1.05rem;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .card p{
+    font-size:0.92rem;
+    color:var(--ink-muted);
+  }
+
+  /* chip list */
+  .chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:22px;
+  }
+  .chip{
+    font-family:'DM Mono', monospace;
+    font-size:0.72rem;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:9px 14px;
+    background:var(--cobalt-pale);
+    color:var(--cobalt-dark);
+    border:1px solid rgba(41,82,196,0.18);
+  }
+
+  /* pull quote band */
+  .pull-band{
+    background:var(--cobalt-pale);
+    padding:44px 40px;
+    margin-top:48px;
+  }
+  .pull-band p{
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(1.25rem, 2.4vw, 1.7rem);
+    max-width:34ch;
+    color:var(--cobalt-dark);
+  }
+
+  /* feature grid (approach) */
+  .feature-list{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:rgba(26,24,20,0.14);
+    border:1px solid rgba(26,24,20,0.14);
+    margin:40px 0 56px;
+  }
+  @media (max-width:720px){ .feature-list{ grid-template-columns:1fr; } }
+  .feature-item{
+    background:var(--ivory);
+    padding:26px 26px;
+  }
+  section.alt .feature-item{ background:var(--ivory-dark); }
+  .feature-item .f-label{
+    font-family:'DM Mono', monospace;
+    font-size:0.68rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--cobalt);
+    display:block;
+    margin-bottom:8px;
+  }
+  .feature-item h3{
+    font-size:1rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .feature-item p{
+    font-size:0.9rem;
+    color:var(--ink-muted);
+  }
+
+  /* course launch card (Rise/Articulate blocks framing, so this replaces an embed) */
+  .launch-card{
+    margin-top:12px;
+    border:1px solid rgba(26,24,20,0.14);
+    background:#fff;
     display:grid;
     grid-template-columns:3fr 2fr;
-    gap:2.5rem;
+    gap:52px;
     align-items:start;
-    margin:1.75rem 0 2.5rem;
+    padding:44px;
   }
-  @media (max-width:760px){
-    .launch-block{ grid-template-columns:1fr; gap:1.5rem; }
+  section.alt .launch-card{ background:var(--ivory); }
+
+  @media (max-width:820px){
+    .launch-card{ grid-template-columns:1fr; gap:30px; padding:32px 26px; }
   }
 
+  /* left — visual */
   .launch-shots{
     display:flex;
     flex-direction:column;
-    gap:1rem;
+    gap:20px;
   }
   .launch-shot{
-    border:1px solid rgba(26,24,20,0.08);
-    border-radius:6px;
+    border:1px solid rgba(26,24,20,0.14);
     aspect-ratio:16/10;
     background:var(--ivory-dark);
     overflow:hidden;
     position:relative;
-    box-shadow:0 8px 24px rgba(26,24,20,0.06);
   }
+  section.alt .launch-shot{ background:var(--ivory); }
   .launch-shot img{
     width:100%;
     height:100%;
@@ -49,257 +520,263 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:1.25rem;
-    font-family:var(--mono);
+    padding:20px;
+    font-family:'DM Mono', monospace;
     font-size:0.68rem;
     text-transform:uppercase;
-    letter-spacing:0.08em;
+    letter-spacing:0.06em;
     color:var(--ink-light);
   }
 
+  /* right — one coherent information block */
   .launch-info{
     display:flex;
     flex-direction:column;
+    height:100%;
   }
+
   .launch-meta-row{
     display:flex;
+    gap:10px;
     flex-wrap:wrap;
-    gap:0.4rem;
-    margin-bottom:1rem;
+    margin-bottom:18px;
   }
+  .launch-meta-row .chip{
+    background:var(--ivory);
+    color:var(--ink-muted);
+    border-color:rgba(26,24,20,0.14);
+  }
+  section.alt .launch-meta-row .chip{ background:var(--ivory-dark); }
+
   .launch-info h3{
-    font-family:var(--serif);
-    font-size:1.35rem;
-    font-weight:600;
-    color:var(--ink);
-    line-height:1.3;
-    margin-bottom:0.75rem;
+    font-size:clamp(1.4rem, 2.6vw, 1.85rem);
+    max-width:20ch;
+    margin-bottom:16px;
   }
-  .launch-info p{
+
+  .launch-info .body-copy{
+    margin-bottom:0;
+    font-size:0.96rem;
+  }
+
+  .launch-preview-list{
+    list-style:none;
+    margin:24px 0 0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .launch-preview-list li{
     font-size:0.9rem;
     color:var(--ink-muted);
-    line-height:1.75;
-    margin-bottom:0;
-  }
-  .launch-outcomes{
-    list-style:none;
-    padding:0;
-    margin:1.25rem 0 0;
-  }
-  .launch-outcomes li{
-    font-size:0.85rem;
-    color:var(--ink-muted);
-    line-height:1.65;
-    padding-left:1.25rem;
+    padding-left:18px;
     position:relative;
-    margin-bottom:0.4rem;
   }
-  .launch-outcomes li::before{
-    content:'→';
+  .launch-preview-list li::before{
+    content:"";
     position:absolute;
     left:0;
-    color:var(--cobalt);
-    font-size:0.8rem;
+    top:8px;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--cobalt);
   }
+
   .launch-cta{
-    margin-top:1.5rem;
-    padding-top:1.25rem;
-    border-top:1px solid rgba(26,24,20,0.08);
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid rgba(26,24,20,0.12);
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
   }
-  .launch-cta .sidebar-link-btn{ margin-top:0; }
+  .launch-cta .btn-primary{
+    padding:16px 30px;
+    font-size:0.85rem;
+  }
   .launch-note{
-    display:block;
-    font-family:var(--mono);
+    font-family:'DM Mono', monospace;
     font-size:0.68rem;
     color:var(--ink-light);
-    margin-top:0.6rem;
   }
 
-  /* three-stage compound visual — the problem statement */
-  .compound{
-    background:var(--white);
-    border:1px solid rgba(26,24,20,0.07);
-    border-radius:6px;
-    padding:2rem 0 0;
-    margin:1.75rem 0 1.5rem;
-  }
-  .compound-flex{ display:flex; align-items:stretch; }
-  .compound-stage{ flex:1; padding:0 1.75rem 2rem; }
-  .compound-stage:not(:first-child){ border-left:1px solid rgba(26,24,20,0.08); }
-  .compound-num{
-    font-family:var(--mono);
-    font-size:0.7rem;
-    letter-spacing:0.12em;
-    color:var(--ink-light);
-  }
-  .compound-icon-wrap{
-    height:3.25rem;
-    display:flex;
-    align-items:flex-end;
-    margin:1.25rem 0 0;
-    padding-bottom:1.1rem;
-    border-bottom:1px solid rgba(26,24,20,0.1);
-  }
-  .compound-icon{ width:2rem; height:2rem; color:var(--cobalt); overflow:visible; }
-  .compound-text{ font-size:0.88rem; color:var(--ink-muted); line-height:1.6; margin-top:1rem; }
-
-  @media (max-width:760px){
-    .compound-flex{ flex-direction:column; }
-    .compound-stage{ padding:0 1.75rem 1.75rem !important; border-left:none !important; }
-    .compound-stage:not(:first-child){ border-top:1px solid rgba(26,24,20,0.08); padding-top:1.75rem !important; }
+  @media (max-width:820px){
+    .launch-info{ height:auto; }
+    .launch-cta{ margin-top:26px; padding-top:22px; }
   }
 
-  /* accordion — secondary context */
-  details.accordion{
-    border-top:1px solid rgba(26,24,20,0.08);
-    padding:1rem 0;
-    margin-bottom:1.5rem;
-  }
-  details.accordion summary{
-    cursor:pointer;
-    font-family:var(--mono);
-    font-size:0.76rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--cobalt);
-    list-style:none;
-  }
-  details.accordion summary::-webkit-details-marker{ display:none; }
-  details.accordion .accordion-body{
-    margin-top:1rem;
+  /* callout - design choice */
+  .callout{
     background:var(--ivory);
-    border-radius:6px;
-    padding:1.25rem 1.5rem;
-    font-size:0.9rem;
-    color:var(--ink-muted);
-    line-height:1.75;
+    border-left:3px solid var(--accent);
+    padding:28px 30px;
+    margin-top:40px;
+    max-width:64ch;
   }
-
-  /* framework chip row */
-  .chip-row{ display:flex; flex-wrap:wrap; gap:0.4rem; margin:1rem 0 1.5rem; }
-
-  /* callout variant — terracotta accent for the "design choice" moment */
-  .callout.accent{
-    background:var(--accent-pale);
-    border-left-color:var(--accent);
-  }
-  .callout.accent p{ color:var(--accent); }
+  section.alt .callout{ background:var(--ivory-dark); }
   .callout .callout-label{
-    display:block;
-    font-family:var(--mono);
-    font-size:0.65rem;
-    letter-spacing:0.08em;
+    font-family:'DM Mono', monospace;
+    font-size:0.68rem;
     text-transform:uppercase;
-    margin-bottom:0.5rem;
-    color:var(--cobalt-dark);
+    letter-spacing:0.06em;
+    color:var(--accent);
+    display:block;
+    margin-bottom:12px;
   }
-  .callout.accent .callout-label{ color:var(--accent); }
+  .callout p{
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    font-size:1.2rem;
+    color:var(--ink);
+  }
+
+  /* dark banner */
+  .banner{
+    background:var(--cobalt-dark);
+    color:#fff;
+    padding:100px 0;
+    text-align:left;
+  }
+  .banner h2{
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(1.6rem, 3.4vw, 2.6rem);
+    max-width:24ch;
+    color:#fff;
+  }
 
   /* reflection cards */
   .reflect-card{
-    background:var(--white);
-    border:1px solid rgba(26,24,20,0.07);
-    border-radius:6px;
-    margin-bottom:1.25rem;
-    overflow:hidden;
+    background:#fff;
+    border:1px solid rgba(26,24,20,0.12);
+    padding:0;
+    margin-bottom:20px;
+    transition:transform var(--dur-hover) var(--ease), border-color var(--dur-hover) var(--ease), box-shadow var(--dur-hover) var(--ease);
+  }
+  .reflect-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--cobalt);
+    box-shadow:0 14px 26px -18px rgba(26,24,20,0.35);
   }
   .reflect-head{
-    padding:1.1rem 1.5rem;
-    border-bottom:1px solid rgba(26,24,20,0.07);
-    background:var(--ivory);
+    padding:20px 24px;
+    border-bottom:1px solid rgba(26,24,20,0.1);
   }
-  .reflect-head h4{
-    font-family:var(--serif);
+  .reflect-head h3{
     font-size:1.05rem;
     font-weight:600;
-    color:var(--ink);
   }
-  .reflect-body{ display:grid; grid-template-columns:1fr 1fr; }
-  @media (max-width:640px){ .reflect-body{ grid-template-columns:1fr; } }
-  .reflect-col{ padding:1.25rem 1.5rem; }
-  .reflect-col + .reflect-col{ border-left:1px solid rgba(26,24,20,0.07); }
-  @media (max-width:640px){
-    .reflect-col + .reflect-col{ border-left:none; border-top:1px solid rgba(26,24,20,0.07); }
+  .reflect-body{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  @media (max-width:720px){
+    .reflect-body{ grid-template-columns:1fr; }
+  }
+  .reflect-col{
+    padding:22px 24px;
+  }
+  .reflect-col + .reflect-col{
+    border-left:1px solid rgba(26,24,20,0.1);
+  }
+  @media (max-width:720px){
+    .reflect-col + .reflect-col{ border-left:none; border-top:1px solid rgba(26,24,20,0.1); }
   }
   .reflect-col .rc-label{
-    display:block;
-    font-family:var(--mono);
-    font-size:0.62rem;
-    letter-spacing:0.08em;
+    font-family:'DM Mono', monospace;
+    font-size:0.65rem;
     text-transform:uppercase;
+    letter-spacing:0.06em;
     color:var(--ink-light);
-    margin-bottom:0.5rem;
+    display:block;
+    margin-bottom:10px;
   }
-  .reflect-col p{ font-size:0.85rem; color:var(--ink-muted); line-height:1.7; margin:0; }
+  .reflect-col p{
+    font-size:0.92rem;
+    color:var(--ink-muted);
+  }
 
-  .pull-quote{
-    font-family:var(--serif);
-    font-style:italic;
-    font-weight:400;
-    font-size:1.3rem;
-    color:var(--ink);
-    line-height:1.45;
-    max-width:32ch;
-    margin:0 0 1.75rem;
+  /* footer */
+  footer{
+    padding:64px 0 56px;
+    border-top:1px solid rgba(26,24,20,0.14);
+  }
+  .footer-links{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .footer-credit{
+    font-family:'DM Mono', monospace;
+    font-size:0.72rem;
+    color:var(--ink-light);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important;
+      scroll-behavior:auto !important;
+    }
+    .reveal{ opacity:1; transform:none; }
   }
 
 </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a href="../index.html#work" class="active">Work</a></li>
-      <li><a href="../contact.html">Contact</a></li>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="nav-back" href="https://haifa-azzahra.github.io/index.html#work">&larr; Selected Work</a>
+    <ul class="nav-links">
+      <li><a href="#course" data-nav>The Course</a></li>
+      <li><a href="#problem" data-nav>Problem</a></li>
+      <li><a href="#needs" data-nav>Learning Needs</a></li>
+      <li><a href="#approach" data-nav>Approach</a></li>
+      <li><a href="#reflection" data-nav>Reflection</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  </div>
+</header>
 
-  <!-- PROJECT HERO -->
-  <section class="project-hero">
-    <div class="project-hero-inner">
-      <p class="project-hero-breadcrumb"><a href="../index.html#work">Work</a> / Performance Analysis in Practice</p>
-      <h1 class="project-hero-title">Performance Analysis in Practice</h1>
-      <p class="project-hero-sub">A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue &mdash; before they decide on a fix. eLearning Designer&rsquo;s Academy, July 2026 Design Challenge.</p>
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-kicker">eLearning Designer&rsquo;s Academy &middot; <a href="https://community.elearningacademy.io/c/design-challenges/july-2026-design-challenge-build-a-performance-based-learning-experience-in-rise-with-mighty-studio" target="_blank" rel="noopener">July 2026 Design Challenge</a></p>
+      <h1 class="hero-title">Performance Analysis in Practice</h1>
+      <p class="hero-sub">A scenario-based Rise 360 course that helps managers diagnose the real cause of a performance issue &mdash; before they decide on a fix.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#course">Try the Course First &darr;</a>
+        <a class="btn" href="#problem">Read the Case Study &darr;</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="meta-grid reveal">
+        <div class="meta-cell"><span class="meta-label">Tool</span><span class="meta-value">Claude, Mighty, Articulate Rise</span></div>
+        <div class="meta-cell"><span class="meta-label">Audience</span><span class="meta-value">Leaders &amp; managers in fast-paced organizations</span></div>
+        <div class="meta-cell"><span class="meta-label">Format</span><span class="meta-value">Scrollable course</span></div>
+        <div class="meta-cell"><span class="meta-label">Framework</span><span class="meta-value">Mager &amp; Pipe&rsquo;s Performance Analysis</span></div>
+      </div>
     </div>
   </section>
 
-  <!-- META STRIP -->
-  <div class="project-meta-strip">
-    <div class="project-meta-strip-inner">
-      <div>
-        <div class="meta-label">Tool</div>
-        <div class="meta-value">Claude, Mighty, Articulate Rise</div>
+  <!-- COURSE — TRY IT FIRST -->
+  <section id="course" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Start Here</span>
+        <h2 class="section-title">Step into Marcus&rsquo;s case before you read how it was built.</h2>
+        <p class="body-copy" style="margin-top:16px;">Articulate Review doesn&rsquo;t allow this preview to be framed on another site, so the course opens in its own tab &mdash; but everything below assumes you&rsquo;ve played through it first.</p>
       </div>
-      <div>
-        <div class="meta-label">Audience</div>
-        <div class="meta-value">Leaders &amp; managers in fast-paced orgs</div>
-      </div>
-      <div>
-        <div class="meta-label">Format</div>
-        <div class="meta-value">Scrollable course</div>
-      </div>
-      <div>
-        <div class="meta-label">Framework</div>
-        <div class="meta-value">Mager &amp; Pipe&rsquo;s Performance Analysis</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- BODY -->
-  <div class="project-body">
-    <div class="project-content">
-
-      <h2 style="margin-top:0;">Start Here</h2>
-      <p>Articulate Review doesn&rsquo;t allow this course to be framed on another site, so it opens in its own tab &mdash; but everything below assumes you&rsquo;ve played through it first.</p>
-
-      <div class="launch-block fade-up">
+      <div class="launch-card reveal">
         <div class="launch-shots">
           <div class="launch-shot">
             <img
@@ -319,29 +796,39 @@
 
         <div class="launch-info">
           <div class="launch-meta-row">
-            <span class="card-tag">15 min</span>
-            <span class="card-tag">Scenario-based</span>
-            <span class="card-tag">Rise 360</span>
+            <span class="chip">15 min</span>
+            <span class="chip">Scenario-based</span>
+            <span class="chip">Rise 360</span>
           </div>
           <h3>Performance Analysis in Practice</h3>
-          <p>You&rsquo;re the manager. Marcus&rsquo;s numbers have slipped, and the easy explanations &mdash; skill, motivation, attitude &mdash; are all sitting right there. The course won&rsquo;t let you reach for one until you&rsquo;ve gathered the evidence.</p>
-          <ul class="launch-outcomes">
+          <p class="body-copy">You&rsquo;re the manager. Marcus&rsquo;s numbers have slipped, and the easy explanations &mdash; skill, motivation, attitude &mdash; are all sitting right there. The course won&rsquo;t let you reach for one until you&rsquo;ve gathered the evidence.</p>
+          <ul class="launch-preview-list">
             <li>Investigate Marcus&rsquo;s case through evidence, not assumptions</li>
             <li>Apply Mager &amp; Pipe&rsquo;s framework at each decision point</li>
             <li>Land on a coaching plan built on the real root cause</li>
           </ul>
           <div class="launch-cta">
-            <a class="sidebar-link-btn" href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener">Launch the Course &#8599;</a>
+            <a class="btn btn-primary" href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener">Launch the Course &#8599;</a>
             <span class="launch-note">Opens in a new tab &middot; 15 minutes</span>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <h2>The Problem</h2>
-      <p class="pull-quote fade-up">&ldquo;How can managers diagnose the real cause of a performance issue before deciding on an intervention?&rdquo;</p>
+  <!-- 01 PROBLEM -->
+  <section id="problem">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">01 / The Problem</span>
+        <h2 class="section-title">Diagnosing before deciding &mdash; not after.</h2>
+      </div>
 
-      <div class="compound fade-up">
+      <p class="problem-quote reveal">&ldquo;How can managers diagnose the real cause of a performance issue before deciding on an intervention?&rdquo;</p>
+
+      <div class="compound reveal">
         <div class="compound-flex">
+
           <div class="compound-stage">
             <span class="compound-num">01</span>
             <div class="compound-icon-wrap">
@@ -354,6 +841,7 @@
             </div>
             <p class="compound-text">Not understanding the root cause of a performance issue</p>
           </div>
+
           <div class="compound-stage">
             <span class="compound-num">02</span>
             <div class="compound-icon-wrap">
@@ -367,6 +855,7 @@
             </div>
             <p class="compound-text">Incorrect diagnosis of the performance problem</p>
           </div>
+
           <div class="compound-stage">
             <span class="compound-num">03</span>
             <div class="compound-icon-wrap">
@@ -377,150 +866,219 @@
             </div>
             <p class="compound-text">Ineffective coaching conversations and interventions</p>
           </div>
+
         </div>
       </div>
 
-      <details class="accordion fade-up">
+      <details class="accordion reveal">
         <summary>Read more context on this +</summary>
         <div class="accordion-body">
           This challenge is particularly common in fast-paced work environments, where visible performance outcomes can mask underlying factors such as unclear expectations, workflow obstacles, competing priorities, or unintended incentives.
         </div>
       </details>
+    </div>
+  </section>
 
-      <h2>Learning Needs Analysis</h2>
-      <p>A review of common managerial practices revealed three key gaps:</p>
-      <ul>
-        <li><strong>Premature diagnosis</strong> &mdash; managers tend to rely on intuition or first impressions, quickly labeling problems as &ldquo;skill issues&rdquo; or &ldquo;motivation issues&rdquo; without collecting sufficient evidence.</li>
-        <li><strong>Limited diagnostic skills</strong> &mdash; many managers are familiar with giving feedback but have less experience systematically analyzing performance problems, identifying environmental barriers, or uncovering conflicting incentives.</li>
-        <li><strong>Need for structured decision-making tools</strong> &mdash; managers require practical frameworks that guide inquiry, encourage evidence gathering, and support more accurate coaching decisions.</li>
-      </ul>
-
-      <p>Mager and Pipe&rsquo;s Performance Analysis framework addresses these needs by providing a structured process to distinguish between:</p>
-      <div class="chip-row fade-up">
-        <span class="card-tag">Skill deficiencies</span>
-        <span class="card-tag">Motivation issues</span>
-        <span class="card-tag">Environmental obstacles</span>
-        <span class="card-tag">Unclear expectations</span>
-        <span class="card-tag">Reinforcing consequences</span>
+  <!-- 02 LEARNING NEEDS ANALYSIS -->
+  <section id="needs" class="alt">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">02 / Learning Needs Analysis</span>
+        <h2 class="section-title">Three gaps behind premature coaching.</h2>
+        <p class="body-copy" style="margin-top:16px;">A review of common managerial practices revealed three key gaps:</p>
       </div>
 
-      <div class="callout fade-up">
+      <div class="card-grid reveal">
+        <div class="card">
+          <h3>Premature diagnosis</h3>
+          <p>Managers tend to rely on intuition or first impressions, quickly labeling problems as &ldquo;skill issues&rdquo; or &ldquo;motivation issues&rdquo; without collecting sufficient evidence.</p>
+        </div>
+        <div class="card">
+          <h3>Limited diagnostic skills</h3>
+          <p>Many managers are familiar with giving feedback but have less experience systematically analyzing performance problems, identifying environmental barriers, or uncovering conflicting incentives.</p>
+        </div>
+        <div class="card">
+          <h3>Need for structured decision-making tools</h3>
+          <p>Managers require practical frameworks that guide inquiry, encourage evidence gathering, and support more accurate coaching decisions.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:48px;">
+        <p class="body-copy">Mager and Pipe&rsquo;s Performance Analysis framework addresses these needs by providing a structured process to distinguish between:</p>
+        <div class="chip-row">
+          <span class="chip">Skill deficiencies</span>
+          <span class="chip">Motivation issues</span>
+          <span class="chip">Environmental obstacles</span>
+          <span class="chip">Unclear expectations</span>
+          <span class="chip">Reinforcing consequences</span>
+        </div>
+      </div>
+
+      <div class="pull-band reveal">
         <p>The learning need, therefore, was not to teach managers how to coach in general &mdash; it was to help them diagnose before they decide.</p>
       </div>
+    </div>
+  </section>
 
-      <h2>My Approach</h2>
-      <p>I designed a 15-minute, scenario-based microlearning experience in Rise 360 centered around a single workplace case. Rather than presenting the framework through static content, learners step into the role of a manager investigating Marcus&rsquo;s performance issue. The interaction intentionally surfaces plausible but incomplete explanations &mdash; skill gaps, low motivation, poor personal accountability &mdash; before gradually revealing additional evidence, mirroring how real workplace decision-making rarely arrives with the full picture upfront.</p>
+  <!-- 03 APPROACH + COURSE -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">03 / My Approach</span>
+        <h2 class="section-title">A single case, unfolding progressively.</h2>
+      </div>
 
-      <ul>
-        <li><strong>Diagnostic framework</strong> &mdash; Mager &amp; Pipe&rsquo;s Performance Analysis, used as the throughline of the whole investigation.</li>
-        <li><strong>Coaching questions</strong> &mdash; prompts that push learners to gather evidence rather than guess at a cause.</li>
-        <li><strong>Decision points</strong> &mdash; moments built to challenge assumptions in the middle of the investigation, not after it.</li>
-        <li><strong>Progressive disclosure</strong> &mdash; information revealed gradually, to recreate the ambiguity of a real workplace case.</li>
-      </ul>
+      <p class="body-copy reveal">I designed a 15-minute, scenario-based microlearning experience in Rise 360 centered around a single workplace case. Rather than presenting the framework through static content, learners step into the role of a manager investigating Marcus&rsquo;s performance issue. The interaction intentionally surfaces plausible but incomplete explanations &mdash; skill gaps, low motivation, poor personal accountability &mdash; before gradually revealing additional evidence, mirroring how real workplace decision-making rarely arrives with the full picture upfront.</p>
 
-      <div class="callout accent fade-up">
+      <div class="feature-list reveal">
+        <div class="feature-item">
+          <span class="f-label">Embedded</span>
+          <h3>Diagnostic framework</h3>
+          <p>Mager &amp; Pipe&rsquo;s Performance Analysis, used as the throughline of the whole investigation.</p>
+        </div>
+        <div class="feature-item">
+          <span class="f-label">Embedded</span>
+          <h3>Coaching questions</h3>
+          <p>Prompts that push learners to gather evidence rather than guess at a cause.</p>
+        </div>
+        <div class="feature-item">
+          <span class="f-label">Embedded</span>
+          <h3>Decision points</h3>
+          <p>Moments built to challenge assumptions in the middle of the investigation, not after it.</p>
+        </div>
+        <div class="feature-item">
+          <span class="f-label">Embedded</span>
+          <h3>Progressive disclosure</h3>
+          <p>Information revealed gradually, to recreate the ambiguity of a real workplace case.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
         <span class="callout-label">Design Choice &middot; Core Principle</span>
         <p>Effective coaching begins not with answers, but with better diagnosis.</p>
       </div>
-
-      <h2>Reflection</h2>
-
-      <div class="reflect-card fade-up">
-        <div class="reflect-head"><h4>Designing for meaningful ambiguity</h4></div>
-        <div class="reflect-body">
-          <div class="reflect-col">
-            <span class="rc-label">What I Did</span>
-            <p>Designed Marcus&rsquo;s situation around several plausible explanations &mdash; skill, motivation, and accountability &mdash; so learners couldn&rsquo;t immediately identify the root cause.</p>
-          </div>
-          <div class="reflect-col">
-            <span class="rc-label">What I&rsquo;d Explore Further</span>
-            <p>Make the 1:1 coaching conversation more nuanced and tense, introducing competing perspectives and more ambiguous responses that require managers to navigate uncertainty before deciding how to respond.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="reflect-card fade-up">
-        <div class="reflect-head"><h4>Making the framework necessary</h4></div>
-        <div class="reflect-body">
-          <div class="reflect-col">
-            <span class="rc-label">What I Did</span>
-            <p>Rather than teaching Mager &amp; Pipe as a framework to memorize, embedded it into the investigation of Marcus&rsquo;s performance problem &mdash; learners experience why structured diagnosis matters before deciding on an intervention.</p>
-          </div>
-          <div class="reflect-col">
-            <span class="rc-label">What I&rsquo;d Explore Further</span>
-            <p>Strengthen the connection between each diagnostic decision and its potential coaching consequence, making the value of the framework even more visible.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="reflect-card fade-up">
-        <div class="reflect-head"><h4>Designing for a specific audience</h4></div>
-        <div class="reflect-body">
-          <div class="reflect-col">
-            <span class="rc-label">What I Did</span>
-            <p>Because the scenario was designed for a SaaS team, used technical workplace language and situations &mdash; sprint commitments, backend engineering, integrations, client escalations &mdash; to make the case feel authentic.</p>
-          </div>
-          <div class="reflect-col">
-            <span class="rc-label">What I&rsquo;d Explore Further</span>
-            <p>For a different audience, tone down the technical language and adapt the workplace context while preserving the underlying performance problem and diagnostic challenge.</p>
-          </div>
-        </div>
-      </div>
-
     </div>
+  </section>
 
-    <!-- SIDEBAR -->
-    <aside class="project-sidebar">
-      <div class="sidebar-card">
-        <div class="sidebar-card-title">Course</div>
-        <a href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener" class="sidebar-link-btn">Launch the Course &#8599;</a>
+  <!-- DARK BANNER -->
+  <section class="banner">
+    <div class="wrap reveal">
+      <span class="eyebrow on-dark">The Clear Boundary</span>
+      <h2>Managers don&rsquo;t need another framework to memorize. They need to feel, firsthand, why rushing the diagnosis costs them the conversation that actually works.</h2>
+    </div>
+  </section>
+
+  <!-- 04 REFLECTION -->
+  <section id="reflection">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">04 / Reflection</span>
+        <h2 class="section-title">What I&rsquo;d take further.</h2>
       </div>
 
-      <div class="sidebar-card">
-        <div class="sidebar-card-title">Tags</div>
-        <span class="sidebar-tag">Performance Analysis</span>
-        <span class="sidebar-tag">Rise 360</span>
-        <span class="sidebar-tag">Behavioral Coaching</span>
-      </div>
+      <div class="reveal">
+        <div class="reflect-card">
+          <div class="reflect-head"><h3>Designing for meaningful ambiguity</h3></div>
+          <div class="reflect-body">
+            <div class="reflect-col">
+              <span class="rc-label">What I Did</span>
+              <p>Designed Marcus&rsquo;s situation around several plausible explanations &mdash; skill, motivation, and accountability &mdash; so learners couldn&rsquo;t immediately identify the root cause.</p>
+            </div>
+            <div class="reflect-col">
+              <span class="rc-label">What I&rsquo;d Explore Further</span>
+              <p>Make the 1:1 coaching conversation more nuanced and tense, introducing competing perspectives and more ambiguous responses that require managers to navigate uncertainty before deciding how to respond.</p>
+            </div>
+          </div>
+        </div>
 
-      <div class="sidebar-card">
-        <div class="sidebar-card-title">Takeaways</div>
-        <div class="outcome-item">
-          <div class="outcome-icon">01</div>
-          <div class="outcome-text">Diagnose before deciding &mdash; a structured process beats intuition.</div>
+        <div class="reflect-card">
+          <div class="reflect-head"><h3>Making the framework necessary</h3></div>
+          <div class="reflect-body">
+            <div class="reflect-col">
+              <span class="rc-label">What I Did</span>
+              <p>Rather than teaching Mager &amp; Pipe as a framework to memorize, embedded it into the investigation of Marcus&rsquo;s performance problem &mdash; learners experience why structured diagnosis matters before deciding on an intervention.</p>
+            </div>
+            <div class="reflect-col">
+              <span class="rc-label">What I&rsquo;d Explore Further</span>
+              <p>Strengthen the connection between each diagnostic decision and its potential coaching consequence, making the value of the framework even more visible.</p>
+            </div>
+          </div>
         </div>
-        <div class="outcome-item">
-          <div class="outcome-icon">02</div>
-          <div class="outcome-text">Ambiguity, designed well, is what makes a framework necessary.</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon">03</div>
-          <div class="outcome-text">Authentic workplace language makes a scenario feel real.</div>
+
+        <div class="reflect-card">
+          <div class="reflect-head"><h3>Designing for a specific audience</h3></div>
+          <div class="reflect-body">
+            <div class="reflect-col">
+              <span class="rc-label">What I Did</span>
+              <p>Because the scenario was designed for a SaaS team, used technical workplace language and situations &mdash; sprint commitments, backend engineering, integrations, client escalations &mdash; to make the case feel authentic.</p>
+            </div>
+            <div class="reflect-col">
+              <span class="rc-label">What I&rsquo;d Explore Further</span>
+              <p>For a different audience, tone down the technical language and adapt the workplace context while preserving the underlying performance problem and diagnostic challenge.</p>
+            </div>
+          </div>
         </div>
       </div>
-    </aside>
-  </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
-    <div class="footer-copy">&copy; 2025 &middot; Built with intention.</div>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
-      <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+    <div class="wrap">
+      <div class="footer-links">
+        <a class="btn" href="https://haifa-azzahra.github.io/index.html#work">&larr; Back to Portfolio (Selected Work)</a>
+        <a class="btn btn-primary" href="https://360.eu.articulate.com/review/content/f38af656-0fdc-471f-9fbb-96e25c4fb832/review" target="_blank" rel="noopener">Explore the Full Course &#8599;</a>
+        <a class="btn" href="#top">Back to Top &uarr;</a>
+      </div>
+      <p class="footer-credit">Haifa Audrey Azzahra &middot; Performance Analysis in Practice, July 2026</p>
     </div>
   </footer>
 
-  <script>
-    const ham = document.getElementById('hamburger');
-    const nav = document.getElementById('navLinks');
-    if (ham && nav) ham.addEventListener('click', () => nav.classList.toggle('open'));
+</main>
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
+    revealEls.forEach(function(el){ io.observe(el); });
+  } else {
+    revealEls.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  // Active nav tracking
+  var navLinks = document.querySelectorAll('.nav-links a[data-nav]');
+  var sections = Array.prototype.map.call(navLinks, function(link){
+    return document.querySelector(link.getAttribute('href'));
+  }).filter(Boolean);
+
+  if('IntersectionObserver' in window && sections.length){
+    var navIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var id = '#' + entry.target.id;
+        var link = document.querySelector('.nav-links a[href="' + id + '"]');
+        if(!link) return;
+        if(entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    sections.forEach(function(s){ navIo.observe(s); });
+  }
+
+})();
+</script>
 
 </body>
 </html>
