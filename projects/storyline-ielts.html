@@ -1,512 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Improving IELTS Writing with Focus — Haifa Audrey Azzahra</title>
-  <meta name="description" content="Case study: A full-cycle Self-Regulated Learning experience for IELTS Writing Band 6.5 learners, built with Articulate Storyline 3 and a Claude AI writing coach." />
-  <link rel="stylesheet" href="../style.css" />
-  <style>
-    /* ── PAGE-SPECIFIC ADDITIONS ── */
-    .phase-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      margin: 1.75rem 0;
-    }
-    .phase-card {
-      border-radius: 6px;
-      padding: 1.5rem;
-      border: 1px solid rgba(26,24,20,0.07);
-    }
-    .phase-card-forethought { background: #EEF6FB; border-top: 4px solid #2A7B9B; }
-    .phase-card-performance { background: #EBF5EE; border-top: 4px solid #2A7B4E; }
-    .phase-card-reflection  { background: #F5EEEB; border-top: 4px solid #7B4A2A; }
-    .phase-card-label {
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    .phase-card-forethought .phase-card-label { color: #2A7B9B; }
-    .phase-card-performance .phase-card-label { color: #2A7B4E; }
-    .phase-card-reflection  .phase-card-label { color: #7B4A2A; }
-    .phase-card-title {
-      font-family: var(--serif);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-    }
-    .phase-card p {
-      font-size: 0.82rem !important;
-      color: var(--ink-muted) !important;
-      line-height: 1.65 !important;
-      margin: 0 !important;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Improving IELTS Writing with Focus — Haifa Audrey Azzahra</title>
+<meta name="description" content="Case study: A full-cycle Self-Regulated Learning experience for IELTS Writing Band 6.5 learners, built with Articulate Storyline 3 and an AI writing coach." />
+<style>
+/* ============================================================
+   HAIFA AUDREY AZZAHRA — ID Portfolio (site tokens, embedded)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap');
 
-    .tool-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
-      margin: 1.75rem 0;
-    }
-    .tool-card {
-      background: var(--white);
-      border: 1px solid rgba(26,24,20,0.08);
-      border-radius: 6px;
-      padding: 1.5rem;
-    }
-    .tool-card-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--ink);
-      margin-bottom: 0.3rem;
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .tool-card p {
-      font-size: 0.82rem !important;
-      color: var(--ink-muted) !important;
-      line-height: 1.65 !important;
-      margin: 0 !important;
-    }
+:root {
+  --cobalt:      #2952C4;
+  --cobalt-dark: #1E3D96;
+  --cobalt-pale: #E8EEFB;
+  --ivory:       #F5F0E6;
+  --ivory-dark:  #EDE5D4;
+  --ink:         #1A1814;
+  --ink-muted:   #5C5750;
+  --ink-light:   #9A9590;
+  --white:       #FFFFFF;
+  --accent:      #C4633A;
+  --accent-pale: #F5E3DA;
+  --teal:        #2A7B7E;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'DM Sans', system-ui, sans-serif;
+  --mono:  'DM Mono', monospace;
+  --nav-h: 72px;
+  --max-w: 1160px;
+  --radius: 3px;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--ivory); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.75; font-size: 16px; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+:focus-visible{ outline:2px solid var(--cobalt); outline-offset:3px; }
 
-    .var-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-      font-size: 0.82rem;
-    }
-    .var-table th {
-      background: var(--cobalt);
-      color: var(--white);
-      padding: 0.6rem 0.9rem;
-      text-align: left;
-      font-weight: 600;
-      font-size: 0.75rem;
-      letter-spacing: 0.05em;
-    }
-    .var-table td {
-      padding: 0.55rem 0.9rem;
-      border-bottom: 1px solid rgba(26,24,20,0.06);
-      color: var(--ink-muted);
-      vertical-align: top;
-    }
-    .var-table tr:nth-child(even) td { background: rgba(41,82,196,0.03); }
-    .var-table .phase-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 0.15rem 0.5rem;
-      border-radius: 2rem;
-    }
-    .badge-f { background: #EEF6FB; color: #2A7B9B; }
-    .badge-p { background: #EBF5EE; color: #2A7B4E; }
-    .badge-r { background: #F5EEEB; color: #7B4A2A; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; background: rgba(245,240,230,0.94); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(26,24,20,0.07); }
+.nav-brand { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--cobalt); letter-spacing: 0.01em; }
+.nav-brand span { color: var(--ink); font-weight: 400; font-style: italic; }
+.nav-links { display: flex; gap: 2.25rem; list-style: none; }
+.nav-links a { font-size: 0.76rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); transition: color 0.25s var(--ease); position: relative; }
+.nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1.5px; background: var(--cobalt); transition: width 0.25s var(--ease); }
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-links a.active { color: var(--cobalt); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: 0.3s; }
 
-    .dev-links {
-      display: flex; flex-wrap: wrap; gap: 0.75rem;
-      margin: 1.5rem 0;
-    }
-    .dev-link {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      font-size: 0.78rem; font-weight: 600;
-      padding: 0.5rem 1rem;
-      border: 1.5px solid var(--cobalt);
-      color: var(--cobalt);
-      border-radius: 3px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .dev-link:hover { background: var(--cobalt); color: var(--white); }
+.project-hero { min-height: 46vh; background: var(--cobalt); display: flex; align-items: flex-end; padding: calc(var(--nav-h) + 3.5rem) 3rem 3.5rem; position:relative; overflow:hidden; }
+.project-hero::before{ content:''; position:absolute; inset:0; background: radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.07) 0%, transparent 60%); }
+.project-hero-inner { max-width: var(--max-w); margin: 0 auto; width: 100%; position:relative; }
+.project-hero-breadcrumb { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+.project-hero-breadcrumb a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.project-hero-breadcrumb a:hover { color: rgba(255,255,255,0.9); }
+.demo-tag{ display:inline-flex; align-items:center; gap:0.5rem; font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.25); padding:0.3rem 0.7rem; border-radius:2rem; margin-bottom:1.1rem; }
+.demo-tag .dot{ width:5px; height:5px; border-radius:50%; background:#8FE3A6; flex-shrink:0; }
+.project-hero-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--white); line-height: 1.15; max-width: 700px; margin-bottom: 0.85rem; }
+.project-hero-sub { font-size: 0.98rem; color: rgba(255,255,255,0.72); max-width: 620px; line-height: 1.7; }
 
-    .disclaimer-banner {
-      background: var(--ivory-dark);
-      border: 1px solid rgba(26,24,20,0.1);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 2.5rem;
-      display: flex; gap: 0.75rem; align-items: flex-start;
-    }
-    .disclaimer-banner p {
-      font-size: 0.82rem !important;
-      color: var(--ink-muted) !important;
-      margin: 0 !important;
-      line-height: 1.65 !important;
-    }
+.project-meta-strip { background: var(--cobalt-dark); padding: 1.25rem 3rem; }
+.project-meta-strip-inner { max-width: var(--max-w); margin: 0 auto; display: flex; gap: 2.5rem; flex-wrap: wrap; }
+.meta-label { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 0.2rem; }
+.meta-value { font-size: 0.85rem; font-weight: 500; color: rgba(255,255,255,0.85); }
 
-    @media (max-width: 700px) {
-      .phase-grid { grid-template-columns: 1fr; }
-      .tool-row   { grid-template-columns: 1fr; }
-    }
-  </style>
+.project-body { max-width: var(--max-w); margin: 0 auto; padding: 4rem 3rem 5rem; display: grid; grid-template-columns: 1fr 290px; gap: 4rem; align-items: start; }
+.project-content h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; margin-top: 3.25rem; }
+.project-content h2:first-child { margin-top: 0; }
+.project-content p { font-size: 0.94rem; color: var(--ink-muted); line-height: 1.85; margin-bottom: 1rem; }
+.project-content ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+.project-content ul li { font-size: 0.9rem; color: var(--ink-muted); line-height: 1.7; padding-left: 1.25rem; position: relative; margin-bottom: 0.4rem; }
+.project-content ul li::before { content: '→'; position: absolute; left: 0; color: var(--cobalt); font-size: 0.8rem; }
+
+.callout { background: var(--cobalt-pale); border-left: 4px solid var(--cobalt); padding: 1.25rem 1.5rem; border-radius: 0 4px 4px 0; margin: 1.5rem 0; }
+.callout p { font-size: 0.9rem; color: var(--cobalt-dark); margin: 0; font-weight: 400; }
+.note-callout{ display:flex; gap:0.85rem; align-items:flex-start; background:var(--white); border:1px solid rgba(26,24,20,0.08); border-radius:6px; padding:1.1rem 1.35rem; margin-bottom:2.5rem; }
+.note-callout .ni{ font-size:1.1rem; line-height:1; flex-shrink:0; margin-top:0.1rem; }
+.note-callout p{ font-size:0.85rem; color:var(--ink-muted); margin:0; line-height:1.7; }
+.note-callout strong{ color:var(--ink); }
+
+.project-sidebar { position: sticky; top: calc(var(--nav-h) + 2rem); }
+.sidebar-card { background: var(--white); border: 1px solid rgba(26,24,20,0.07); border-radius: 6px; padding: 1.6rem; margin-bottom: 1.25rem; }
+.sidebar-card-title { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 0.9rem; }
+.sidebar-tag { display: inline-block; font-size: 0.73rem; padding: 0.24rem 0.6rem; background: var(--cobalt-pale); color: var(--cobalt-dark); border-radius: 2rem; margin: 0.18rem; font-weight: 500; }
+.sidebar-link-btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; padding: 0.8rem; background: var(--cobalt); color: var(--white); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; border-radius: var(--radius); margin-top: 0.7rem; transition: background 0.25s; }
+.sidebar-link-btn:hover { background: var(--cobalt-dark); }
+.sidebar-link-btn.outline{ background:transparent; border:1.5px solid var(--cobalt); color:var(--cobalt); }
+.sidebar-link-btn.outline:hover{ background:var(--cobalt-pale); }
+.sidebar-fw-item{ display:flex; gap:0.7rem; margin-bottom:0.85rem; font-size:0.83rem; color:var(--ink-muted); line-height:1.55; }
+.sidebar-fw-item .fwi{ font-size:0.95rem; flex-shrink:0; }
+.sidebar-fw-item strong{ color:var(--ink); font-weight:600; }
+.var-stat{ font-family:var(--serif); font-size:2rem; font-weight:700; color:var(--cobalt); line-height:1; }
+.var-stat-label{ font-size:0.78rem; color:var(--ink-muted); margin-bottom:1rem; }
+.var-break{ display:flex; gap:0.5rem; font-size:0.78rem; color:var(--ink-muted); }
+.var-break span{ font-weight:600; color:var(--ink); }
+
+footer { background: var(--ink); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.footer-brand { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.5); }
+.footer-brand strong { color: var(--white); }
+.footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.4); transition: color 0.2s; }
+.footer-links a:hover { color: rgba(255,255,255,0.85); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .project-hero{ padding: calc(var(--nav-h) + 2.5rem) 1.5rem 2.5rem; }
+  .project-meta-strip{ padding:1.1rem 1.5rem; }
+  .project-body { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap:2.5rem; }
+  .project-sidebar { position: static; }
+  footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------------- page-specific components ---------------- */
+
+/* flashcards */
+.flash-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin:1.5rem 0 1.75rem; }
+@media (max-width:700px){ .flash-grid{ grid-template-columns:1fr; } }
+.flashcard{ background:var(--white); border:1px solid rgba(26,24,20,0.08); border-radius:6px; padding:1.75rem; transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), border-color 0.28s var(--ease); }
+.flashcard:hover, .flashcard:focus-within{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(26,24,20,0.09); border-color:rgba(41,82,196,0.25); }
+.flash-kicker{ font-family:var(--mono); font-size:0.66rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--cobalt); margin-bottom:0.75rem; }
+.flashcard.accent .flash-kicker{ color:var(--accent); }
+.flashcard h3{ font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--ink); line-height:1.35; margin-bottom:0.9rem; }
+.flashcard ul{ margin-bottom:0; }
+.flashcard ul li{ font-size:0.85rem; }
+
+.design-q{ background:var(--cobalt-dark); border-radius:6px; padding:2.5rem 2rem; margin:0 0 2rem; text-align:center; }
+.dq-icon{ width:3rem; height:3rem; border-radius:50%; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; margin:0 auto 1.1rem; }
+.dq-icon svg{ width:1.5rem; height:1.5rem; color:#fff; }
+.design-q .dq-label{ font-family:var(--mono); font-size:0.85rem; font-weight:600; letter-spacing:0.16em; text-transform:uppercase; color:rgba(255,255,255,0.92); margin-bottom:1.1rem; }
+.design-q p{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:clamp(1.05rem,2vw,1.35rem); color:var(--white); max-width:44ch; margin:0 auto; line-height:1.5; }
+
+/* SRL pathway */
+.srl-path{ background:var(--white); border:1px solid rgba(26,24,20,0.07); border-radius:6px; padding:2rem 0; margin:1.5rem 0 2rem; }
+.srl-flex{ display:flex; align-items:stretch; }
+.srl-node{ flex:1; padding:0 1.6rem; text-align:left; }
+.srl-node:not(:first-child){ border-left:1px solid rgba(26,24,20,0.08); }
+.srl-node.center{ background:var(--cobalt-pale); margin:-2rem 0; padding:2rem 1.6rem; border-left:none; position:relative; }
+.srl-kicker{ font-family:var(--mono); font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-light); margin-bottom:0.6rem; }
+.srl-node.center .srl-kicker{ color:var(--cobalt-dark); }
+.srl-node h4{ font-family:var(--serif); font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:0.6rem; }
+.srl-node.center h4{ color:var(--cobalt-dark); }
+.srl-node p{ font-size:0.83rem; color:var(--ink-muted); line-height:1.65; margin:0; }
+.srl-arrow{ display:flex; align-items:center; justify-content:center; width:1.75rem; color:var(--cobalt); font-family:var(--mono); font-size:0.9rem; flex-shrink:0; }
+@media (max-width:760px){
+  .srl-flex{ flex-direction:column; }
+  .srl-node{ padding:1.5rem 1.6rem !important; border-left:none !important; margin:0 !important; }
+  .srl-node:not(:first-child){ border-top:1px solid rgba(26,24,20,0.08); }
+  .srl-arrow{ width:auto; padding:0 1.6rem; justify-content:flex-start; }
+}
+
+/* carousels */
+.carousel-block{ margin:1.5rem 0 2.5rem; }
+.carousel-block h3{ font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--ink); margin-bottom:1rem; }
+.pcarousel{ background:var(--white); border:1px solid rgba(26,24,20,0.07); border-radius:6px; overflow:hidden; }
+.pcarousel-stage{ position:relative; width:100%; aspect-ratio:16/10; background:var(--ivory-dark); overflow:hidden; }
+.pcarousel-track{ display:flex; height:100%; transition:transform 0.4s var(--ease); }
+.pcarousel-slide{ flex:0 0 100%; width:100%; height:100%; position:relative; cursor:zoom-in; }
+.pcarousel-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+.pcarousel-slide .ps-fallback{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:1.25rem; font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-light); }
+.pcarousel-nav{ position:absolute; top:50%; transform:translateY(-50%); width:2.5rem; height:2.5rem; border-radius:50%; background:rgba(255,255,255,0.92); border:1px solid rgba(26,24,20,0.12); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s, transform 0.2s; box-shadow:0 3px 10px rgba(0,0,0,0.1); }
+.pcarousel-nav:hover{ background:var(--cobalt); border-color:var(--cobalt); }
+.pcarousel-nav:hover svg{ stroke:var(--white); }
+.pcarousel-nav svg{ stroke:var(--ink); transition:stroke 0.2s; }
+.pcarousel-prev{ left:0.85rem; }
+.pcarousel-next{ right:0.85rem; }
+.pcarousel-foot{ display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.25rem; border-top:1px solid rgba(26,24,20,0.07); }
+.pcarousel-count{ font-family:var(--mono); font-size:0.72rem; color:var(--ink-muted); letter-spacing:0.04em; }
+.pcarousel-dots{ display:flex; gap:0.4rem; }
+.pcarousel-dot{ width:6px; height:6px; border-radius:50%; background:rgba(26,24,20,0.18); border:none; cursor:pointer; padding:0; transition:all 0.25s; }
+.pcarousel-dot.active{ background:var(--cobalt); width:16px; border-radius:4px; }
+.pcarousel-caption{ font-size:0.8rem; color:var(--ink-muted); padding:0 1.25rem 1rem; margin:0; }
+
+/* lightbox */
+.lightbox{ position:fixed; inset:0; z-index:500; background:rgba(26,24,20,0.88); display:none; align-items:center; justify-content:center; padding:2rem; opacity:0; transition:opacity 0.25s var(--ease); }
+.lightbox.open{ display:flex; }
+.lightbox.show{ opacity:1; }
+.lightbox-inner{ position:relative; max-width:min(90vw, 1100px); max-height:88vh; transform:scale(0.97); transition:transform 0.25s var(--ease); }
+.lightbox.show .lightbox-inner{ transform:scale(1); }
+.lightbox-inner img{ max-width:100%; max-height:88vh; object-fit:contain; border-radius:4px; display:block; }
+.lightbox-close{ position:absolute; top:-2.75rem; right:0; width:2.25rem; height:2.25rem; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3); color:#fff; font-size:1.1rem; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:transform 0.25s, background 0.2s; }
+.lightbox-close:hover{ background:rgba(255,255,255,0.22); transform:rotate(90deg); }
+.lightbox-nav{ position:absolute; top:50%; transform:translateY(-50%); width:2.75rem; height:2.75rem; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s; }
+.lightbox-nav:hover{ background:rgba(255,255,255,0.22); }
+.lightbox-nav svg{ stroke:#fff; }
+.lightbox-prev{ left:-1rem; }
+.lightbox-next{ right:-1rem; }
+@media (max-width:760px){ .lightbox-prev{ left:0.25rem; } .lightbox-next{ right:0.25rem; } .lightbox-close{ top:0.5rem; right:0.5rem; } }
+.lightbox-caption{ text-align:center; color:rgba(255,255,255,0.65); font-size:0.82rem; margin-top:0.9rem; }
+
+/* ecosystem support items (non-carousel) */
+.eco-support{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:0 0 2rem; }
+@media (max-width:700px){ .eco-support{ grid-template-columns:1fr; } }
+.eco-item{ background:var(--white); border:1px solid rgba(26,24,20,0.07); border-radius:6px; padding:1.4rem 1.5rem; }
+.eco-item .ei-head{ display:flex; align-items:center; gap:0.6rem; margin-bottom:0.6rem; }
+.eco-item .ei-icon{ font-size:1.1rem; }
+.eco-item h4{ font-family:var(--serif); font-size:1rem; font-weight:600; color:var(--ink); }
+.eco-item p{ font-size:0.83rem; color:var(--ink-muted); line-height:1.65; margin:0; }
+
+/* three-phase design cards */
+.phase-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin:1.5rem 0 2rem; }
+@media (max-width:800px){ .phase-grid{ grid-template-columns:1fr; } }
+.phase-card{ background:var(--white); border:1px solid rgba(26,24,20,0.07); border-radius:6px; padding:1.5rem; }
+.phase-card .pc-emoji{ font-size:1.4rem; margin-bottom:0.7rem; }
+.phase-card .pc-eyebrow{ font-family:var(--mono); font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-light); margin-bottom:0.3rem; }
+.phase-card h4{ font-family:var(--serif); font-size:1.05rem; font-weight:600; color:var(--ink); margin-bottom:0.6rem; }
+.phase-card p{ font-size:0.85rem; color:var(--ink-muted); line-height:1.7; margin:0; }
+
+/* accordions */
+.acc{ border-top:1px solid rgba(26,24,20,0.09); }
+.acc-item{ border-bottom:1px solid rgba(26,24,20,0.09); }
+.acc-trigger{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 0.25rem; background:none; border:none; cursor:pointer; text-align:left; font-family:var(--sans); }
+.acc-trigger-left{ display:flex; align-items:center; gap:0.9rem; }
+.acc-icon{ width:1.85rem; height:1.85rem; flex-shrink:0; color:var(--cobalt); display:flex; align-items:center; justify-content:center; }
+.acc-icon svg{ width:100%; height:100%; }
+.acc-titles{ display:flex; flex-direction:column; gap:0.2rem; }
+.acc-eyebrow{ font-family:var(--mono); font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-light); }
+.acc-title{ font-family:var(--serif); font-size:1.02rem; font-weight:600; color:var(--ink); }
+.acc-sub{ font-size:0.78rem; color:var(--ink-muted); }
+.acc-plus{ font-family:var(--mono); font-size:1.1rem; color:var(--cobalt); flex-shrink:0; transition:transform 0.25s var(--ease); width:1.2rem; text-align:center; }
+.acc-item.open .acc-plus{ transform:rotate(45deg); }
+.acc-panel{ max-height:0; overflow:hidden; transition:max-height 0.35s var(--ease); }
+.acc-panel-inner{ padding:0 0.25rem 1.4rem 2.75rem; }
+.acc-panel-inner p{ font-size:0.87rem; color:var(--ink-muted); line-height:1.75; margin-bottom:0.7rem; }
+.acc-panel-inner ul{ margin-bottom:0; }
+.acc-panel-inner ul li{ font-size:0.85rem; }
+.acc-tag{ display:inline-block; font-family:var(--mono); font-size:0.6rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--cobalt-dark); background:var(--cobalt-pale); padding:0.2rem 0.55rem; border-radius:2rem; margin-bottom:0.7rem; }
+.acc-note{ padding:1rem 0.25rem 0; font-size:0.8rem; color:var(--ink-light); font-style:italic; }
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+</style>
 </head>
 <body>
 
-  <nav>
-    <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../about.html">About</a></li>
-      <li><a href="../index.html#work" class="active">Work</a></li>
-      <li><a href="../contact.html">Contact</a></li>
+<!-- NAV -->
+<nav>
+  <a href="../index.html" class="nav-brand">Haifa Audrey <span>Azzahra</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../index.html#work" class="active">Work</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PROJECT HERO -->
+<section class="project-hero">
+  <div class="project-hero-inner">
+    <p class="project-hero-breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#work">Work</a> / Improving IELTS Writing with Focus</p>
+    <span class="demo-tag"><span class="dot"></span>Demo Project &middot; Proof-of-concept learning ecosystem</span>
+    <h1 class="project-hero-title">Improving IELTS Writing with Focus</h1>
+    <p class="project-hero-sub">A full-cycle Self-Regulated Learning experience, designed from Zimmerman&rsquo;s SRL framework outward, using a two-tool ecosystem where Storyline manages the session architecture and an AI writing coach provides adaptive, essay-specific feedback.</p>
+  </div>
+</section>
+
+<!-- META STRIP -->
+<div class="project-meta-strip">
+  <div class="project-meta-strip-inner">
+    <div><div class="meta-label">Tools</div><div class="meta-value">Storyline 3 &middot; Google AI Studio &middot; JS &middot; Sheets</div></div>
+    <div><div class="meta-label">Audience</div><div class="meta-value">Band 6.5 IELTS learners (independent study)</div></div>
+    <div><div class="meta-label">Duration</div><div class="meta-value">1&ndash;3 hours per session</div></div>
+    <div><div class="meta-label">Format</div><div class="meta-value">Self-paced interactive module</div></div>
+    <div><div class="meta-label">Published</div><div class="meta-value">April 2026</div></div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="project-body">
+  <div class="project-content">
+
+    <div class="note-callout">
+      <span class="ni">&#128203;</span>
+      <p><strong>Note:</strong> This is a conceptual project designed for this portfolio. The design, architecture, and evaluation framework are fully realised; the Storyline module and AI coach are functional prototypes, not deployed or validated products.</p>
+    </div>
+
+    <h2 style="margin-top:0;">The Problem</h2>
+
+    <div class="flash-grid">
+      <div class="flashcard" tabindex="0">
+        <span class="flash-kicker">Test Pressure</span>
+        <h3>A high-pressure test that requires the right strategy</h3>
+        <ul>
+          <li>No single correct answer; judged across four interdependent criteria</li>
+          <li>60-minute time limit, with Task 2 weighted double</li>
+          <li>Without a strategy, performance stays inconsistent under pressure</li>
+        </ul>
+      </div>
+      <div class="flashcard accent" tabindex="0">
+        <span class="flash-kicker">Access / Cost</span>
+        <h3>Financial cost barriers</h3>
+        <ul>
+          <li>Many learners prepare independently due to cost barriers</li>
+          <li>Without structure, practice becomes inconsistent and poorly targeted</li>
+          <li>Repeated attempts compound financial strain and erode confidence</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="design-q">
+      <div class="dq-icon">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="10.5"/><circle cx="16" cy="16" r="5.5"/><circle cx="16" cy="16" r="1" fill="currentColor" stroke="none"/></svg>
+      </div>
+      <p class="dq-label">Design Question</p>
+      <p>How can you provide a self-directed learner with the structure of a coached session: without a coach, without an LMS, and without a large budget?</p>
+    </div>
+
+    <h2>Learning Needs Analysis</h2>
+    <p>The core gap here is not a lack of knowledge of IELTS criteria. Many Band 6.5 learners can identify the assessment criteria, yet still struggle to apply them consistently under test conditions.</p>
+
+    <div class="srl-path">
+      <div class="srl-flex">
+        <div class="srl-node">
+          <span class="srl-kicker">Learner Condition</span>
+          <h4>What is happening to the learner?</h4>
+          <p>Can identify IELTS assessment criteria, yet struggles to apply them consistently under real test conditions.</p>
+        </div>
+        <div class="srl-arrow">&rarr;</div>
+        <div class="srl-node center">
+          <span class="srl-kicker">The Centerpiece</span>
+          <h4>Self-Regulated Learning</h4>
+          <p>Grounded in Zimmerman&rsquo;s SRL framework: three phases (Forethought, Performance, Reflection), practiced as a cycle rather than taught as content.</p>
+        </div>
+        <div class="srl-arrow">&rarr;</div>
+        <div class="srl-node">
+          <span class="srl-kicker">Learner Impact</span>
+          <h4>What does this affect?</h4>
+          <p>Strengthens goal-setting, reflection accuracy, and metacognitive calibration; shifts learners from passive practice to intentional, data-informed learning.</p>
+        </div>
+      </div>
+    </div>
+
+    <h2>The Three-Phase Design</h2>
+    <p>Rather than explaining what SRL is, every scene in the module requires learners to <em>do</em> what self-regulated learners do.</p>
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="pc-emoji">&#128302;</div>
+        <div class="pc-eyebrow">Phase 1</div>
+        <h4>Forethought</h4>
+        <p>Band gap analysis, scaffolded goal-setting with sentence stems, motivational grounding, and anxiety reframing. Learners identify their own gap before setting a target.</p>
+      </div>
+      <div class="phase-card">
+        <div class="pc-emoji">&#128736;</div>
+        <div class="pc-eyebrow">Phase 2</div>
+        <h4>Performance</h4>
+        <p>Learners submit a full essay to the AI writing coach. They receive their primary gap, a sample of improved text, and targeted practice suggestions.</p>
+      </div>
+      <div class="phase-card">
+        <div class="pc-emoji">&#128260;</div>
+        <div class="pc-eyebrow">Phase 3</div>
+        <h4>Reflection</h4>
+        <p>Three sequential cognitive moves: evaluate accurately, decide adaptively, commit specifically. Every prompt targets a specific self-regulatory behaviour with a theoretical basis.</p>
+      </div>
+    </div>
+
+    <h2>The Learning Ecosystem</h2>
+    <p>Two learner-facing products carry the experience. Storyline manages the session architecture; the AI coach provides adaptive, essay-specific feedback.</p>
+
+    <div class="carousel-block">
+      <h3>Articulate Storyline 3</h3>
+      <div class="pcarousel" data-carousel data-slug="storyline">
+        <div class="pcarousel-stage">
+          <div class="pcarousel-track">
+
+            <div class="pcarousel-slide" data-index="0">
+              <img src="../assets/storyline-01.png" alt="Storyline module screenshot 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 01<br>assets/storyline-01.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="1">
+              <img src="../assets/storyline-02.png" alt="Storyline module screenshot 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 02<br>assets/storyline-02.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="2">
+              <img src="../assets/storyline-03.png" alt="Storyline module screenshot 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 03<br>assets/storyline-03.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="3">
+              <img src="../assets/storyline-04.png" alt="Storyline module screenshot 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 04<br>assets/storyline-04.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="4">
+              <img src="../assets/storyline-05.png" alt="Storyline module screenshot 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 05<br>assets/storyline-05.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="5">
+              <img src="../assets/storyline-06.png" alt="Storyline module screenshot 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 06<br>assets/storyline-06.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="6">
+              <img src="../assets/storyline-07.png" alt="Storyline module screenshot 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">Storyline screenshot 07<br>assets/storyline-07.png</div>
+            </div>
+
+          </div>
+          <button class="pcarousel-nav pcarousel-prev" aria-label="Previous screenshot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pcarousel-nav pcarousel-next" aria-label="Next screenshot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="pcarousel-foot">
+          <span class="pcarousel-count" data-count>01 / 07</span>
+          <div class="pcarousel-dots" data-dots></div>
+        </div>
+        <p class="pcarousel-caption" data-caption>[Caption for Screenshot 01]</p>
+      </div>
+    </div>
+
+    <div class="carousel-block">
+      <h3>IELTS AI Writing Coach</h3>
+      <div class="pcarousel" data-carousel data-slug="aicoach">
+        <div class="pcarousel-stage">
+          <div class="pcarousel-track">
+
+            <div class="pcarousel-slide" data-index="0" data-caption-text="Essay submission screen: learner views the prompt and submits their response for analysis.">
+              <img src="../assets/ai-coach-01.png" alt="Essay submission screen" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">AI Coach screenshot 01<br>assets/ai-coach-01.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="1" data-caption-text="Examiner Report: primary gaps identified, targeted fixes with examples drawn directly from the submitted essay.">
+              <img src="../assets/ai-coach-02.png" alt="Examiner report" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">AI Coach screenshot 02<br>assets/ai-coach-02.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="2">
+              <img src="../assets/ai-coach-03.png" alt="AI writing coach screenshot 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">AI Coach screenshot 03<br>assets/ai-coach-03.png</div>
+            </div>
+            <div class="pcarousel-slide" data-index="3">
+              <img src="../assets/ai-coach-04.png" alt="AI writing coach screenshot 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="ps-fallback">AI Coach screenshot 04<br>assets/ai-coach-04.png</div>
+            </div>
+
+          </div>
+          <button class="pcarousel-nav pcarousel-prev" aria-label="Previous screenshot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pcarousel-nav pcarousel-next" aria-label="Next screenshot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="pcarousel-foot">
+          <span class="pcarousel-count" data-count>01 / 04</span>
+          <div class="pcarousel-dots" data-dots></div>
+        </div>
+        <p class="pcarousel-caption" data-caption>Essay submission screen: learner views the prompt and submits their response for analysis.</p>
+      </div>
+      <p style="margin-top:0.75rem;"><a href="https://ielts-writing-coach-tan.vercel.app/" target="_blank" rel="noopener" style="color:var(--cobalt); font-weight:500; border-bottom:1.5px solid var(--cobalt-pale);">Visit the Writing Coach &#8599;</a></p>
+    </div>
+
+    <div class="eco-support">
+      <div class="eco-item">
+        <div class="ei-head"><span class="ei-icon">&#128202;</span><h4>JavaScript + Google Apps Script</h4></div>
+        <p>Chosen as the evaluation layer for LMS-free, zero-cost deployment. A Google Apps Script Web App receives all 27 session variables from Storyline, writing each completed session as a new row.</p>
+      </div>
+      <div class="eco-item">
+        <div class="ei-head"><span class="ei-icon">&#128203;</span><h4>Google Sheets</h4></div>
+        <p>The evaluation backend. Each completed session writes one timestamped, learner-named row, with all Forethought, Performance, and Reflection variables stored in structured columns.</p>
+      </div>
+    </div>
+
+    <h2>Learning Evaluation</h2>
+    <p><strong>Core question:</strong> Does repeated use of this tool build self-regulation in IELTS writing learners over time?</p>
+
+    <div class="acc" data-accordion>
+
+      <div class="acc-item open">
+        <button class="acc-trigger" aria-expanded="true">
+          <span class="acc-trigger-left">
+            <span class="acc-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="10.5"/><circle cx="16" cy="16" r="5.5"/><circle cx="16" cy="16" r="1" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Phase 1</span>
+              <span class="acc-title">Forethought</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <span class="acc-tag">Designed to Evaluate</span>
+            <ul>
+              <li><strong>Goal quality:</strong> does <code>smart_goal_action</code> become more specific, and <code>smart_goal_weeks</code> more realistic?</li>
+              <li><strong>Anxiety &amp; self-efficacy trajectory:</strong> does the tone of <code>struggle_reframe</code> and <code>self_efficacy</code> become more confident over sessions?</li>
+              <li><strong>Engagement:</strong> <code>session_count</code> tracks how many full cycles each learner completes; drop-off rate indicates where motivation breaks down.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-trigger-left">
+            <span class="acc-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="10.5"/><path d="M13 11 L22 16 L13 21 Z" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Phase 2</span>
+              <span class="acc-title">Performance</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <span class="acc-tag">Designed to Evaluate</span>
+            <ul>
+              <li><strong>Self-diagnosis accuracy:</strong> does <code>criterion_focus</code> start matching <code>gap_identified</code> more often? Mismatches are expected early; convergence is expected over time.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-trigger-left">
+            <span class="acc-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16 C 8 9, 24 9, 28 16 C 24 23, 8 23, 4 16 Z"/><circle cx="16" cy="16" r="4"/></svg>
+            </span>
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Phase 3</span>
+              <span class="acc-title">Reflection</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <span class="acc-tag">Designed to Evaluate</span>
+            <ul>
+              <li><strong>Reflection depth:</strong> do <code>improvement_attribution</code> responses shift from surface (&ldquo;I did better&rdquo;) to causal (&ldquo;I improved because I focused on topic sentences&rdquo;)?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-trigger-left">
+            <span class="acc-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M23 9 A10 10 0 1 1 9 9.5" /><path d="M23 4 L23 9 L18 9" /></svg>
+            </span>
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Ongoing</span>
+              <span class="acc-title">Adaptive Behaviour</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <span class="acc-tag">Designed to Evaluate</span>
+            <ul>
+              <li><strong>Adaptive behaviour:</strong> does <code>new_criterion_focus</code> show variety across sessions, or does the learner stay stuck on one criterion?</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="acc-note">Also tracked across sessions: correlation between <code>session_count</code> and <code>current_band_score</code>. Improvement here is defined not only as higher band scores, but as better regulation of the writing process itself.</p>
+
+    <h2>Development Materials</h2>
+    <p>Full documentation, including the Learning Experience Matrix, AI Coach Development Log, Google Apps Script, and Storyline JavaScript trigger, is available below. In a real production environment, I would continuously refine the AI Coach to enhance its accuracy and reliability.</p>
+    <ul>
+      <li><a href="https://drive.google.com/file/d/1DEOMTmZR5eiO8KJviaWh9jYCO4w-6gSn/view?usp=drive_link" target="_blank" rel="noopener">Learning Experience Matrix</a></li>
+      <li><a href="https://drive.google.com/file/d/1WgdEnP2cHauMqTXVzPPsUhf3eC4pHYjx/view?usp=drive_link" target="_blank" rel="noopener">AI Coach Development Log</a></li>
+      <li><a href="https://drive.google.com/file/d/1I7jkm4EdpH3JEkssj1I5_0Og3l39GjYj/view?usp=drive_link" target="_blank" rel="noopener">Google Apps Script</a></li>
+      <li><a href="https://drive.google.com/file/d/1xr6GVw4IyLHiTK7YNFVhzRdktQuI-zUX/view?usp=drive_link" target="_blank" rel="noopener">JavaScript</a></li>
     </ul>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
 
-  <!-- PROJECT HERO -->
-  <div class="project-hero" style="background: linear-gradient(135deg, #1E3D96 0%, #2A7B7E 100%);">
-    <div class="project-hero-inner">
-      <p class="project-hero-breadcrumb">
-        <a href="../index.html">Home</a> &nbsp;/&nbsp;
-        <a href="../index.html#work">Work</a> &nbsp;/&nbsp;
-        Improving IELTS Writing with Focus
-      </p>
-      <h1 class="project-hero-title">Improving IELTS Writing with Focus</h1>
-      <p class="project-hero-sub">A full-cycle Self-Regulated Learning experience — designed from Zimmerman's SRL framework outward, using a two-tool ecosystem where Storyline manages the session architecture and an AI writing coach provides adaptive, essay-specific feedback.</p>
-    </div>
-  </div>
-
-  <!-- META STRIP -->
-  <div class="project-meta-strip" style="background: #172F75;">
-    <div class="project-meta-strip-inner">
-      <div>
-        <div class="meta-label">Tools</div>
-        <div class="meta-value">Storyline 3 · Google AI Studio · JS · Google Sheets</div>
-      </div>
-      <div>
-        <div class="meta-label">Audience</div>
-        <div class="meta-value">Band 6.5 IELTS learners (independent study)</div>
-      </div>
-      <div>
-        <div class="meta-label">Duration</div>
-        <div class="meta-value">1–3 hours per session</div>
-      </div>
-      <div>
-        <div class="meta-label">Format</div>
-        <div class="meta-value">Self-paced interactive module</div>
-      </div>
-      <div>
-        <div class="meta-label">Published</div>
-        <div class="meta-value">April 2026</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BODY -->
-  <div class="project-body">
-
-    <!-- MAIN CONTENT -->
-    <article class="project-content">
-
-      <div class="disclaimer-banner">
-        <span style="font-size:1rem;">📋</span>
-        <p><strong>Note:</strong> This is a conceptual project developed for this portfolio. The design, architecture, and evaluation framework are fully realised — the Storyline module and AI coach are functional prototypes.</p>
-      </div>
-
-      <h2>The Problem</h2>
-      <p>IELTS Academic Writing is the section most likely to hold Band 6.5 learners back. Unlike listening or reading, there is no single correct answer — performance is judged across four interdependent criteria (Task Achievement, Coherence &amp; Cohesion, Lexical Resource, and Grammatical Range &amp; Accuracy), under 60-minute time pressure, with Task 2 carrying double the weight (British Council, ETS, IDP: IELTS Australia, 2020).</p>
-      <p>In Indonesia, many learners prepare independently due to cost barriers. Resources are widely available, but without structure, independent preparation tends to produce inconsistent practice, poor effort allocation, and a cycle of repeated test attempts — financial strain, declining confidence, reduced motivation.</p>
-
-      <div class="callout">
-        <p>🎯 <strong>Design question:</strong> How can you provide a self-directed learner with the structure of a coached session—without relying on a coach, an LMS, or a large budget?</p>
-      </div>
-
-      <h2>Learning Needs Analysis</h2>
-      <p>The core gap addressed here is not a lack of knowledge of IELTS criteria. Many Band 6.5 learners can identify assessment criteria, yet struggle to apply them consistently under test conditions.</p>
-      <p>This points to a gap in self-regulation: the ability to plan deliberately, monitor performance in real time, and reflect accurately to adapt.</p>
-      <p>Grounded in Zimmerman's Self-Regulated Learning (SRL) framework, this solution operationalises three phases — Forethought, Performance, and Reflection — not as content to be taught, but as a cycle to be practiced. Rather than explaining what SRL is, every scene in the module requires learners to <em>do</em> what self-regulated learners do.</p>
-      <p>Through repeated use, the cycle strengthens goal-setting, reflection accuracy, and metacognitive calibration — key conditions for score improvement. This shifts learners from passive practice to intentional, data-informed learning.</p>
-
-      <h2>The Three-Phase Design</h2>
-
-      <div class="phase-grid">
-        <div class="phase-card phase-card-forethought">
-          <p class="phase-card-label">🔮 Phase 1</p>
-          <div class="phase-card-title">Forethought</div>
-          <p>Band gap analysis, scaffolded goal-setting with sentence stems, motivational grounding, and anxiety reframing. Learners identify their own gap before setting a target.</p>
-        </div>
-        <div class="phase-card phase-card-performance">
-          <p class="phase-card-label">🛠 Phase 2</p>
-          <div class="phase-card-title">Performance</div>
-          <p>Learners submit a full essay to the AI writing coach. They will receive input: primary gap, sample of improved text, and targeted practice suggestions.</p>
-        </div>
-        <div class="phase-card phase-card-reflection">
-          <p class="phase-card-label">🔄 Phase 3</p>
-          <div class="phase-card-title">Reflection</div>
-          <p>Three sequential cognitive moves: evaluate accurately, decide adaptively, commit specifically. Every prompt targets a specific self-regulatory behaviour with a theoretical basis.</p>
-        </div>
-      </div>
-
-      <h2>The Learning Ecosystem</h2>
-
-      <div class="tool-row">
-        <div class="tool-card">
-          <div class="tool-card-name">
-            <span style="font-size:1.1rem;">⚙️</span> Articulate Storyline 3
-          </div>
-          <p>Chosen for its persistent variable architecture — real-time learner-facing displays, conditional branching on learner-generated input, and session-to-session continuity via looping. The SRL scaffolding, session structure, and all 27 tracked variables live here.</p>
-        </div>
-        <div class="tool-card">
-          <div class="tool-card-name">
-            <span style="font-size:1.1rem;">🤖</span> IELTS AI Writing Coach 
-          </div>
-          <p>Analyses essays and delivers criterion-specific feedback, strategies, and practice. Feedback is intended as a reflective prompt — not a definitive score or examiner judgement.</p>
-          <a href="https://ielts-writing-coach-tan.vercel.app/" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;margin-top:0.85rem;font-size:0.78rem;font-weight:600;color:var(--cobalt);border-bottom:1.5px solid var(--cobalt-pale);padding-bottom:2px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--cobalt)'" onmouseout="this.style.borderColor='var(--cobalt-pale)'">
-            Visit the Writing Coach
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
-        </div>
-      </div>
-
-
-      <div class="tool-row">
-        <div class="tool-card">
-          <div class="tool-card-name">
-            <span style="font-size:1.1rem;">📊</span> JavaScript + Google Apps Script
-          </div>
-          <p>Chosen as the evaluation layer because the tool was designed for LMS-free, zero-cost deployment. A Google Apps Script Web App receives all 27 session variables via XMLHttpRequest from Storyline, writing each completed session as a new row — enabling longitudinal SRL tracking without infrastructure cost.</p>
-        </div>
-        <div class="tool-card">
-          <div class="tool-card-name">
-            <span style="font-size:1.1rem;">📋</span> Google Sheets
-          </div>
-          <p>The evaluation backend. Each completed session writes one row — timestamped, learner-named, with all Forethought, Performance, and Reflection variables stored in structured columns. Designed to surface SRL pattern changes across sessions.</p>
-        </div>
-      </div>
-
-      <div style="margin-bottom: 2rem;">
-  <p style="font-size:16px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">The writing coach in action</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <img src="../assets/T1-Tech and Ed-Answer-v0.2.PNG" alt="Essay submission screen" style="width:100%;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);">
-      <p style="font-size:11px;color:var(--color-text-secondary);line-height:1.4;margin:0;">Essay submission screen — learner views the prompt and submits their response for analysis.</p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <img src="../assets/T1-Tech and Ed-Feedback.PNG" alt="Examiner Report" style="width:100%;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);">
-      <p style="font-size:11px;color:var(--color-text-secondary);line-height:1.4;margin:0;">Examiner Report — primary gaps identified, targeted fixes with examples drawn directly from the submitted essay.</p>
-    </div>
-  </div>
-</div>
-
-      <h2>Learning Evaluation</h2>
-
-<div style="background:#f0f4ff;border-left:4px solid #4f6ef7;padding:16px 20px;border-radius:6px;margin-bottom:24px;">
-  <p style="margin:0;font-size:1rem;"><strong>🎯 Core question:</strong> Does repeated use of this tool build self-regulation in IELTS writing learners over time?</p>
-</div>
-
-<table class="var-table">
-  <thead>
-    <tr>
-      <th>Dimension</th>
-      <th>Representative indicators (across sessions)</th>
-      <th>Phase</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><strong>Goal quality</strong></td>
-      <td>Does <code>smart_goal_action</code> become more specific? Does <code>smart_goal_weeks</code> become more realistic?</td>
-      <td><span class="phase-badge badge-f">Forethought</span></td>
-    </tr>
-    <tr>
-      <td><strong>Anxiety &amp; self-efficacy trajectory</strong></td>
-      <td>Does the tone of <code>struggle_reframe</code> and <code>self_efficacy</code> become more confident over sessions?</td>
-      <td><span class="phase-badge badge-f">Forethought</span></td>
-    </tr>
-    <tr>
-      <td><strong>Engagement</strong></td>
-      <td><code>session_count</code> tracks how many full cycles each learner completes; drop-off rate indicates where motivation breaks down.</td>
-      <td><span class="phase-badge badge-f">Forethought</span></td>
-    </tr>
-    <tr>
-      <td><strong>Self-diagnosis accuracy</strong></td>
-      <td>Does <code>criterion_focus</code> start matching <code>gap_identified</code> more often? Mismatches are expected early — expert self-regulators converge over time.</td>
-      <td><span class="phase-badge badge-p">Performance</span></td>
-    </tr>
-    <tr>
-      <td><strong>Reflection depth</strong></td>
-      <td>Do <code>improvement_attribution</code> responses shift from surface ("I did better") to causal ("I improved because I focused on topic sentences")?</td>
-      <td><span class="phase-badge badge-r">Reflection</span></td>
-    </tr>
-    <tr>
-      <td><strong>Adaptive behaviour</strong></td>
-      <td>Does <code>new_criterion_focus</code> show variety across sessions, or does the learner stay stuck on one criterion?</td>
-      <td><span class="phase-badge badge-r">Reflection</span></td>
-    </tr>
-    <tr>
-      <td><strong>Correlation with score improvement</strong></td>
-      <td>Is there an increase in <code>current_band_score</code> following multiple sessions with enhanced SRL indicators?</td>
-      <td><span class="phase-badge">N/A</span></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Improvement is defined not only as higher band scores, but as better regulation of the writing process itself — more specific goals, more accurate self-monitoring, deeper reflection, and more adaptive next-step choices across sessions.</p>
-
-      <h2>Development Materials</h2>
-      <p>The full development documentation is available below — including the Learning Experience Matrix, AI Coach Development Log (Initial Prompt, AI Evaluation and Iteration, Lessons Learned), Google Apps Script, and Storyline JavaScript trigger. In a real production environment, I would continuously refine the AI Coach to enhance its accuracy and reliability. </p>
-      <div class="dev-links">
-        <a href="https://drive.google.com/file/d/1DEOMTmZR5eiO8KJviaWh9jYCO4w-6gSn/view?usp=drive_link" target="_blank" class="dev-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          Learning Experience Matrix
-        </a>
-        <a href="https://drive.google.com/file/d/1WgdEnP2cHauMqTXVzPPsUhf3eC4pHYjx/view?usp=drive_link" target="_blank" class="dev-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          AI Coach Development Log
-        </a>
-        <a href="https://drive.google.com/file/d/1I7jkm4EdpH3JEkssj1I5_0Og3l39GjYj/view?usp=drive_link" target="_blank" class="dev-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Google Apps Script
-        </a>
-        <a href="https://drive.google.com/file/d/1xr6GVw4IyLHiTK7YNFVhzRdktQuI-zUX/view?usp=drive_link" target="_blank" class="dev-link">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          JavaScript
-        </a>
-      </div>
-
-      <h3>References</h3>
-<ul>
-  <li>Zimmerman's overview for the phase structure and theoretical legitimacy (<a href="https://www.leiderschapsdomeinen.nl/wp-content/uploads/2016/12/Zimmerman-B.-2002-Becoming-Self-Regulated-Learner.pdf">Link</a>).</li>
-  <li>Panadero's review for broader SRL model support and the forethought-performance-reflection framing (<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5408091/">Link</a>).</li>
-  <li>A study on self-regulated writing intervention for English learners, because it directly argues that SRL in writing is teachable and improves with practice (<a href="https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2022.841395/full">Link</a>).</li>
-  <li>A writing-performance study showing significant gains or strong correlations between SRL strategies and writing outcomes (<a href="https://files.eric.ed.gov/fulltext/EJ1479401.pdf">Link</a>).</li>
-</ul>
-      
+    <h2>References</h2>
+    <ul>
+      <li>Zimmerman&rsquo;s overview for the phase structure and theoretical legitimacy. <a href="https://www.leiderschapsdomeinen.nl/wp-content/uploads/2016/12/Zimmerman-B.-2002-Becoming-Self-Regulated-Learner.pdf" target="_blank" rel="noopener">Link</a></li>
+      <li>Panadero&rsquo;s review for broader SRL model support and the forethought-performance-reflection framing. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5408091/" target="_blank" rel="noopener">Link</a></li>
+      <li>A study on self-regulated writing intervention for English learners, arguing that SRL in writing is teachable and improves with practice. <a href="https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2022.841395/full" target="_blank" rel="noopener">Link</a></li>
+      <li>A writing-performance study showing correlations between SRL strategies and writing outcomes. <a href="https://files.eric.ed.gov/fulltext/EJ1479401.pdf" target="_blank" rel="noopener">Link</a></li>
+    </ul>
 
     <h2>The Storyline Module</h2>
-<a href="../projects/ielts-storyline/story.html" 
-   target="_blank" 
-   class="sidebar-link-btn" 
-   style="display:inline-flex;align-items:center;gap:0.5rem;margin:1.5rem 0;">
-  Launch Storyline Module
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-</a>
+    <p><a href="https://haifa-azzahra.github.io/projects/ielts-storyline/story.html" target="_blank" rel="noopener" style="color:var(--cobalt); font-weight:500; border-bottom:1.5px solid var(--cobalt-pale);">Launch Storyline Module &#8599;</a></p>
 
-      <h2>Reflection</h2>
+    <h2>Reflection</h2>
+    <div class="acc" data-accordion>
 
-      <p><strong>On the design process</strong></p>
-      <p>The pivotal moment was refining the approach from teaching about SRL to designing through it. During the course outline matrix development, every scene was reframed: does this prompt action or reflection, or just comprehension? That single question restructured the entire learning architecture.</p>
-
-      <p><strong>On the tool</strong></p>
-      <p>The current version provides one practice prompt per session. A production version would expand prompt variety and invest further in the Storyline UI/UX — developing a visual language that reinforces self-regulation: calm, focused, and intentionally unhurried. The interface should signal that this is a space for reflection, not speed. The goal would also be better visual cohesion between the Storyline module and the Claude artifact so they feel like one ecosystem rather than two adjacent tools.</p>
-
-      <p><strong>On what it means for learners</strong></p>
-      <p>This learning experience builds the internal process of self-regulation. But self-regulation doesn't mean learning alone — writing improves through feedback, diverse models, and engagement with a learning community. This tool is one part of a larger ecosystem. It doesn't replace the external environment, and it was never designed to.</p>
-
-    </article>
-
-    <!-- SIDEBAR -->
-    <aside class="project-sidebar">
-
-      <div class="sidebar-card">
-        <p class="sidebar-card-title">Skills Demonstrated</p>
-        <span class="sidebar-tag">Learning Science</span>
-        <span class="sidebar-tag">Self-Regulated Learning</span>
-        <span class="sidebar-tag">Storyline 3</span>
-        <span class="sidebar-tag">AI Integration</span>
-        <span class="sidebar-tag">JavaScript</span>
-        <span class="sidebar-tag">Google Apps Script</span>
-        <span class="sidebar-tag">Learning Evaluation</span>
-        <span class="sidebar-tag">Cognitive Load Management</span>
-        <span class="sidebar-tag">Needs Analysis</span>
-        <span class="sidebar-tag">Instructional Writing</span>
-      </div>
-
-      <div class="sidebar-card">
-        <p class="sidebar-card-title">Learning Objective</p>
-        <div class="outcome-item">
-          <div class="outcome-icon">🎯</div>
-          <div class="outcome-text">By the end of repeated sessions, learners will independently regulate their IELTS Writing practice — setting evidence-based goals, monitoring strategy use, and reflecting accurately to drive improvement toward Band 7+.</div>
+      <div class="acc-item open">
+        <button class="acc-trigger" aria-expanded="true">
+          <span class="acc-trigger-left">
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Reflection</span>
+              <span class="acc-title">On the design process</span>
+              <span class="acc-sub">Reframing from teaching about SRL to designing through it</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>The pivotal moment was refining the approach from teaching about SRL to designing through it. During the course outline matrix development, every scene was reframed: does this prompt action or reflection, or just comprehension? That single question restructured the entire learning architecture.</p>
+          </div>
         </div>
       </div>
 
-      <div class="sidebar-card">
-        <p class="sidebar-card-title">Design Frameworks</p>
-        <div class="outcome-item">
-          <div class="outcome-icon">🧠</div>
-          <div class="outcome-text"><strong>Zimmerman's SRL Model</strong> — three-phase session architecture</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon">🎯</div>
-          <div class="outcome-text"><strong>Gollwitzer's Implementation Intentions</strong> — if-then goal planning in Reflection phase</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon">⚡</div>
-          <div class="outcome-text"><strong>Cognitive Load Theory</strong> — sentence stem scaffolding, one-concept-per-scene structure</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon">💬</div>
-          <div class="outcome-text"><strong>Motivational Interviewing</strong> — self-generated reasons displayed back to strengthen commitment</div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-trigger-left">
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Reflection</span>
+              <span class="acc-title">On the tool</span>
+              <span class="acc-sub">What a production version would need</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>The current version provides one practice prompt per session. A production version would expand prompt variety and invest further in the Storyline UI/UX: developing a visual language that reinforces self-regulation, calm, focused, and intentionally unhurried. The interface should signal that this is a space for reflection, not speed. The goal would also be better visual cohesion between the Storyline module and the AI writing coach so they feel like one ecosystem rather than two adjacent tools.</p>
+          </div>
         </div>
       </div>
 
-      <div class="sidebar-card">
-        <p class="sidebar-card-title">Variables Tracked</p>
-        <div style="text-align:center; margin-bottom:0.75rem;">
-          <span style="font-family:var(--serif); font-size:2.5rem; font-weight:700; color:var(--cobalt);">27</span>
-          <div style="font-size:0.78rem; color:var(--ink-muted);">session variables per cycle</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon" style="background:var(--cobalt-pale); font-size:0.7rem;">F</div>
-          <div class="outcome-text" style="font-size:0.78rem;">14 Forethought variables</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon" style="background:#EBF5EE; font-size:0.7rem;">P</div>
-          <div class="outcome-text" style="font-size:0.78rem;">5 Performance variables</div>
-        </div>
-        <div class="outcome-item">
-          <div class="outcome-icon" style="background:#F5EEEB; font-size:0.7rem;">R</div>
-          <div class="outcome-text" style="font-size:0.78rem;">8 Reflection variables</div>
+      <div class="acc-item">
+        <button class="acc-trigger" aria-expanded="false">
+          <span class="acc-trigger-left">
+            <span class="acc-titles">
+              <span class="acc-eyebrow">Reflection</span>
+              <span class="acc-title">On what it means for learners</span>
+              <span class="acc-sub">Self-regulation within a larger ecosystem</span>
+            </span>
+          </span>
+          <span class="acc-plus">+</span>
+        </button>
+        <div class="acc-panel">
+          <div class="acc-panel-inner">
+            <p>This learning experience builds the internal process of self-regulation. But self-regulation doesn&rsquo;t mean learning alone: writing improves through feedback, diverse models, and engagement with a learning community. This tool is one part of a larger ecosystem. It doesn&rsquo;t replace the external environment, and it was never designed to.</p>
+          </div>
         </div>
       </div>
 
-      <div style="text-align:center; padding: 1.5rem 0;">
-        <a href="../index.html#work" style="font-size:0.78rem;color:var(--ink-muted);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid rgba(26,24,20,0.2);padding-bottom:2px;">
-          ← Back to All Work
-        </a>
-      </div>
+    </div>
 
-    </aside>
   </div>
 
+  <!-- SIDEBAR -->
+  <aside class="project-sidebar">
 
-  <footer>
-    <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
-    <div class="footer-copy">© 2026 · Built with intention.</div>
-    <div class="footer-links">
-      <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
-      <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Explore</div>
+      <a href="https://haifa-azzahra.github.io/projects/ielts-storyline/story.html" target="_blank" rel="noopener" class="sidebar-link-btn">Launch Storyline Module &#8599;</a>
+      <a href="https://ielts-writing-coach-tan.vercel.app/" target="_blank" rel="noopener" class="sidebar-link-btn outline">Visit Writing Coach &#8599;</a>
     </div>
-  </footer>
 
-  <script>
-    const ham = document.getElementById('hamburger');
-    const nav = document.getElementById('navLinks');
-    ham.addEventListener('click', () => nav.classList.toggle('open'));
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
-</body>
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Skills Demonstrated</div>
+      <span class="sidebar-tag">Learning Science</span>
+      <span class="sidebar-tag">Self-Regulated Learning</span>
+      <span class="sidebar-tag">Storyline 3</span>
+      <span class="sidebar-tag">AI Integration</span>
+      <span class="sidebar-tag">JavaScript</span>
+      <span class="sidebar-tag">Google Apps Script</span>
+      <span class="sidebar-tag">Learning Evaluation</span>
+      <span class="sidebar-tag">Cognitive Load Management</span>
+      <span class="sidebar-tag">Needs Analysis</span>
+      <span class="sidebar-tag">Instructional Writing</span>
+    </div>
 
-  <script>
-(function() {
-const originalOpen = window.open;
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Learning Objective</div>
+      <p style="font-size:0.85rem; color:var(--ink-muted); line-height:1.7; margin:0;">By the end of repeated sessions, learners will independently regulate their IELTS Writing practice: setting evidence-based goals, monitoring strategy use, and reflecting accurately to drive improvement toward Band 7+.</p>
+    </div>
 
-window.open = function(url, target, features) {
-if (url === "https://claude.ai/public/artifacts/2665ead7-f4e5-4792-aa50-567f20ba7958") {
-url = "https://ielts-writing-coach-tan.vercel.app/";
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Design Frameworks</div>
+      <div class="sidebar-fw-item"><span class="fwi">&#129504;</span><span><strong>Zimmerman&rsquo;s SRL Model:</strong> three-phase session architecture</span></div>
+      <div class="sidebar-fw-item"><span class="fwi">&#127919;</span><span><strong>Gollwitzer&rsquo;s Implementation Intentions:</strong> if-then goal planning in the Reflection phase</span></div>
+      <div class="sidebar-fw-item"><span class="fwi">&#9889;</span><span><strong>Cognitive Load Theory:</strong> sentence stem scaffolding, one-concept-per-scene structure</span></div>
+      <div class="sidebar-fw-item" style="margin-bottom:0;"><span class="fwi">&#128172;</span><span><strong>Motivational Interviewing:</strong> self-generated reasons displayed back to strengthen commitment</span></div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-card-title">Variables Tracked</div>
+      <div class="var-stat">27</div>
+      <div class="var-stat-label">session variables per cycle</div>
+      <div class="var-break" style="margin-bottom:0.35rem;"><span>F</span> 14 Forethought variables</div>
+      <div class="var-break" style="margin-bottom:0.35rem;"><span>P</span> 5 Performance variables</div>
+      <div class="var-break"><span>R</span> 8 Reflection variables</div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="Previous screenshot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <img id="lbImage" src="" alt="">
+    <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="Next screenshot"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <p class="lightbox-caption" id="lbCaption"></p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand"><strong>Haifa Audrey Azzahra</strong></div>
+  <div class="footer-copy">&copy; 2026 &middot; Built with intention.</div>
+  <div class="footer-links">
+    <a href="https://www.linkedin.com/in/haifa-audrey/" target="_blank">LinkedIn</a>
+    <a href="mailto:ahaifaaudrey@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+// hamburger
+const ham = document.getElementById('hamburger');
+const navLinksEl = document.getElementById('navLinks');
+if (ham && navLinksEl) ham.addEventListener('click', () => navLinksEl.classList.toggle('open'));
+
+// ---- accordions ----
+document.querySelectorAll('[data-accordion]').forEach(group => {
+  const items = Array.from(group.querySelectorAll('.acc-item'));
+  const panels = items.map(it => it.querySelector('.acc-panel'));
+
+  function setOpen(item, panel, open){
+    item.classList.toggle('open', open);
+    item.querySelector('.acc-trigger').setAttribute('aria-expanded', String(open));
+    panel.style.maxHeight = open ? panel.scrollHeight + 'px' : '0px';
+  }
+
+  items.forEach((item, i) => {
+    const trigger = item.querySelector('.acc-trigger');
+    const panel = panels[i];
+    setOpen(item, panel, item.classList.contains('open'));
+    trigger.addEventListener('click', () => {
+      const willOpen = !item.classList.contains('open');
+      items.forEach((other, j) => { if (other !== item) setOpen(other, panels[j], false); });
+      setOpen(item, panel, willOpen);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    items.forEach((item, i) => { if (item.classList.contains('open')) panels[i].style.maxHeight = panels[i].scrollHeight + 'px'; });
+  });
+});
+
+// ---- carousels + shared lightbox ----
+const lightbox = document.getElementById('lightbox');
+const lbImage = document.getElementById('lbImage');
+const lbCaption = document.getElementById('lbCaption');
+const lbPrev = document.getElementById('lbPrev');
+const lbNext = document.getElementById('lbNext');
+const lbClose = document.getElementById('lbClose');
+let activeCarousel = null;
+let lastFocused = null;
+
+function openLightbox(carousel){
+  activeCarousel = carousel;
+  updateLightboxImage();
+  lastFocused = document.activeElement;
+  lightbox.classList.add('open');
+  requestAnimationFrame(() => lightbox.classList.add('show'));
+  lbClose.focus();
 }
-return originalOpen.call(this, url, target, features);
-};
-})();
+function closeLightbox(){
+  lightbox.classList.remove('show');
+  setTimeout(() => { lightbox.classList.remove('open'); }, 200);
+  if (lastFocused) lastFocused.focus();
+}
+function updateLightboxImage(){
+  if (!activeCarousel) return;
+  const slide = activeCarousel.slides[activeCarousel.index];
+  const img = slide.querySelector('img');
+  lbImage.src = img.style.display === 'none' ? '' : img.src;
+  lbImage.alt = img.alt;
+  const caption = activeCarousel.el.querySelector('[data-caption]');
+  lbCaption.textContent = caption ? caption.textContent : '';
+}
+lbClose.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+lbPrev.addEventListener('click', () => { activeCarousel.go(-1); updateLightboxImage(); });
+lbNext.addEventListener('click', () => { activeCarousel.go(1); updateLightboxImage(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft'){ activeCarousel.go(-1); updateLightboxImage(); }
+  if (e.key === 'ArrowRight'){ activeCarousel.go(1); updateLightboxImage(); }
+});
+
+document.querySelectorAll('[data-carousel]').forEach(el => {
+  const track = el.querySelector('.pcarousel-track');
+  const slides = Array.from(el.querySelectorAll('.pcarousel-slide'));
+  const prevBtn = el.querySelector('.pcarousel-prev');
+  const nextBtn = el.querySelector('.pcarousel-next');
+  const countEl = el.querySelector('[data-count]');
+  const dotsEl = el.querySelector('[data-dots]');
+  const captionEl = el.querySelector('[data-caption]');
+  const total = slides.length;
+  let index = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'pcarousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to screenshot ' + (i + 1));
+    dot.addEventListener('click', () => { index = i; render(); });
+    dotsEl.appendChild(dot);
+  });
+  const dots = Array.from(dotsEl.children);
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+
+  function render(){
+    track.style.transform = 'translateX(-' + (index * 100) + '%)';
+    countEl.textContent = pad(index + 1) + ' / ' + pad(total);
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+    if (captionEl){
+      const cap = slides[index].getAttribute('data-caption-text');
+      captionEl.textContent = cap || ('[Caption for Screenshot ' + pad(index + 1) + ']');
+    }
+  }
+
+  function go(dir){
+    index = (index + dir + total) % total;
+    render();
+  }
+
+  prevBtn.addEventListener('click', () => go(-1));
+  nextBtn.addEventListener('click', () => go(1));
+
+  el.setAttribute('tabindex', '0');
+  el.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+
+  slides.forEach(slide => {
+    slide.addEventListener('click', () => {
+      index = parseInt(slide.getAttribute('data-index'), 10);
+      render();
+      openLightbox(api);
+    });
+  });
+
+  const api = { el, slides, get index(){ return index; }, go };
+  render();
+});
+
+// ---- scroll reveal (optional, respects reduced motion) ----
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+  // reserved for future use; kept minimal per brief (restraint over animation)
+}
 </script>
 
+</body>
 </html>
