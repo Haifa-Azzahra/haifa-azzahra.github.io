@@ -159,10 +159,10 @@ footer { background: var(--ink); padding: 2.5rem 3rem; display: flex; align-item
 .carousel-block{ margin:1.5rem 0 2.5rem; }
 .carousel-block h3{ font-family:var(--serif); font-size:1.15rem; font-weight:600; color:var(--ink); margin-bottom:1rem; }
 .pcarousel{ background:var(--white); border:1px solid rgba(26,24,20,0.07); border-radius:6px; overflow:hidden; }
-.pcarousel-stage{ position:relative; width:100%; aspect-ratio:16/10; background:var(--ivory-dark); overflow:hidden; }
+.pcarousel-stage{ position:relative; width:100%; aspect-ratio:4/3; background:var(--ivory-dark); overflow:hidden; }
 .pcarousel-track{ display:flex; height:100%; transition:transform 0.4s var(--ease); }
 .pcarousel-slide{ flex:0 0 100%; width:100%; height:100%; position:relative; cursor:zoom-in; }
-.pcarousel-slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+.pcarousel-slide img{ width:100%; height:100%; object-fit:contain; display:block; background:var(--ivory-dark); }
 .pcarousel-slide .ps-fallback{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center; padding:1.25rem; font-family:var(--mono); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-light); }
 .pcarousel-nav{ position:absolute; top:50%; transform:translateY(-50%); width:2.5rem; height:2.5rem; border-radius:50%; background:rgba(255,255,255,0.92); border:1px solid rgba(26,24,20,0.12); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s, transform 0.2s; box-shadow:0 3px 10px rgba(0,0,0,0.1); }
 .pcarousel-nav:hover{ background:var(--cobalt); border-color:var(--cobalt); }
