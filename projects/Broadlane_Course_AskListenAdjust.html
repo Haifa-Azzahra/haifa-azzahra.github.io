@@ -606,8 +606,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: welcome-hero.mp4, the register right before opening, quiet/warm morning light -->
         <video autoplay muted loop playsinline><source src="/assets/broadlane/welcome-hero.mp4" type="video/mp4"></video>
-        <span class="asset-missing-badge">Add: assets/broadlane/welcome-hero.mp4</span>
-        <div class="video-overlay"><div class="video-caption">The register, right before opening. Quiet, ready, welcoming.</div></div>
+        <div class="video-overlay"><div class="video-caption">Welcome, Broadlane Associates!</div></div>
       </div>
       <div class="card">
         <span class="eyebrow">A Broadlane Associate Course</span>
@@ -730,7 +729,7 @@ button{ font-family:inherit; cursor:pointer; }
           <span class="eyebrow">Broadlane Preferred Card</span>
           <h2 class="serif-accent" style="font-size:1.4rem;">Save More on Every Visit</h2>
           <div class="inline-image-slot">
-            <img src="/assets/broadlane/m1-save-more.PNG" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <img src="/assets/broadlane/m1-save-more.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
             <div class="missing-note" style="display:none;">ADD IMAGE<br>assets/broadlane/m1-save-more.png<br><small>Preferred Card product shot or lifestyle image</small></div>
           </div>
         </div>
@@ -774,7 +773,6 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: module2-checkout-lane.mp4, items crossing a checkout belt, close-up hands, natural light -->
         <video autoplay muted loop playsinline><source src="/assets/broadlane/module2-checkout-lane.mp4" type="video/mp4"></video>
-        <span class="asset-missing-badge">Add: assets/broadlane/module2-checkout-lane.mp4</span>
         <div class="video-overlay"><div class="video-caption">Before you say a word about the card, look at what's in the basket.</div></div>
       </div>
       <div class="card">
@@ -1019,7 +1017,6 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: module5-branching.mp4, one continuous checkout interaction, coat purchase, calm/natural -->
         <video autoplay muted loop playsinline><source src="/assets/broadlane/module5-branching.mp4" type="video/mp4"></video>
-        <span class="asset-missing-badge">Add: assets/broadlane/module5-branching.mp4</span>
         <div class="video-overlay"><div class="video-caption">One customer. Three decisions that build on each other.</div></div>
       </div>
       <div class="card">
@@ -1049,7 +1046,7 @@ button{ font-family:inherit; cursor:pointer; }
     <section class="screen" data-screen="m5-d2">
       <div class="module-tag"><span class="dot"></span>Module 5 · Decision 2, Your Pitch</div>
       <div class="card">
-        <h2>How do you introduce the Preferred Card?</h2>
+        <h2 data-audio-auto="/assets/broadlane/m5-d1-customer.mp3">How do you introduce the Preferred Card?</h2>
         <div class="choice-list" data-single-select="m5-d2" data-category="pitch" data-scored="true">
           <div class="choice-item">
             <button class="choice" data-value="a" data-good="false"><span class="badge">A</span><span>"By the way, if you open a Preferred Card today, that coat drops from $120 down to $95 right now."</span></button>
@@ -1127,7 +1124,6 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="bg-video-wrap" style="aspect-ratio:16/6;">
         <!-- VIDEO SLOT: debrief-endofshift.mp4, same checkout counter, quiet, register closed, dim warm light -->
         <video autoplay muted loop playsinline><source src="/assets/broadlane/debrief-endofshift.mp4" type="video/mp4"></video>
-        <span class="asset-missing-badge">Add: assets/broadlane/debrief-endofshift.mp4</span>
         <div class="video-overlay"><div class="video-caption">End of shift. Register closed. Quiet.</div></div>
       </div>
       <div class="card no-pad shift-debrief">
@@ -1332,8 +1328,7 @@ button{ font-family:inherit; cursor:pointer; }
             <div class="story-photo-slot" style="aspect-ratio:3/4;"><img src="/assets/broadlane/${v.photo}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/${v.photo}</div></div>
             <div>
               <p class="cust-quote" data-audio-auto="/assets/broadlane/m4-${v.id}.mp3">"${v.customerQuote}"</p>
-              <h3 style="font-size:1.1rem; margin-top:20px;">${v.headline}</h3>
-              <p style="margin-bottom:0;">${v.situation}</p>
+              <p style="font-family:var(--font-body); font-weight:700; font-size:1.05rem; color:var(--navy); margin:20px 0 0;">How would you introduce the card?</p>
             </div>
           </div>
         </div>
@@ -1416,7 +1411,20 @@ button{ font-family:inherit; cursor:pointer; }
   railBackdrop.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeDrawer(); });
 
+  // ---------- Audio control: a single shared registry so any active clip (auto-played
+  // customer lines, the outcome reveal, or the manual Brenda narration player) can be
+  // stopped on demand from screen navigation or answer selection. ----------
+  const activeAudios = new Set();
+  function stopAllAudio(){
+    activeAudios.forEach(a=>{
+      try{ a.pause(); }catch(e){ /* ignore */ }
+      if(a._onStop){ try{ a._onStop(); }catch(e){ /* ignore */ } }
+    });
+    activeAudios.clear();
+  }
+
   function showScreen(i){
+    stopAllAudio();
     screens.forEach((s,idx)=>s.classList.toggle('active', idx===i));
     current=i; updateRail();
     window.scrollTo({top:0, behavior:'smooth'});
@@ -1440,20 +1448,17 @@ button{ font-family:inherit; cursor:pointer; }
 
   // ---------- Customer audio: plays automatically, no button, no click needed ----------
   // Learner-reply audio was removed entirely per course direction; only customer lines play.
+  // Stops any other active clip first so only one plays at a time (and so navigation/answer
+  // clicks reliably cut off whatever was playing).
   function playAudio(src){
     if(!src) return;
+    stopAllAudio();
     try{
       const audio = new Audio(src);
-      audio.play().catch(()=>{ /* asset not yet attached, fail silently */ });
+      audio.addEventListener('ended', ()=>{ activeAudios.delete(audio); });
+      audio.play().then(()=>{ activeAudios.add(audio); }).catch(()=>{ /* asset not yet attached, fail silently */ });
     }catch(e){ /* ignore */ }
   }
-
-  // m5-d1's narrated customer scene doesn't ship with an inline audio tag in the markup,
-  // so tag it the same way as the rest of the customer lines for the auto-play system.
-  (function tagRemainingCustomerAudio(){
-    const m5d1 = document.querySelector('[data-screen="m5-d1"] .photo-scene');
-    if(m5d1) m5d1.dataset.audioAuto = '/assets/broadlane/m5-d1-customer.mp3';
-  })();
 
   // ---------- Manual narration player: play/pause toggle, icon stays a static play glyph, resumes from wherever it was paused ----------
   (function initNarrationPlayers(){
@@ -1469,14 +1474,17 @@ button{ font-family:inherit; cursor:pointer; }
       btn.addEventListener('click', ()=>{
         if(!audio){
           audio = new Audio(src);
+          audio._onStop = ()=>{ setPlayingState(false); };
           // currentTime is untouched by pause(), so clicking play again always resumes mid-line.
-          audio.addEventListener('ended', ()=>{ audio.currentTime = 0; setPlayingState(false); });
+          audio.addEventListener('ended', ()=>{ audio.currentTime = 0; setPlayingState(false); activeAudios.delete(audio); });
         }
         if(audio.paused){
-          audio.play().catch(()=>{ /* asset not yet attached, fail silently */ });
+          stopAllAudio();
+          audio.play().then(()=>{ activeAudios.add(audio); }).catch(()=>{ /* asset not yet attached, fail silently */ });
           setPlayingState(true);
         } else {
           audio.pause();
+          activeAudios.delete(audio);
           setPlayingState(false);
         }
       });
@@ -1538,6 +1546,7 @@ button{ font-family:inherit; cursor:pointer; }
     const category = group.dataset.category;
     group.querySelectorAll('.choice').forEach(btn=>{
       btn.addEventListener('click', ()=>{
+        stopAllAudio();
         const val = btn.dataset.value;
         const good = btn.dataset.good==='true';
         group.querySelectorAll('.choice').forEach(b=>{
