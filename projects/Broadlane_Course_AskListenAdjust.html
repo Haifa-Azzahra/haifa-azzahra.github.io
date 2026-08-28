@@ -241,11 +241,11 @@ button{ font-family:inherit; cursor:pointer; }
 .product-row:last-child{ border-bottom:none; }
 .product-thumb{
   position:relative; flex:0 0 auto; width:52px; height:52px; border-radius:var(--radius-sm); background:var(--white); box-shadow:0 2px 8px rgba(26,52,69,.09);
-  display:flex; align-items:center; justify-content:center; font-size:.62rem; font-weight:800; letter-spacing:.06em; color:var(--navy); opacity:.4;
+  display:flex; align-items:center; justify-content:center; font-size:.62rem; font-weight:800; letter-spacing:.06em; color:var(--navy);
   text-align:center; line-height:1.2; overflow:hidden;
 }
 .product-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
-.product-thumb .thumb-fallback{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; }
+.product-thumb .thumb-fallback{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; opacity:.4; }
 .product-name{ flex:1; font-weight:600; font-size:.95rem; }
 .product-price{ flex:0 0 auto; font-weight:700; font-size:.95rem; }
 .tray-total{ display:flex; justify-content:space-between; align-items:center; padding:18px 2px 0; margin-top:10px; border-top:2px solid rgba(26,52,69,.12); }
@@ -1046,7 +1046,7 @@ button{ font-family:inherit; cursor:pointer; }
     <section class="screen" data-screen="m5-d2">
       <div class="module-tag"><span class="dot"></span>Module 5 · Decision 2, Your Pitch</div>
       <div class="card">
-        <h2 data-audio-auto="/assets/broadlane/m5-d1-customer.mp3">How do you introduce the Preferred Card?</h2>
+        <h2>How do you introduce the Preferred Card?</h2>
         <div class="choice-list" data-single-select="m5-d2" data-category="pitch" data-scored="true">
           <div class="choice-item">
             <button class="choice" data-value="a" data-good="false"><span class="badge">A</span><span>"By the way, if you open a Preferred Card today, that coat drops from $120 down to $95 right now."</span></button>
@@ -1068,7 +1068,7 @@ button{ font-family:inherit; cursor:pointer; }
     <section class="screen" data-screen="m5-d3">
       <div class="module-tag"><span class="dot"></span>Module 5 · Decision 3, Handling Pushback</div>
       <div class="card">
-        <div class="scenario-panel">
+        <div class="scenario-panel" data-audio-auto="/assets/broadlane/m5-d1-customer.mp3">
           <div class="scenario-grid">
             <div class="story-photo-slot" style="aspect-ratio:3/4;"><img src="/assets/broadlane/m5-d3-customer.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/m5-d3-customer.png</div></div>
             <div>
@@ -1430,7 +1430,8 @@ button{ font-family:inherit; cursor:pointer; }
     window.scrollTo({top:0, behavior:'smooth'});
     if(screens[i].dataset.screen==='debrief') renderDebrief();
     // Customer audio plays automatically the moment a page opens, no button required.
-    screens[i].querySelectorAll('[data-audio-auto]').forEach(el=>{ playAudio(el.dataset.audioAuto); });
+    const autoAudioEls = Array.from(screens[i].querySelectorAll('[data-audio-auto]'));
+    if(autoAudioEls.length) playAudioSequence(autoAudioEls.map(el=>el.dataset.audioAuto));
   }
   document.body.addEventListener('click',(e)=>{
     if(e.target.matches('[data-next]') && !e.target.disabled && current<screens.length-1) showScreen(current+1);
@@ -1458,6 +1459,25 @@ button{ font-family:inherit; cursor:pointer; }
       audio.addEventListener('ended', ()=>{ activeAudios.delete(audio); });
       audio.play().then(()=>{ activeAudios.add(audio); }).catch(()=>{ /* asset not yet attached, fail silently */ });
     }catch(e){ /* ignore */ }
+  }
+
+  // Plays a list of clips one after another (waits for each to finish before starting the
+  // next), rather than firing them all at once, since playAudio() stops whatever's already
+  // playing, multiple clips fired together would otherwise cancel all but the last.
+  function playAudioSequence(srcList){
+    stopAllAudio();
+    let idx = 0;
+    function playNext(){
+      if(idx>=srcList.length) return;
+      const src = srcList[idx++];
+      if(!src){ playNext(); return; }
+      try{
+        const audio = new Audio(src);
+        audio.addEventListener('ended', ()=>{ activeAudios.delete(audio); playNext(); });
+        audio.play().then(()=>{ activeAudios.add(audio); }).catch(()=>{ playNext(); /* asset not yet attached, skip to next */ });
+      }catch(e){ playNext(); }
+    }
+    playNext();
   }
 
   // ---------- Manual narration player: play/pause toggle, icon stays a static play glyph, resumes from wherever it was paused ----------
