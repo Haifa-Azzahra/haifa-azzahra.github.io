@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask, Listen, Adjust: The Broadlane Card Conversation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Noto+Serif:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BROADLANE COURSE v2, rebuilt against Broadlane_Project.docx
+   Brand tokens per Broadlane_BrandGuide.pdf, layout per the new
+   storyboard's photo mockups (split customer/associate scenes,
+   lettered A/B/C choices, inline check/X feedback, scored debrief).
+   ============================================================ */
+:root{
+  --navy:#1A3445;
+  --rust:#D14A34;
+  --sky:#BCDDE9;
+  --white:#FFFFFF;
+  --grey-bg:#F2F2F2;
+  --blush:#FCD9D5;
+  --cream:#F7F2EA;
+  --teal:#3E6B66;       /* design-extension accent, matches storyboard mockups' associate panels */
+  --good:#5B7F63; --good-bg:#EEF3EC;   /* muted sage, correct-answer accent */
+  --bad:#8C5A46; --bad-bg:#F5EEE9;     /* muted warm brown, restrained, same family as rust, non-alarming */
+  --shadow: 0 12px 32px rgba(26,52,69,.12);
+  --shadow-soft: 0 4px 14px rgba(26,52,69,.07);
+  --shadow-lift: 0 16px 40px rgba(26,52,69,.16);
+  --radius: 22px;      /* major containers, rounded, elevated language */
+  --radius-md: 16px;   /* secondary containers */
+  --radius-sm: 12px;   /* small elements: chips, thumbs, tags */
+  --radius-pill: 999px;
+  --font-display:'Noto Serif', serif;
+  --font-body:'Montserrat', sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{ font-family:var(--font-body); color:var(--navy); background:var(--cream); }
+h1,h2,h3{ font-family:var(--font-body); font-weight:700; letter-spacing:-.01em; margin:0 0 .5em; line-height:1.22;}
+h2{ font-size:1.7rem; }
+.serif-accent{ font-family:var(--font-display); font-weight:700; }
+p{ line-height:1.65; margin:0 0 1em; }
+button{ font-family:inherit; cursor:pointer; }
+.eyebrow{ text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; font-weight:700; color:var(--rust); display:block; margin-bottom:.5em;}
+.rule{ width:44px; height:3px; background:var(--rust); border:none; margin:6px 0 16px; }
+
+#app{ max-width:880px; margin:0 auto; padding:28px 28px 100px; }
+
+/* Top bar, brand + hamburger toggle for the course nav drawer */
+.progress-rail{
+  position:sticky; top:0; z-index:10; display:flex; align-items:center; gap:14px;
+  padding:14px 6px; margin-bottom:18px; background:linear-gradient(180deg, rgba(247,242,234,.98), rgba(247,242,234,.9));
+  backdrop-filter: blur(6px); border-bottom:1px solid rgba(26,52,69,.08);
+}
+.hamburger-btn{
+  flex:0 0 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+  width:38px; height:38px; border-radius:var(--radius-sm); background:var(--white); border:1px solid rgba(26,52,69,.12);
+  box-shadow:var(--shadow-soft); transition:background .15s ease, box-shadow .15s ease;
+}
+.hamburger-btn:hover{ background:var(--cream); }
+.hamburger-btn span{ display:block; width:16px; height:2px; border-radius:2px; background:var(--navy); }
+.rail-brand{ display:flex; align-items:center; gap:10px; white-space:nowrap; }
+.brand-logo{ display:block; flex:0 0 auto; height:26px; width:auto; }
+.brand-logo-fallback{ display:none; font-family:var(--font-body); font-weight:800; font-size:1.05rem; letter-spacing:-.01em; color:var(--navy); }
+.brand-sub{ font-weight:500; font-size:.82rem; color:var(--rust); }
+@media (max-width:560px){ .brand-sub{ display:none; } }
+.cards-counter{
+  margin-left:auto; display:flex; align-items:center; gap:8px; background:var(--white); border:1px solid rgba(26,52,69,.1);
+  border-radius:var(--radius-pill); padding:7px 14px; box-shadow:var(--shadow-soft); font-size:.76rem; font-weight:700; color:var(--navy); white-space:nowrap;
+}
+.cards-counter .count{ color:var(--rust); font-weight:800; font-size:.92rem; }
+@media (max-width:480px){ .cards-counter .label-full{ display:none; } }
+
+/* ---------- Course nav drawer, Rise-style left panel, toggled by the hamburger ---------- */
+.rail-backdrop{
+  position:fixed; inset:0; background:rgba(26,52,69,.42); opacity:0; pointer-events:none; z-index:19;
+  transition:opacity .25s ease;
+}
+.rail-backdrop.open{ opacity:1; pointer-events:auto; }
+.rail-drawer{
+  position:fixed; top:0; left:0; bottom:0; width:320px; max-width:86vw; background:var(--white); z-index:20;
+  box-shadow:var(--shadow-lift); border-radius:0 var(--radius) var(--radius) 0;
+  display:flex; flex-direction:column; transform:translateX(-100%); transition:transform .3s cubic-bezier(.22,.9,.35,1);
+}
+.rail-drawer.open{ transform:translateX(0); }
+.rail-drawer-header{
+  display:flex; align-items:center; justify-content:space-between; padding:20px 20px 16px;
+  border-bottom:1px solid rgba(26,52,69,.1); flex:0 0 auto;
+}
+.rail-drawer-title{ font-weight:800; font-size:.92rem; color:var(--navy); }
+.rail-close-btn{
+  width:30px; height:30px; border-radius:50%; background:rgba(26,52,69,.06); color:var(--navy);
+  font-size:1rem; line-height:1; border:none; display:flex; align-items:center; justify-content:center;
+}
+.rail-close-btn:hover{ background:rgba(26,52,69,.12); }
+.rail-steps{ display:flex; flex-direction:column; gap:4px; padding:14px; overflow-y:auto; }
+.rail-item{
+  display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:var(--radius-sm);
+  font-size:.86rem; font-weight:600; color:rgba(26,52,69,.4); white-space:nowrap; cursor:pointer;
+  border-left:3px solid transparent; transition:background .15s ease, color .15s ease;
+}
+.rail-item:hover{ background:rgba(26,52,69,.05); }
+.rail-marker{
+  flex:0 0 auto; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:.66rem; font-weight:800; background:rgba(26,52,69,.08); color:rgba(26,52,69,.42);
+}
+.rail-item.done{ color:var(--navy); cursor:pointer; }
+.rail-item.done .rail-marker{ background:var(--good); color:var(--white); }
+.rail-item.done:hover{ background:rgba(26,52,69,.05); }
+.rail-item.current{ color:var(--rust); font-weight:800; background:rgba(209,74,52,.08); border-left-color:var(--rust); cursor:pointer; }
+.rail-item.current .rail-marker{ background:var(--rust); color:var(--white); }
+@media (max-width:680px){
+  .rail-drawer{
+    top:auto; left:0; right:0; bottom:0; width:auto; max-width:none; max-height:75vh;
+    border-radius:var(--radius) var(--radius) 0 0; transform:translateY(100%);
+  }
+  .rail-drawer.open{ transform:translateY(0); }
+}
+
+.screen{ display:none; animation:fadeUp .4s ease; }
+.screen.active{ display:block; }
+@keyframes fadeUp{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+.card{ background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid rgba(26,52,69,.05); padding:44px 48px; margin-bottom:24px; }
+.card.on-navy{ background:var(--navy); color:var(--white); border-color:var(--navy); }
+.card.no-pad{ padding:0; overflow:hidden; }
+@media (max-width:600px){ .card{ padding:30px 22px; border-radius:var(--radius-md); } }
+
+.module-tag{
+  display:block; text-transform:uppercase; letter-spacing:.13em; font-size:.7rem; font-weight:700; color:var(--rust);
+  padding-bottom:12px; margin-bottom:26px; border-bottom:1px solid rgba(26,52,69,.12);
+}
+.module-tag .dot{ display:none; }
+
+/* ---------- Background video slots ---------- */
+.bg-video-wrap{ position:relative; width:100%; aspect-ratio:16/7; border-radius:var(--radius); overflow:hidden; margin-bottom:18px; background:var(--navy); }
+.bg-video-wrap video{ width:100%; height:100%; object-fit:cover; display:block; opacity:.85; }
+.bg-video-wrap .video-overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(26,52,69,.1), rgba(26,52,69,.78)); display:flex; align-items:flex-end; padding:22px; }
+.bg-video-wrap .video-caption{ color:var(--white); font-weight:700; font-size:1rem; }
+.bg-video-wrap .video-caption small{ display:block; font-weight:500; opacity:.85; font-size:.78rem; margin-top:4px; }
+.asset-missing-badge{ position:absolute; top:12px; right:12px; background:rgba(255,255,255,.94); color:var(--navy); font-size:.66rem; font-weight:700; padding:5px 10px; border-radius:999px; }
+
+/* ---------- Customer quote, rounded, elevated conversation moment (global card system) ---------- */
+.photo-scene{
+  display:flex; align-items:flex-start; gap:6px; background:var(--cream);
+  border-radius:var(--radius-md); box-shadow:var(--shadow-soft);
+  padding:22px 24px; margin:30px 0 32px;
+}
+.photo-scene .scene-icon{ display:none; }
+.photo-scene p{
+  font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.2rem; color:var(--navy);
+  line-height:1.5; margin:0; flex:1 1 auto; min-width:0;
+}
+.photo-scene p strong{
+  display:block; font-family:var(--font-body); font-style:normal; font-weight:700; text-transform:uppercase;
+  font-size:.68rem; letter-spacing:.12em; color:var(--rust); margin-bottom:10px;
+}
+
+/* ---------- Photo placeholder duo (customer / associate) ---------- */
+.photo-duo{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.photo-slot{
+  position:relative; border-radius:var(--radius-md); overflow:hidden; aspect-ratio:3/4; background:var(--sky);
+  display:flex; align-items:flex-end; padding:0; box-shadow:var(--shadow-soft);
+}
+.photo-slot img{ width:100%; height:100%; object-fit:cover; display:block; }
+.photo-slot .who-label{
+  position:absolute; top:10px; left:10px; background:rgba(255,255,255,.92); color:var(--navy);
+  font-size:.7rem; font-weight:800; letter-spacing:.05em; text-transform:uppercase; padding:4px 10px; border-radius:999px;
+}
+.photo-slot.customer .who-label{ color:var(--rust); }
+.photo-slot.associate .who-label{ color:var(--teal); }
+.photo-slot .missing-note{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center;
+  color:var(--navy); font-size:.72rem; font-weight:700; padding:14px; background:rgba(255,255,255,.35);
+}
+.photo-slot .quote-bubble{
+  background:rgba(255,255,255,.95); margin:10px; border-radius:10px; padding:10px 12px; font-weight:700; font-size:.85rem; font-style:italic;
+}
+
+/* ---------- Choice list, rounded, tactile answer cards (global interaction system) ---------- */
+.choice-list{ display:flex; flex-direction:column; gap:14px; margin:28px 0; }
+.choice-item{ position:relative; border-radius:var(--radius-md); overflow:visible; }
+.choice{
+  width:100%; text-align:left; display:flex; gap:16px; align-items:flex-start;
+  background:var(--cream); border:1.5px solid transparent; border-radius:var(--radius-md);
+  padding:20px 52px 20px 20px; font-size:.98rem; font-weight:400; color:var(--navy); line-height:1.55;
+  box-shadow:var(--shadow-soft);
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+}
+.choice:hover{ background:var(--white); box-shadow:var(--shadow-lift); transform:translateY(-2px); }
+.choice .badge{
+  flex:0 0 auto; width:26px; height:26px; margin-top:1px; border-radius:50%; background:var(--white); color:var(--navy);
+  border:1.4px solid var(--navy); display:flex; align-items:center; justify-content:center; font-size:.7rem; font-weight:700;
+}
+.choice.picked{ background:var(--white); border-color:var(--navy); box-shadow:0 0 0 1px var(--navy), var(--shadow-soft); transform:none; }
+.choice.picked.is-good{ border-color:var(--good); box-shadow:0 0 0 1px var(--good), var(--shadow-soft); }
+.choice.picked.is-bad{ border-color:var(--bad); box-shadow:0 0 0 1px var(--bad), var(--shadow-soft); }
+.choice.picked.is-good .badge{ background:var(--good); border-color:var(--good); color:var(--white); }
+.choice.picked.is-bad .badge{ background:var(--bad); border-color:var(--bad); color:var(--white); }
+.inline-feedback{
+  margin:8px 0 0; padding:14px 18px; border-radius:var(--radius-sm); font-size:.87rem; font-weight:500; line-height:1.6; letter-spacing:.005em;
+  display:none;
+}
+.inline-feedback.show{ display:block; animation:fadeUp .25s ease; }
+.inline-feedback.is-good{ color:var(--good); background:var(--good-bg); }
+.inline-feedback.is-bad{ color:var(--bad); background:var(--bad-bg); }
+
+/* Buttons, compact, editorial, catalogue-style CTA */
+.btn{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:var(--radius-pill); padding:15px 30px; font-weight:600; font-size:.76rem; text-transform:uppercase; letter-spacing:.09em; transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease; }
+.btn-primary{ background:var(--rust); color:var(--white); box-shadow:0 8px 20px rgba(209,74,52,.28); }
+.btn-primary:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 12px 26px rgba(209,74,52,.34); }
+.btn-primary:active:not(:disabled){ transform:translateY(0); }
+.btn-primary:disabled{ background:#e7bcb0; cursor:not-allowed; box-shadow:none; }
+.btn-ghost{ background:transparent; color:var(--navy); border:1.5px solid var(--navy); }
+.btn-ghost:hover{ background:rgba(26,52,69,.06); transform:translateY(-2px); }
+.btn:focus-visible{ outline:2px solid var(--navy); outline-offset:3px; }
+.nav-row{ display:flex; justify-content:space-between; align-items:center; margin-top:32px; gap:12px; flex-wrap:wrap; }
+
+.choice{ padding-right:20px; }
+
+/* ---------- Editorial quote / label helpers (reused across M3–M5) ---------- */
+.cust-quote{ font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.1rem; color:var(--navy); line-height:1.5; margin:14px 0 0; }
+.section-label{ font-weight:700; font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:var(--navy); opacity:.65; margin:0 0 10px; }
+
+/* ---------- Inline image placeholder (Module 1, Module 5) ---------- */
+.inline-image-slot{ position:relative; aspect-ratio:16/6; background:var(--sky); border-radius:4px; margin:14px 0 18px; overflow:hidden; }
+.inline-image-slot .missing-note{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; font-size:.72rem; font-weight:700; color:var(--navy); padding:14px; }
+
+/* ---------- Module 2, gamified checkout experience ---------- */
+.checkout-panel{
+  background:var(--cream); border-radius:var(--radius-md); box-shadow:var(--shadow-soft);
+  padding:28px 30px; margin-bottom:22px;
+}
+.register-label{
+  display:inline-block; font-weight:700; font-size:.7rem; text-transform:uppercase; letter-spacing:.09em;
+  color:var(--rust); background:rgba(209,74,52,.1); padding:6px 14px; border-radius:var(--radius-pill); margin-bottom:16px;
+}
+.product-tray{ display:flex; flex-direction:column; }
+.product-row{ display:flex; align-items:center; gap:16px; padding:14px 2px; border-bottom:1px solid rgba(26,52,69,.1); }
+.product-row:last-child{ border-bottom:none; }
+.product-thumb{
+  position:relative; flex:0 0 auto; width:52px; height:52px; border-radius:var(--radius-sm); background:var(--white); box-shadow:0 2px 8px rgba(26,52,69,.09);
+  display:flex; align-items:center; justify-content:center; font-size:.62rem; font-weight:800; letter-spacing:.06em; color:var(--navy); opacity:.4;
+  text-align:center; line-height:1.2; overflow:hidden;
+}
+.product-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+.product-thumb .thumb-fallback{ position:absolute; inset:0; display:none; align-items:center; justify-content:center; }
+.product-name{ flex:1; font-weight:600; font-size:.95rem; }
+.product-price{ flex:0 0 auto; font-weight:700; font-size:.95rem; }
+.tray-total{ display:flex; justify-content:space-between; align-items:center; padding:18px 2px 0; margin-top:10px; border-top:2px solid rgba(26,52,69,.12); }
+.tray-total .label{ font-weight:700; font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; opacity:.65; }
+.tray-total .amount{ font-weight:800; font-size:1.5rem; color:var(--rust); }
+.next-move-panel{
+  background:var(--white); border:1.5px solid rgba(26,52,69,.08); border-radius:var(--radius-md);
+  box-shadow:var(--shadow-soft); padding:26px 28px;
+}
+.next-move-label{ font-weight:700; font-size:.7rem; text-transform:uppercase; letter-spacing:.09em; color:var(--rust); margin:0 0 8px; }
+.next-move-question{ font-weight:700; font-size:1.08rem; margin:0 0 18px; color:var(--navy); }
+
+/* Tabs (Module 1, 3 tabs per mockup: Save More / How It Works / Your Benefits) */
+.tabs{ display:flex; gap:6px; margin-bottom:0; }
+.tab-btn{ background:var(--grey-bg); border:none; border-radius:10px 10px 0 0; padding:11px 16px; font-weight:700; font-size:.82rem; color:var(--navy); opacity:.55; }
+.tab-btn.active{ background:var(--cream); opacity:1; }
+.tab-panel{ display:none; background:var(--cream); border-radius:0 12px 12px 12px; padding:22px; border:1px solid var(--grey-bg); }
+.tab-panel.active{ display:block; }
+.tab-panel .step-row{ display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--grey-bg);}
+.tab-panel .step-row:last-child{ border-bottom:none; }
+.tab-panel .step-num{ flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:var(--sky); color:var(--navy); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.85rem;}
+.benefit-block{ border-radius:var(--radius-md); padding:16px 18px; margin-bottom:12px; }
+.benefit-block.tag-25{ background:var(--sky); }
+.benefit-block.tag-rewards{ background:var(--blush); }
+.benefit-block.tag-growth{ background:var(--sky); }
+.benefit-block.tag-goal{ background:var(--blush); }
+
+/* Module 3A build-a-line */
+.chip-bank{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.chip{ background:var(--sky); border:none; border-radius:999px; padding:9px 15px; font-weight:700; font-size:.8rem; }
+.chip.used{ opacity:.3; }
+.built-line{ min-height:54px; background:var(--grey-bg); border-radius:12px; padding:14px 16px; font-weight:600; font-style:italic; margin-bottom:10px; }
+
+/* Module 4, customer story two-panel */
+.story-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); margin-bottom:18px; background:var(--white);}
+.story-left{ background:var(--cream); padding:32px 30px; }
+.story-right{ background:var(--white); padding:0; border-left:1px solid rgba(26,52,69,.08); }
+.story-right .panel-head, .panel-head{
+  background:var(--rust); color:var(--white); font-weight:800; text-transform:uppercase; letter-spacing:.05em; font-size:.82rem;
+  display:flex; align-items:center; gap:10px; padding:16px 24px; border-radius:var(--radius-md);
+  box-shadow:0 8px 20px rgba(209,74,52,.22); margin-bottom:28px;
+}
+.story-right .panel-body{ padding:32px 30px; }
+.story-scenario-tag{ display:inline-block; background:var(--navy); color:var(--white); font-size:.7rem; font-weight:800; padding:7px 14px; border-radius:var(--radius-pill); margin-bottom:14px;}
+.story-photo-slot{ position:relative; border-radius:var(--radius-md); overflow:hidden; aspect-ratio:3/4; background:var(--sky); margin-bottom:14px; box-shadow:var(--shadow-soft); }
+.story-photo-slot .missing-note{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; font-size:.72rem; font-weight:700; padding:14px; }
+.customer-context{ font-size:.78rem; font-weight:600; color:var(--navy); opacity:.6; margin:12px 0 0; line-height:1.5; }
+.customer-name-bar{ background:var(--navy); color:var(--white); padding:16px 22px; display:flex; align-items:center; justify-content:space-between; }
+.story-right h2{ font-size:1.3rem; margin-bottom:20px; }
+@media (max-width:680px){ .story-grid{ grid-template-columns:1fr; } .story-right{ border-left:none; border-top:1px solid rgba(26,52,69,.08); } .photo-duo{ grid-template-columns:1fr; } }
+
+/* ---------- Module 4/5, customer scenario panel (pale-blue elevated surface) ---------- */
+.scenario-panel{
+  background:rgba(188,221,233,.34); border-radius:var(--radius-md); padding:26px 28px; margin-bottom:26px;
+}
+.scenario-grid{ display:grid; grid-template-columns:190px 1fr; gap:28px; align-items:flex-start; }
+@media (max-width:600px){
+  .scenario-grid{ grid-template-columns:1fr; }
+  .scenario-grid .story-photo-slot{ max-width:220px; margin:0 auto; }
+}
+.outcome-note{
+  display:flex; align-items:flex-start; gap:10px; margin-top:18px; background:var(--sky);
+  border-radius:var(--radius-md); padding:16px 18px; font-weight:600; box-shadow:var(--shadow-soft);
+}
+
+/* Module 5 slider */
+.slider-wrap{ margin:20px 0; }
+.slider-wrap input[type=range]{ width:100%; accent-color:var(--rust); }
+.slider-labels{ display:flex; justify-content:space-between; font-size:.78rem; font-weight:700; color:var(--navy); opacity:.7; margin-top:4px;}
+.slider-readout{ text-align:center; font-weight:800; font-size:1.05rem; margin-top:10px; color:var(--rust); }
+
+/* Debrief, THE SHIFT, scored dial (fixed for text overlap/clipping: dial verdict kept inside the
+   ring's clear space, breakdown labels wrap instead of overflowing, no forced fixed heights) */
+.dial-wrap{ display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap; }
+.dial{ position:relative; width:232px; height:232px; flex:0 0 auto; }
+.dial svg{ width:100%; height:100%; }
+.dial-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 20px; text-align:center; }
+.dial-score{ font-size:2.1rem; font-weight:800; color:var(--navy); line-height:1.1; }
+.dial-outof{ font-size:.68rem; font-weight:700; opacity:.6; text-transform:uppercase; margin-top:2px; }
+.dial-verdict{ color:var(--rust); font-weight:800; margin-top:8px; font-size:.82rem; line-height:1.35; max-width:122px; }
+.breakdown-list{ flex:1; min-width:240px; display:flex; flex-direction:column; gap:10px; }
+.breakdown-row{ position:relative; display:flex; flex-direction:column; gap:8px; padding:14px 16px; background:var(--navy); color:var(--white); border-radius:var(--radius-sm); box-shadow:var(--shadow-soft); font-size:.86rem; font-weight:700; }
+.breakdown-row .row-top{ display:flex; align-items:center; gap:12px; position:relative; z-index:1; }
+.breakdown-row .icon{ flex:0 0 auto; width:22px; text-align:center; }
+.breakdown-row .label{ flex:1 1 auto; min-width:0; line-height:1.35; }
+.breakdown-row .pct{ flex:0 0 auto; margin-left:auto; color:var(--sky); font-weight:800; padding-left:8px; }
+.breakdown-row .bar-track{ height:4px; background:rgba(255,255,255,.16); border-radius:2px; overflow:hidden; }
+.breakdown-row .bar-fill{ height:100%; width:0%; background:var(--rust); border-radius:2px; transition:width 1s cubic-bezier(.22,.9,.35,1); }
+.approach-cols{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; align-items:start; }
+.approach-col{ border-radius:var(--radius-md); padding:20px 22px; min-height:0; }
+.approach-col.good{ background:var(--good-bg); }
+.approach-col.grow{ background:var(--bad-bg); }
+.approach-col h3{ font-size:.8rem; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+.approach-col.good h3{ color:var(--good); }
+.approach-col.grow h3{ color:var(--bad); }
+.approach-col p{ font-size:.9rem; line-height:1.6; margin:0; }
+.approach-col.good p{ color:var(--good); }
+.approach-col.grow p{ color:var(--bad); }
+@media (max-width:680px){ .approach-cols{ grid-template-columns:1fr; } }
+@media (max-width:460px){ .dial-wrap{ justify-content:center; } .dial{ margin:0 auto; } }
+
+/* One Cue, interactive selection activity */
+.cue-table{ border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow); margin:18px 0; }
+.cue-table-head{ display:grid; grid-template-columns:1fr 1fr; }
+.cue-table-head div{ padding:13px 18px; font-weight:800; font-size:.78rem; text-transform:uppercase; letter-spacing:.04em; color:var(--white); }
+.cue-table-head .h1{ background:var(--rust); }
+.cue-table-head .h2{ background:var(--navy); }
+.cue-row{
+  display:grid; grid-template-columns:1fr 1fr; background:var(--white); border-bottom:1px solid var(--grey-bg);
+  cursor:pointer; border-left:3px solid transparent; transition:background .15s ease, border-color .15s ease;
+}
+.cue-row:hover{ background:rgba(26,52,69,.035); }
+.cue-row > div{ padding:16px 18px; font-size:.86rem; position:relative; }
+.cue-row .situation{ font-weight:700; }
+.cue-row .action{ font-weight:500; background:var(--cream); }
+.cue-row.selected{ border-left-color:var(--rust); }
+.cue-row.selected .situation::before{ content:'✓ '; color:var(--rust); font-weight:800; }
+.cue-row.selected .action{ background:var(--blush); }
+.cue-confirm{
+  display:none; background:var(--white); border:1px solid rgba(26,52,69,.12); border-left:3px solid var(--rust);
+  border-radius:4px; padding:22px 24px; margin-top:18px;
+}
+.cue-confirm.show{ display:block; animation:fadeUp .3s ease; }
+.cue-confirm-text{ font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.05rem; margin:0; }
+
+.helper-text{ font-size:.82rem; opacity:.7; }
+.end-scene{ text-align:center; padding:44px 20px; }
+
+/* ---------- Why This Matters, fact callout ---------- */
+.fact-callout{ display:flex; flex-direction:column; gap:14px; margin:26px 0 8px; }
+.fact-item{
+  display:flex; gap:16px; align-items:flex-start; background:var(--cream); border-radius:var(--radius-md);
+  padding:18px 20px; box-shadow:var(--shadow-soft);
+}
+.fact-item .fact-num{
+  flex:0 0 auto; width:34px; height:34px; border-radius:50%; background:var(--white); color:var(--navy);
+  border:1.5px solid var(--navy); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.9rem;
+}
+.fact-item p{ margin:0; line-height:1.6; }
+.fact-item strong{ font-weight:800; }
+.fact-item.emphasis{ background:var(--navy); box-shadow:var(--shadow); }
+.fact-item.emphasis .fact-num{ background:var(--rust); border-color:var(--rust); color:var(--white); }
+.fact-item.emphasis p{ color:var(--white); }
+
+/* ---------- Why This Matters, one cohesive story flow: headline -> stat -> bridge -> Brenda invite ---------- */
+.story-stat{
+  display:flex; align-items:flex-start; gap:22px; margin:30px 0 24px; padding-left:22px;
+  border-left:3px solid var(--rust);
+}
+.story-stat-num{
+  font-family:var(--font-display); font-weight:700; font-size:3.4rem; line-height:.85; color:var(--rust); flex:0 0 auto;
+}
+.story-stat-copy{ padding-top:6px; min-width:0; }
+.story-stat-label{
+  display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:var(--navy); opacity:.55;
+  font-weight:700; margin-bottom:6px;
+}
+.story-stat-copy p{ margin:0; line-height:1.6; }
+.story-bridge{ margin:0 0 28px; color:var(--navy); opacity:.88; line-height:1.65; }
+@media (max-width:520px){ .story-stat{ gap:14px; padding-left:16px; } .story-stat-num{ font-size:2.6rem; } }
+
+.brenda-invite{ background:var(--navy); border-radius:var(--radius-md); padding:26px 28px; box-shadow:var(--shadow); }
+.brenda-invite-text{
+  font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.06rem; color:var(--white);
+  margin:0; line-height:1.55;
+}
+.brenda-invite-action{ margin-top:22px; display:flex; justify-content:flex-end; }
+@media (max-width:520px){ .brenda-invite{ padding:22px 20px; } .brenda-invite-action{ justify-content:stretch; } .brenda-invite-action .btn{ width:100%; justify-content:center; } }
+
+/* ---------- The Shift, two-zone debrief: persistent Brenda column + dashboard content ---------- */
+.shift-debrief{ display:flex; align-items:stretch; }
+.shift-debrief-brenda{
+  flex:0 0 30%; background:var(--navy); padding:32px 26px; display:flex; flex-direction:column; gap:16px;
+}
+.shift-debrief-avatar{
+  width:100%; aspect-ratio:3/4; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-soft);
+  background:var(--sky); position:relative;
+}
+.shift-debrief-avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+.shift-debrief-avatar .missing-note{
+  position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center;
+  font-size:.62rem; font-weight:700; color:var(--navy); padding:10px; line-height:1.2; background:var(--sky);
+}
+.shift-debrief-name{ font-weight:800; font-size:1.05rem; color:var(--white); }
+.shift-debrief-role{ font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--rust); margin-top:3px; }
+.shift-debrief-quote{
+  font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1rem; color:var(--white);
+  opacity:.92; line-height:1.58; margin:2px 0 0; padding-top:14px; border-top:1px solid rgba(255,255,255,.14);
+}
+.shift-debrief-content{ flex:1 1 auto; min-width:0; padding:32px 34px; }
+.shift-debrief-head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:22px; }
+.shift-debrief-content .dial{ width:184px; height:184px; }
+.shift-debrief-content .dial-wrap{ gap:20px; }
+@media (max-width:760px){
+  .shift-debrief{ flex-direction:column; }
+  .shift-debrief-brenda{ flex:0 0 auto; flex-direction:row; align-items:center; padding:22px 20px; }
+  .shift-debrief-avatar{ width:74px; aspect-ratio:1/1; border-radius:50%; flex:0 0 auto; }
+  .shift-debrief-quote{ border-top:none; padding-top:0; font-size:.9rem; }
+  .shift-debrief-content{ padding:26px 22px; }
+}
+
+/* ---------- Mentor banner, reusable Brenda intro strip (Your One Cue) ---------- */
+.status-pill{
+  display:inline-flex; align-items:center; gap:7px; background:var(--blush); color:var(--rust); font-size:.72rem;
+  font-weight:700; padding:7px 15px; border-radius:var(--radius-pill); white-space:nowrap; flex:0 0 auto;
+}
+.status-pill .dot{ width:6px; height:6px; border-radius:50%; background:var(--rust); }
+.mentor-banner{
+  display:flex; align-items:center; gap:20px; background:linear-gradient(90deg, var(--cream), rgba(247,242,234,.35));
+  border-left:4px solid var(--rust); border-radius:var(--radius-md); padding:20px 26px; margin:24px 0 4px;
+  box-shadow:var(--shadow-soft);
+}
+.mentor-banner .avatar-wrap{ position:relative; flex:0 0 auto; width:72px; height:72px; }
+.mentor-banner .avatar-wrap img{ width:100%; height:100%; border-radius:50%; object-fit:cover; display:block; box-shadow:var(--shadow-soft); }
+.mentor-banner .avatar-wrap .missing-note{
+  position:absolute; inset:0; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  text-align:center; font-size:.48rem; font-weight:700; color:var(--navy); background:var(--sky); padding:4px; line-height:1.15;
+}
+.mentor-banner .manager-badge{
+  position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); background:var(--rust); color:var(--white);
+  font-size:.55rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; padding:3px 10px;
+  border-radius:var(--radius-pill); white-space:nowrap; box-shadow:0 2px 6px rgba(209,74,52,.35);
+}
+.mentor-banner .banner-body{ min-width:0; flex:1 1 auto; }
+.mentor-banner .banner-name{ font-weight:800; font-size:.92rem; color:var(--navy); }
+.mentor-banner .banner-name span{ font-weight:600; opacity:.6; font-size:.78rem; margin-left:6px; }
+.mentor-banner .banner-quote{
+  font-family:var(--font-display); font-style:italic; font-weight:600; font-size:1.05rem; color:var(--navy);
+  margin:6px 0 0; line-height:1.55;
+}
+@media (max-width:560px){ .mentor-banner{ flex-direction:column; align-items:flex-start; text-align:left; gap:14px; } }
+
+/* ---------- Briefing with Brenda: persistent portrait column + briefing column ---------- */
+/* Colors/type scoped to this screen only, per the "screen-specific" brief; rest of the course keeps its palette. */
+.brenda-chat-card{
+  --b-navy:#0D2238; --b-coral:#E53935; --b-beige:#F5EEE4; --b-gray:#E4E8E8;
+  display:flex; align-items:stretch;
+}
+.brenda-chat-presence{
+  flex:0 0 40%; background:var(--b-navy); padding:0; display:flex; flex-direction:column; min-width:0;
+}
+.brenda-chat-portrait{
+  position:relative; width:100%; flex:1 1 auto; min-height:280px; overflow:hidden; background:var(--sky);
+}
+.brenda-chat-portrait img{ width:100%; height:100%; object-fit:cover; display:block; }
+.brenda-chat-portrait .missing-note{
+  position:absolute; inset:0; display:none; align-items:center; justify-content:center; text-align:center;
+  font-family:var(--font-body); font-size:.6rem; font-weight:700; color:var(--b-navy); padding:10px; line-height:1.2; background:var(--sky);
+}
+.brenda-chat-presence-body{ flex:0 0 auto; padding:22px 26px 28px; }
+.brenda-chat-presence-name{
+  font-family:var(--font-body); font-weight:700; text-transform:uppercase; letter-spacing:.03em; font-size:1.08rem; color:var(--white);
+}
+.brenda-chat-presence-role{
+  font-family:var(--font-body); font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--b-coral); margin-top:4px;
+}
+.brenda-chat-presence-line{
+  font-family:var(--font-body); font-weight:400; font-size:.84rem; color:var(--white); opacity:.75; line-height:1.55; margin:16px 0 0;
+  padding-top:16px; border-top:1px solid rgba(255,255,255,.16);
+}
+/* ---- Briefing column: eyebrow + intro box, a single cohesive list, Brenda's sign-off with narration, a button ---- */
+.brenda-briefing{ flex:1 1 auto; min-width:0; display:flex; flex-direction:column; padding:38px 40px 32px; }
+.briefing-eyebrow{
+  font-family:var(--font-body); font-weight:700; text-transform:uppercase; letter-spacing:.13em; font-size:.7rem; color:var(--b-coral);
+  display:block; margin-bottom:10px;
+}
+.briefing-intro-box{ background:var(--b-beige); border-radius:var(--radius-md); padding:20px 24px; }
+.briefing-intro{
+  font-family:var(--font-display); font-weight:600; color:var(--b-navy); font-size:1.18rem; line-height:1.45; margin:0;
+}
+.briefing-list{ display:flex; flex-direction:column; margin-top:26px; }
+.briefing-item{
+  display:flex; align-items:center; gap:18px; padding:20px 2px;
+  border-top:1px solid var(--b-gray);
+}
+.briefing-item:first-child{ border-top:none; padding-top:8px; }
+.briefing-num{
+  flex:0 0 auto; width:30px; font-family:var(--font-display); font-weight:700; font-size:1.15rem; color:var(--b-coral);
+}
+.briefing-body{ flex:1 1 auto; min-width:0; }
+.briefing-heading{
+  font-family:var(--font-body); font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:.82rem; color:var(--b-navy); margin:0 0 4px;
+}
+.briefing-sub{ font-family:var(--font-body); font-weight:400; font-size:.92rem; color:var(--b-navy); opacity:.66; line-height:1.5; margin:0; }
+.briefing-icon-circle{
+  flex:0 0 auto; width:40px; height:40px; border-radius:50%; background:var(--b-beige);
+  display:flex; align-items:center; justify-content:center;
+}
+.briefing-icon-circle svg{ width:18px; height:18px; color:var(--b-navy); opacity:.8; }
+/* ---- Sign-off: a plain callout, styled like the intro box, stacked above Continue ---- */
+.briefing-close-box{
+  background:var(--b-beige); border-radius:var(--radius-md); padding:18px 22px; margin-top:28px;
+}
+.briefing-close-msg{
+  margin:0; font-family:var(--font-display); font-weight:600; font-size:.96rem; color:var(--b-navy); line-height:1.5;
+}
+.briefing-footer-v2{ margin-top:20px; display:flex; justify-content:flex-end; }
+.briefing-audio-top{ margin-bottom:22px; }
+.briefing-audio{
+  flex:0 0 auto; display:flex; align-items:center; gap:9px; background:var(--b-beige); border-radius:var(--radius-pill);
+  padding:5px 16px 5px 5px;
+}
+.briefing-audio-btn{
+  flex:0 0 auto; width:30px; height:30px; border-radius:50%; background:var(--b-coral); color:var(--white);
+  display:flex; align-items:center; justify-content:center; border:none; padding:0; transition:transform .15s ease;
+}
+.briefing-audio-btn:hover{ transform:scale(1.06); }
+.briefing-audio-btn svg{ width:12px; height:12px; }
+.briefing-audio-btn .icon-play{ margin-left:1px; }
+.briefing-audio-label{
+  font-family:var(--font-body); font-weight:700; font-size:.66rem; text-transform:uppercase; letter-spacing:.06em; color:var(--b-navy);
+  opacity:.68; white-space:nowrap;
+}
+.briefing-continue-btn{
+  flex:0 0 auto; background:var(--b-coral); box-shadow:0 8px 20px rgba(229,57,53,.28);
+}
+@media (max-width:760px){
+  .brenda-chat-card{ flex-direction:column; }
+  .brenda-chat-presence{ flex:0 0 auto; flex-direction:row; align-items:center; padding:20px; gap:16px; }
+  .brenda-chat-portrait{ width:72px; height:72px; min-height:0; flex:0 0 auto; border-radius:50%; }
+  .brenda-chat-presence-body{ padding:0; }
+  .brenda-chat-presence-line{ display:none; }
+  .brenda-briefing{ padding:26px 22px 24px; }
+}
+
+/* ---------- Debrief closing quote, speaker attribution ---------- */
+
+</style>
+</head>
+<body>
+<div id="app">
+  <nav class="progress-rail">
+    <button class="hamburger-btn" id="railToggle" aria-label="Open course menu" aria-expanded="false" aria-controls="railDrawer">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="rail-brand">
+      <img class="brand-logo" src="assets/broadlane/broadlane-logo.png" alt="Broadlane" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="brand-logo-fallback">BROADLANE</span>
+      <span class="brand-sub">&middot; Ask, Listen, Adjust</span>
+    </div>
+    <div class="cards-counter" aria-live="polite">
+      <span class="count" id="cardsCounter">0/0</span>
+      <span class="label-full">on-target reads today</span>
+    </div>
+  </nav>
+  <div class="rail-backdrop" id="railBackdrop"></div>
+  <aside class="rail-drawer" id="railDrawer" aria-hidden="true">
+    <div class="rail-drawer-header">
+      <span class="rail-drawer-title">Course Menu</span>
+      <button class="rail-close-btn" id="railClose" aria-label="Close menu">&times;</button>
+    </div>
+    <div class="rail-steps" id="railSteps"></div>
+  </aside>
+  <div id="screens">
+
+    <!-- ===== WELCOME ===== -->
+    <section class="screen" data-screen="welcome">
+      <div class="bg-video-wrap">
+        <!-- VIDEO SLOT: welcome-hero.mp4, the register right before opening, quiet/warm morning light -->
+        <video autoplay muted loop playsinline><source src="assets/broadlane/welcome-hero.mp4" type="video/mp4"></video>
+        <span class="asset-missing-badge">Add: assets/broadlane/welcome-hero.mp4</span>
+        <div class="video-overlay"><div class="video-caption">The register, right before opening. Quiet, ready, welcoming.</div></div>
+      </div>
+      <div class="card">
+        <span class="eyebrow">A Broadlane Associate Course</span>
+        <h1 class="serif-accent" style="font-size:2rem;">Ask, Listen, Adjust</h1>
+        <h2 style="font-size:1.05rem; font-weight:600; color:var(--rust); margin-bottom:14px;">The Broadlane Card Conversation</h2>
+        <p>This is a short course designed to equip you with the skills to confidently pitch the Broadlane Preferred Card, meet daily targets, and build customer trust as Broadlane continues to grow.</p>
+        <p class="helper-text">Takes about 15–20 minutes. Your choices along the way shape a short debrief at the end.</p>
+        <div class="nav-row" style="justify-content:flex-end;"><button class="btn btn-primary" data-next>Start the shift →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="welcome-context">
+      <div class="card">
+        <span class="eyebrow">Why This Matters</span>
+        <h2>Every card is a small decision with a bigger ripple.</h2>
+        <div class="story-stat">
+          <span class="story-stat-num">24</span>
+          <div class="story-stat-copy">
+            <span class="story-stat-label">New stores opening this year</span>
+            <p>Broadlane is opening two dozen new stores this year, at a time when many major retail names are struggling.</p>
+          </div>
+        </div>
+        <p class="story-bridge">That kind of growth depends on customers having reasons to come back. The Preferred Card is one of the ways Broadlane builds that relationship, value today, and a reason to keep shopping with us. That's where you come in.</p>
+        <div class="brenda-invite">
+          <p class="brenda-invite-text">Before you hit the floor, let's talk about what this means for your shift.</p>
+        </div>
+        <div class="brenda-invite-action"><button class="btn btn-primary" data-next>Continue →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== BRIEFING WITH BRENDA ===== -->
+    <section class="screen" data-screen="welcome-brenda-chat">
+      <div class="module-tag"><span class="dot"></span>Why This Matters · Briefing with Brenda</div>
+      <div class="card no-pad brenda-chat-card">
+        <div class="brenda-chat-presence">
+          <div class="brenda-chat-portrait">
+            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
+          </div>
+          <div class="brenda-chat-presence-body">
+            <div class="brenda-chat-presence-name">Brenda</div>
+            <div class="brenda-chat-presence-role">Assistant Manager</div>
+            <p class="brenda-chat-presence-line">Here to help you connect Broadlane's goals to your role.</p>
+          </div>
+        </div>
+        <div class="brenda-briefing">
+          <div class="briefing-audio briefing-audio-top" data-audio-player data-audio-src="assets/broadlane/welcome-brenda-briefing.mp3">
+            <button type="button" class="briefing-audio-btn" data-audio-toggle aria-label="Play audio" aria-pressed="false">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </button>
+            <span class="briefing-audio-label">Play audio</span>
+          </div>
+          <span class="briefing-eyebrow">Before You Hit The Floor</span>
+          <div class="briefing-intro-box">
+            <p class="briefing-intro">Here's what I want you to keep in mind before you hit the floor.</p>
+          </div>
+          <div class="briefing-list">
+            <div class="briefing-item">
+              <span class="briefing-num">01</span>
+              <div class="briefing-body">
+                <p class="briefing-heading">The Target</p>
+                <p class="briefing-sub">Five Preferred Cards per shift.</p>
+              </div>
+              <span class="briefing-icon-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/></svg>
+              </span>
+            </div>
+            <div class="briefing-item">
+              <span class="briefing-num">02</span>
+              <div class="briefing-body">
+                <p class="briefing-heading">The Approach</p>
+                <p class="briefing-sub">That doesn't mean asking every customer.</p>
+              </div>
+              <span class="briefing-icon-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16M4 12h10M4 18h13"/></svg>
+              </span>
+            </div>
+            <div class="briefing-item">
+              <span class="briefing-num">03</span>
+              <div class="briefing-body">
+                <p class="briefing-heading">The Skill</p>
+                <p class="briefing-sub">It's about noticing when the conversation makes sense — and knowing what to say.</p>
+              </div>
+              <span class="briefing-icon-circle" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 12s3.8-6.5 10-6.5S22 12 22 12s-3.8 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+              </span>
+            </div>
+          </div>
+          <div class="briefing-close-box">
+            <p class="briefing-close-msg">You'll get to try this yourself in a minute. Let's see how you'd handle it.</p>
+          </div>
+          <div class="briefing-footer-v2">
+            <button class="btn btn-primary briefing-continue-btn" data-next>Continue →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MODULE 1, KNOW THE CARD ===== -->
+    <section class="screen" data-screen="m1-intro">
+      <div class="module-tag"><span class="dot"></span>Module 1 · Know the Card</div>
+      <div class="card">
+        <h2>Before you can talk about it, know it.</h2>
+        <p>A customer's about to ask you something about the card. Let's make sure you've got warm, simple answers ready.</p>
+        <div class="photo-scene" data-audio-auto="assets/broadlane/m1-intro-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Oh, what's this card you guys have?"</p></div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>See the card details →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m1-tabs">
+      <div class="module-tag"><span class="dot"></span>Module 1 · Know the Card</div>
+      <div class="card no-pad" style="padding:28px 26px;">
+        <h2>The Broadlane Preferred Card</h2>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="save">Save More</button>
+          <button class="tab-btn" data-tab="works">How It Works</button>
+          <button class="tab-btn" data-tab="benefits">Your Benefits</button>
+        </div>
+        <div class="tab-panel active" data-tab-panel="save">
+          <span class="eyebrow">Broadlane Preferred Card</span>
+          <h2 class="serif-accent" style="font-size:1.4rem;">Save More on Every Visit</h2>
+          <div class="inline-image-slot">
+            <div class="missing-note">ADD IMAGE<br>assets/broadlane/m1-save-more.png<br><small>Preferred Card product shot or lifestyle image</small></div>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab-panel="works">
+          <div class="eyebrow" style="margin-bottom:14px;">02 How It Works</div>
+          <div class="step-row"><div class="step-num">01</div><div><strong>Open</strong><p style="margin:2px 0 0;">Sign up for your Broadlane Preferred Card in-store or online. It's quick and easy.</p></div></div>
+          <div class="step-row"><div class="step-num">02</div><div><strong>Shop</strong><p style="margin:2px 0 0;">Use your card every time you shop at Broadlane.</p></div></div>
+          <div class="step-row"><div class="step-num">03</div><div><strong>Earn &amp; Redeem</strong><p style="margin:2px 0 0;">Earn points and coupons with every purchase and redeem for rewards that give you more.</p></div></div>
+        </div>
+        <div class="tab-panel" data-tab-panel="benefits">
+          <div class="eyebrow" style="margin-bottom:14px;">03 Your Benefits</div>
+          <div class="benefit-block tag-25"><strong>$25 Off Today</strong><p style="margin:4px 0 0;">Open a Preferred Card today and take $25 off what's in your basket right now.</p></div>
+          <div class="benefit-block tag-rewards"><strong>Rewards That Keep Giving</strong><p style="margin:4px 0 0;">Every time you shop with us after that, you'll be earning coupons and points that turn into cash back, a little something extra for the moments ahead.</p></div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Got it →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m1-quiz">
+      <div class="module-tag"><span class="dot"></span>Module 1 · Quick Check</div>
+      <div class="card">
+        <h2>Quick check</h2>
+        <div class="photo-scene" data-audio-auto="assets/broadlane/m1-quiz-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Does the $25 off apply next time I shop too?"</p></div>
+        <div class="choice-list" data-single-select="m1-quiz" data-category="pitch" data-scored="true">
+          <div class="choice-item">
+            <button class="choice" data-value="today-only" data-good="true"><span class="badge">A</span><span>"The $25 is just for today. After that, it's all about the rewards program building up."</span></button>
+            <div class="inline-feedback" data-feedback-for="today-only"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="every-time" data-good="false"><span class="badge">B</span><span>"Yep, every time you shop!"</span></button>
+            <div class="inline-feedback" data-feedback-for="every-time"></div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m1-quiz">Continue to the floor →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== MODULE 2, BUILD THE BASKET ===== -->
+    <section class="screen" data-screen="m2-intro">
+      <div class="module-tag"><span class="dot"></span>Module 2 · Build the Basket</div>
+      <div class="bg-video-wrap">
+        <!-- VIDEO SLOT: module2-checkout-lane.mp4, items crossing a checkout belt, close-up hands, natural light -->
+        <video autoplay muted loop playsinline><source src="assets/broadlane/module2-checkout-lane.mp4" type="video/mp4"></video>
+        <span class="asset-missing-badge">Add: assets/broadlane/module2-checkout-lane.mp4</span>
+        <div class="video-overlay"><div class="video-caption">Before you say a word about the card, look at what's in the basket.</div></div>
+      </div>
+      <div class="card">
+        <h2>Read the basket first.</h2>
+        <p>Not every purchase is a card moment. Let's build three baskets and decide, each time, whether it's worth mentioning at all.</p>
+        <div class="benefit-block tag-25"><strong>What to look for</strong><p style="margin:4px 0 0;">Large purchases, jewelry, and other high-dollar items are the clearest signals, they're where that $25 off makes a real difference the customer will notice. A handful of small, inexpensive items usually isn't worth the friction of asking.</p></div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Ring up the first customer →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m2-b1">
+      <div class="module-tag"><span class="dot"></span>Module 2 · Basket 1</div>
+      <div class="card">
+        <div class="checkout-panel">
+          <div class="register-label">At the Register, Basket 1</div>
+          <div class="product-tray" id="m2b1-tray"></div>
+          <div class="tray-total"><span class="label">Total</span><span class="amount" id="m2b1-total">$0</span></div>
+        </div>
+        <div class="next-move-panel">
+          <div class="next-move-label">Your Next Move</div>
+          <p class="next-move-question">Would you mention the Preferred Card here?</p>
+          <div class="choice-list" data-single-select="m2b1-call" data-category="cues" data-scored="true" id="m2b1-choices">
+            <div class="choice-item">
+              <button class="choice" data-value="yes" data-good="false"><span class="badge">A</span><span>Yes, mention the card</span></button>
+              <div class="inline-feedback" data-feedback-for="yes"></div>
+            </div>
+            <div class="choice-item">
+              <button class="choice" data-value="not-yet" data-good="true"><span class="badge">B</span><span>Not yet, this basket doesn't warrant it</span></button>
+              <div class="inline-feedback" data-feedback-for="not-yet"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m2b1-call">Next customer →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m2-b2">
+      <div class="module-tag"><span class="dot"></span>Module 2 · Basket 2</div>
+      <div class="card">
+        <div class="checkout-panel">
+          <div class="register-label">At the Register, Basket 2</div>
+          <div class="product-tray" id="m2b2-tray"></div>
+          <div class="tray-total"><span class="label">Total</span><span class="amount" id="m2b2-total">$0</span></div>
+        </div>
+        <div class="next-move-panel">
+          <div class="next-move-label">Your Next Move</div>
+          <p class="next-move-question">Would you mention the Preferred Card here?</p>
+          <div class="choice-list" data-single-select="m2b2-call" data-category="cues" data-scored="true" id="m2b2-choices">
+            <div class="choice-item">
+              <button class="choice" data-value="yes" data-good="true"><span class="badge">A</span><span>Yes, this is a good moment to mention it</span></button>
+              <div class="inline-feedback" data-feedback-for="yes"></div>
+            </div>
+            <div class="choice-item">
+              <button class="choice" data-value="not-yet" data-good="false"><span class="badge">B</span><span>Not yet</span></button>
+              <div class="inline-feedback" data-feedback-for="not-yet"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m2b2-call">Next customer →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m2-b3">
+      <div class="module-tag"><span class="dot"></span>Module 2 · Basket 3</div>
+      <div class="card">
+        <div class="checkout-panel">
+          <div class="register-label">At the Register, Basket 3</div>
+          <div class="product-tray" id="m2b3-tray"></div>
+          <div class="tray-total"><span class="label">Total</span><span class="amount" id="m2b3-total">$0</span></div>
+        </div>
+        <div class="next-move-panel">
+          <div class="next-move-label">Your Next Move</div>
+          <p class="next-move-question">Would you mention the Preferred Card here?</p>
+          <div class="choice-list" data-single-select="m2b3-call" data-category="cues" data-scored="true" id="m2b3-choices">
+            <div class="choice-item">
+              <button class="choice" data-value="yes" data-good="true"><span class="badge">A</span><span>Yes, this is a good moment to mention it</span></button>
+              <div class="inline-feedback" data-feedback-for="yes"></div>
+            </div>
+            <div class="choice-item">
+              <button class="choice" data-value="not-yet" data-good="false"><span class="badge">B</span><span>Not yet</span></button>
+              <div class="inline-feedback" data-feedback-for="not-yet"></div>
+            </div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m2b3-call">On to your pitch →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== MODULE 3, POSITION THE CARD ===== -->
+    <section class="screen" data-screen="m3-intro">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Position the Card</div>
+      <div class="card">
+        <h2>Two skills here: saying it well, and knowing how much to say.</h2>
+        <p>This module is two short parts, <strong>Part A: Craft the Line</strong> and <strong>Part B: Read the Moment</strong>.</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Start Part A →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m3a-compare">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part A, Craft the Line</div>
+      <div class="card">
+        <h2>A customer's holding a $65 coat. Which line lands better?</h2>
+        <div class="choice-list" data-single-select="m3a-compare" data-category="pitch" data-scored="true">
+          <div class="choice-item">
+            <button class="choice" data-value="generic" data-good="false"><span class="badge">A</span><span>"You'd save $25 today if you opened a Preferred Card, want me to pull that up?"</span></button>
+            <div class="inline-feedback" data-feedback-for="generic"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="tailored" data-good="true"><span class="badge">B</span><span>"That coat's $65, with the Preferred Card, it comes down to $40 today. You'll get rewards down the road too. Want me to grab one for you?"</span></button>
+            <div class="inline-feedback" data-feedback-for="tailored"></div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m3a-compare">Try building your own →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m3a-build">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part A, Craft the Line</div>
+      <div class="card">
+        <h2>New basket: a $40 pair of boots. Build your own tailored line.</h2>
+        <p class="helper-text">Tap phrases in order, aim for something specific to this item, not generic.</p>
+        <div class="built-line" id="m3a-built">Tap phrases below to start building your line…</div>
+        <div class="chip-bank" id="m3a-chips">
+          <button class="chip" data-chip="I love those boots, by the way, ">I love those boots, by the way,</button>
+          <button class="chip" data-chip="that'd bring your total to $15 today with the Card. ">that'd bring your total to $15 today with the Card.</button>
+          <button class="chip" data-chip="And you'd start earning cash back for next time too. ">And you'd start earning cash back for next time too.</button>
+          <button class="chip" data-chip="Want me to set that up? Only takes a minute.">Want me to set that up? Only takes a minute.</button>
+        </div>
+        <button class="btn btn-ghost" id="m3a-reset" style="margin-top:6px;">Start over</button>
+        <p style="margin-top:16px;">Notice how each phrase ties back to <em>this</em> item and <em>this</em> total, that specificity is what makes it land.</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>On to Part B →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m3b-intro">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Read the Moment</div>
+      <div class="card">
+        <h2>Same good line. Different customers.</h2>
+        <p>How much you say should match what the customer is telling you right now, not the price tag. Three quick reads:</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Read the first customer →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m3b-1">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 1</div>
+      <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
+        <div class="story-left">
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b1-customer.png</div></div>
+          <p class="customer-context">Browsing the card display, curious</p>
+          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-1-customer.mp3">"So how does this card work, and what do I get with it?"</p>
+        </div>
+        <div class="story-right">
+          <div class="panel-body">
+            <h2>How much do you say?</h2>
+            <div class="choice-list" data-single-select="m3b-1" data-category="cues" data-scored="true">
+              <div class="choice-item">
+                <button class="choice" data-value="a" data-good="false"><span class="badge">A</span><span>"You'll get discounts. It's really worth it!"</span></button>
+                <div class="inline-feedback" data-feedback-for="a"></div>
+              </div>
+              <div class="choice-item">
+                <button class="choice" data-value="b" data-good="true"><span class="badge">B</span><span>"You'd save $25 today, and get rewards on future purchases."</span></button>
+                <div class="inline-feedback" data-feedback-for="b"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m3b-1">Next customer →</button></div>
+    </section>
+
+    <section class="screen" data-screen="m3b-2">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 2</div>
+      <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
+        <div class="story-left">
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b2-customer.png</div></div>
+          <p class="customer-context">Checking phone, glancing at the door</p>
+          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-2-customer.mp3">"Sorry, I'm in a bit of a hurry."</p>
+        </div>
+        <div class="story-right">
+          <div class="panel-body">
+            <h2>How much do you say?</h2>
+            <div class="choice-list" data-single-select="m3b-2" data-category="cues" data-scored="true">
+              <div class="choice-item">
+                <button class="choice" data-value="a" data-good="true"><span class="badge">A</span><span>"No worries. Let's get you checked out."</span></button>
+                <div class="inline-feedback" data-feedback-for="a"></div>
+              </div>
+              <div class="choice-item">
+                <button class="choice" data-value="b" data-good="false"><span class="badge">B</span><span>"No worries. You'd save $25 today with the Preferred Card. It only takes a minute to apply…"</span></button>
+                <div class="inline-feedback" data-feedback-for="b"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m3b-2">Last customer →</button></div>
+    </section>
+
+    <section class="screen" data-screen="m3b-3">
+      <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 3</div>
+      <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
+        <div class="story-left">
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b3-customer.png</div></div>
+          <p class="customer-context">Holding a competitor's store card, says little</p>
+          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-3-customer.mp3">"I already have a card. I'm good."</p>
+        </div>
+        <div class="story-right">
+          <div class="panel-body">
+            <h2>How much do you say?</h2>
+            <div class="choice-list" data-single-select="m3b-3" data-category="cues" data-scored="true">
+              <div class="choice-item">
+                <button class="choice" data-value="a" data-good="true"><span class="badge">A</span><span>"Totally fair. Just so you know, ours would save you $25 today."</span></button>
+                <div class="inline-feedback" data-feedback-for="a"></div>
+              </div>
+              <div class="choice-item">
+                <button class="choice" data-value="b" data-good="false"><span class="badge">B</span><span>"That's great! With the Preferred Card, you'd save $25 today and start earning coupons and points toward cash back on future purchases. Would you like me to tell you more?"</span></button>
+                <div class="inline-feedback" data-feedback-for="b"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m3b-3">On to handling pushback →</button></div>
+    </section>
+
+    <!-- ===== MODULE 4, HANDLE THE PUSHBACK ===== -->
+    <section class="screen" data-screen="m4-intro">
+      <div class="module-tag"><span class="dot"></span>Module 4 · Handle the Pushback</div>
+      <div class="card">
+        <h2>Not every "no" means the same thing.</h2>
+        <p>A customer might be worried about the value, unsure they need another card, pressed for time, or simply unsure they can trust what they're hearing.</p>
+        <p>Listen for what's behind the pushback, then respond to that concern.</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Ella, 1st Customer →</button></div>
+      </div>
+    </section>
+
+    <!-- Module 4 vignette screens (Ella, Michelle, Randy, Will, Dana) are generated dynamically below by JS,
+         each becomes a two-screen sequence: Screen 1 (the customer + intro pitch) and Screen 2 (handle the pushback) -->
+
+    <!-- ===== MODULE 5, THE DECISION CHAIN ===== -->
+    <section class="screen" data-screen="m5-intro">
+      <div class="module-tag"><span class="dot"></span>Module 5 · The Decision Chain</div>
+      <div class="bg-video-wrap">
+        <!-- VIDEO SLOT: module5-branching.mp4, one continuous checkout interaction, coat purchase, calm/natural -->
+        <video autoplay muted loop playsinline><source src="assets/broadlane/module5-branching.mp4" type="video/mp4"></video>
+        <span class="asset-missing-badge">Add: assets/broadlane/module5-branching.mp4</span>
+        <div class="video-overlay"><div class="video-caption">One customer. Three decisions that build on each other.</div></div>
+      </div>
+      <div class="card">
+        <h2>Everything so far, in one conversation</h2>
+        <p>A customer's buying a $120 coat. Your choices here carry forward, there's no reset between decisions.</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Decision 1 →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m5-d1">
+      <div class="module-tag"><span class="dot"></span>Module 5 · Decision 1, Understand the Cues</div>
+      <div class="card">
+        <div class="photo-scene"><div class="scene-icon">🧍</div>
+          <p style="margin:0;">The customer walks up calmly, sets down the $120 coat, and pulls out their phone while waiting. Asked how they're doing, they give a polite, neutral smile: <em>"Good, thanks. Just this coat today."</em> No rush, no complaints about price, no questions about the register signs.</p>
+        </div>
+        <h2 style="font-size:1.05rem;">How open does this customer seem to a card mention?</h2>
+        <div class="slider-wrap">
+          <input type="range" min="0" max="100" value="50" id="m5-slider">
+          <div class="slider-labels"><span>Closed off</span><span>Neutral</span><span>Wide open</span></div>
+        </div>
+        <p class="slider-readout" id="m5-slider-readout">Neutral, worth a brief, well-placed mention</p>
+        <p class="helper-text">There's no single right spot here, this is a read, not a test. Most associates land somewhere in the "neutral, worth a low-key mention" zone for a customer like this.</p>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next>Decision 2 →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m5-d2">
+      <div class="module-tag"><span class="dot"></span>Module 5 · Decision 2, Your Pitch</div>
+      <div class="card">
+        <h2>How do you introduce the Preferred Card?</h2>
+        <div class="choice-list" data-single-select="m5-d2" data-category="pitch" data-scored="true">
+          <div class="choice-item">
+            <button class="choice" data-value="a" data-good="false"><span class="badge">A</span><span>"By the way, if you open a Preferred Card today, that coat drops from $120 down to $95 right now."</span></button>
+            <div class="inline-feedback" data-feedback-for="a"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="b" data-good="true"><span class="badge">B</span><span>"Just a heads up while I'm getting this scanned, if you don't already have our Preferred Card, I can easily apply that $25 welcome savings to this coat today if you'd like to check it out."</span></button>
+            <div class="inline-feedback" data-feedback-for="b"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="c" data-good="false"><span class="badge">C</span><span>"Are you finding everything okay? Since you're grabbing that coat, I have to let you know about our rewards program so you don't miss out on cash back."</span></button>
+            <div class="inline-feedback" data-feedback-for="c"></div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m5-d2">Decision 3 →</button></div>
+      </div>
+    </section>
+
+    <section class="screen" data-screen="m5-d3">
+      <div class="module-tag"><span class="dot"></span>Module 5 · Decision 3, Handling Pushback</div>
+      <div class="card">
+        <div class="scenario-panel">
+          <div class="scenario-grid">
+            <div class="story-photo-slot" style="aspect-ratio:3/4;"><div class="missing-note">ADD PHOTO<br>assets/broadlane/m5-d3-customer.png</div></div>
+            <div>
+              <p class="customer-context">Customer pausing, phone in hand, weighing it over</p>
+              <p class="cust-quote" data-audio-auto="assets/broadlane/m5-d3-customer.mp3">The customer gives a non-committal shrug: "I mean, I guess. Is it one of those things where it takes forever to sign up and ruins my credit score?"</p>
+            </div>
+          </div>
+        </div>
+        <p class="section-label">HOW DO YOU KEEP THE MOMENTUM GOING WITHOUT BEING PUSHY?</p>
+        <div class="choice-list" data-single-select="m5-d3" data-category="pushback" data-opens-card="true" data-scored="true">
+          <div class="choice-item">
+            <button class="choice" data-value="a" data-good="true"><span class="badge">A</span><span>"Not at all! It takes a minute or two, and we use a soft credit check to see if you qualify, so it won't impact your credit score just to look at that $25 savings."</span></button>
+            <div class="inline-feedback" data-feedback-for="a"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="b" data-good="false"><span class="badge">B</span><span>"Just tap 'yes' on the screen here and we'll get your $25 off right away."</span></button>
+            <div class="inline-feedback" data-feedback-for="b"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="c" data-good="false"><span class="badge">C</span><span>"Oh, it's really quick, nothing to worry about. Do you want to try it or should I just ring up the regular total?"</span></button>
+            <div class="inline-feedback" data-feedback-for="c"></div>
+          </div>
+        </div>
+        <div class="outcome-note" id="m5d3-outcome" style="display:none;" data-audio-onreveal="assets/broadlane/m5-d3-outcome.mp3">
+          <span>The customer gives a small nod, looks back at the register screen: <em>"Alright, if it's just a soft check, let's see if I qualify so I can grab that discount."</em></span>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m5-d3">Bonus Round →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== BONUS, DELIVERING A DECLINE ===== -->
+    <section class="screen" data-screen="bonus">
+      <div class="module-tag"><span class="dot"></span>Bonus · Delivering a Decline</div>
+      <div class="card">
+        <h2>The application came back declined</h2>
+        <p>No speculation on why. Just keep the moment easy for the customer.</p>
+        <div class="choice-list" data-single-select="bonus" data-category="decline" data-scored="true">
+          <div class="choice-item">
+            <button class="choice" data-value="a" data-good="true"><span class="badge">A</span><span>"No worries at all, that happens sometimes, and it doesn't change a thing about your purchase today. Let's get you checked out."</span></button>
+            <div class="inline-feedback" data-feedback-for="a"></div>
+          </div>
+          <div class="choice-item">
+            <button class="choice" data-value="b" data-good="false"><span class="badge">B</span><span>"Oh no, I am so, so sorry! The system says it was declined. It might be because of your credit history or something, but don't feel bad about it!"</span></button>
+            <div class="inline-feedback" data-feedback-for="b"></div>
+          </div>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="bonus">See how you did →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== THE SHIFT (scored debrief) ===== -->
+    <section class="screen" data-screen="debrief">
+      <div class="bg-video-wrap" style="aspect-ratio:16/6;">
+        <!-- VIDEO SLOT: debrief-endofshift.mp4, same checkout counter, quiet, register closed, dim warm light -->
+        <video autoplay muted loop playsinline><source src="assets/broadlane/debrief-endofshift.mp4" type="video/mp4"></video>
+        <span class="asset-missing-badge">Add: assets/broadlane/debrief-endofshift.mp4</span>
+        <div class="video-overlay"><div class="video-caption">End of shift. Register closed. Quiet.</div></div>
+      </div>
+      <div class="card no-pad shift-debrief">
+        <div class="shift-debrief-brenda">
+          <div class="shift-debrief-avatar">
+            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
+          </div>
+          <div>
+            <div class="shift-debrief-name">Brenda</div>
+            <div class="shift-debrief-role">Assistant Manager</div>
+          </div>
+          <p class="shift-debrief-quote">"Let's review how your approach can make all the difference in a customer interaction."</p>
+        </div>
+        <div class="shift-debrief-content">
+          <div class="shift-debrief-head">
+            <div>
+              <span class="eyebrow" style="margin-bottom:.2em;">Let's Talk Through</span>
+              <h2 style="font-size:1.7rem; margin-bottom:0;">THE SHIFT</h2>
+            </div>
+            <span class="status-pill"><span class="dot"></span>Shift Debrief &amp; Reflection</span>
+          </div>
+          <div class="dial-wrap">
+            <div class="dial">
+              <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="82" fill="none" stroke="#F2F2F2" stroke-width="18"/>
+                <circle id="dialArc" cx="100" cy="100" r="82" fill="none" stroke="#D14A34" stroke-width="18" stroke-linecap="round" stroke-dasharray="515" stroke-dashoffset="515" transform="rotate(-90 100 100)"/>
+              </svg>
+              <div class="dial-center">
+                <div class="dial-score" id="dialScore">0</div>
+                <div class="dial-outof">out of 100</div>
+                <div class="dial-verdict" id="dialVerdict"></div>
+              </div>
+            </div>
+            <div class="breakdown-list" id="breakdownList"></div>
+          </div>
+          <div class="approach-cols">
+            <div class="approach-col good"><h3>What worked well</h3><p id="goodSummary" style="margin:0;"></p></div>
+            <div class="approach-col grow"><h3>Worth another look</h3><p id="growSummary" style="margin:0;"></p></div>
+          </div>
+          <div class="nav-row"><span></span><button class="btn btn-primary" data-next>One last thing →</button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== YOUR ONE CUE ===== -->
+    <section class="screen" data-screen="one-cue">
+      <div class="card">
+        <span class="eyebrow">Your One Cue</span>
+        <h2>One small cue. Big impact.</h2>
+        <div class="mentor-banner">
+          <div class="avatar-wrap">
+            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
+            <span class="manager-badge">Manager</span>
+          </div>
+          <div class="banner-body">
+            <div class="banner-name">Brenda<span>— Assistant Manager</span></div>
+            <p class="banner-quote">"Choose the one situation you want to handle better on your next shift, then choose the response you'll use."</p>
+          </div>
+        </div>
+        <p class="section-label" style="margin-top:22px;">CHOOSE ONE CUE TO CARRY WITH YOU</p>
+        <p class="helper-text" style="margin-top:-6px;">Click the situation that feels most useful for your next shift.</p>
+        <div class="cue-table" id="cueTable">
+          <div class="cue-table-head"><div class="h1">When this happens…</div><div class="h2">…I'll do this</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The customer is rushed or distracted.</div><div class="action">I'll keep the card mention brief and move on.</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The customer gives me a clear buying cue.</div><div class="action">I'll connect the card to what matters to them.</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The customer pushes back.</div><div class="action">I'll acknowledge the concern before deciding whether to respond or let it go.</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The customer questions the value.</div><div class="action">I'll give them a different reason to consider it, not repeat the same benefit.</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The customer says no.</div><div class="action">I'll respect the decision without turning it into a debate.</div></div>
+          <div class="cue-row" data-cue-row tabindex="0"><div class="situation">The application is declined.</div><div class="action">I'll keep it matter-of-fact, avoid speculation, and smoothly continue the checkout.</div></div>
+        </div>
+        <div class="cue-confirm" id="cueConfirm">
+          <p class="section-label" style="margin-bottom:2px;">YOUR CUE</p>
+          <p class="cue-confirm-text" id="cueConfirmSituation"></p>
+          <p class="section-label" style="margin:14px 0 2px;">YOUR ACTION</p>
+          <p class="cue-confirm-text" id="cueConfirmAction"></p>
+          <p style="margin-top:14px; font-weight:700; font-style:italic;">That's the one to carry with you today.</p>
+        </div>
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled id="cueFinishBtn">Finish →</button></div>
+      </div>
+    </section>
+
+    <!-- ===== END ===== -->
+    <section class="screen" data-screen="end">
+      <div class="end-scene card on-navy">
+        <span class="eyebrow" style="color:var(--sky);">Shift Complete</span>
+        <h1 class="serif-accent" style="color:var(--white); font-size:1.8rem;">See you on the floor.</h1>
+        <p style="color:var(--sky); max-width:480px; margin:0 auto;">Ask. Listen. Adjust. That's the whole conversation.</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  // ---------- Module 4: generate the 5 customer vignettes as two-screen sequences ----------
+  const VIGNETTES = [
+    { id:'ella', label:'Ella, 1st Customer', scenario:'SCENARIO 1', photo:'m4-ella.png',
+      headline:"Helping a customer manage today's spending",
+      situation:"Ella is shopping for her sister's wedding this weekend and is already spending more than she planned.",
+      customerQuote:"I'm shopping for my sister's wedding this weekend. I'm already spending more than I planned.",
+      introChoices:[
+        {v:'a', good:false, text:"\"Lucky for you, we've got a Preferred Card here. It'll take $25 off your purchase today.\""},
+        {v:'b', good:true, text:"\"Since you're already spending quite a bit today, you might want to consider our Preferred Card. You'd get $25 off this purchase.\""}
+      ],
+      pushback:"I don't know if opening another card is worth it just for $25.",
+      opensCard:true,
+      respondChoices:[
+        {v:'a', good:true, text:"\"There'll be rewards down the road too, so it's not just about today's savings.\""},
+        {v:'b', good:false, text:"\"I get that. But $25 is still a pretty good saving on what you're buying today.\""}
+      ]
+    },
+    { id:'michelle', label:'Michelle, 2nd Customer', scenario:'SCENARIO 2', photo:'m4-michelle.png',
+      headline:'A loyal cardholder, elsewhere',
+      situation:"Michelle mostly uses her current card for everyday purchases and hasn't considered switching.",
+      customerQuote:"I mostly use my current card for everyday stuff. It works fine for me.",
+      introChoices:[
+        {v:'a', good:true, text:"\"You might like our Preferred Card too. You'd save $25 today.\""},
+        {v:'b', good:false, text:"\"If you're happy with your current card, there's probably no reason to look at another one.\""}
+      ],
+      pushback:"I don't really need another one.",
+      opensCard:false,
+      respondChoices:[
+        {v:'a', good:true, text:"\"No worries. Happy to just check you out now.\""},
+        {v:'b', good:false, text:"\"I understand, but you could still use ours for the rewards.\""}
+      ]
+    },
+    { id:'randy', label:'Randy, 3rd Customer', scenario:'SCENARIO 3', photo:'m4-randy.png',
+      headline:'Packing for a trip, pressed for time',
+      situation:"Randy is grabbing everything he needs for an overseas trip and is moving quickly.",
+      customerQuote:"Getting everything for my overseas trip.",
+      introChoices:[
+        {v:'a', good:true, text:"\"Since you're grabbing everything for your trip today, you could save $25 with our Preferred Card.\""},
+        {v:'b', good:false, text:"\"We've got a Preferred Card that can save you $25 today. Would you like to hear about it?\""}
+      ],
+      pushback:"Oh, that's great. But I need to head out right away.",
+      opensCard:false,
+      respondChoices:[
+        {v:'a', good:true, text:"\"Absolutely. Let's get you checked out.\""},
+        {v:'b', good:false, text:"\"Of course. It'll only take a minute if you want to do it now, though.\""}
+      ]
+    },
+    { id:'will', label:'Will, 4th Customer', scenario:'SCENARIO 4', photo:'m4-will.png',
+      headline:'New to store cards, a little wary',
+      situation:"Will has never used a store card before and tends to stick with what he knows.",
+      customerQuote:"I've never used a store card before. I usually just stick with the cards I know.",
+      introChoices:[
+        {v:'a', good:true, text:"\"I totally get that. If you're open to it, our Preferred Card actually takes $25 off your basket right now, which means you could grab a few extra things today completely on us, plus earn rewards for the future.\""},
+        {v:'b', good:false, text:"\"You should sign up anyway. It gives you points and a big discount.\""}
+      ],
+      pushback:"I've never heard of this card before. Is it actually worth getting?",
+      opensCard:true,
+      respondChoices:[
+        {v:'a', good:true, text:"\"It definitely can be, especially today. Your total is $45 and the card takes $25 off. Plus ongoing rewards.\""},
+        {v:'b', good:false, text:"\"Trust me, it's worth it. You just need to add your info here real quick.\""}
+      ]
+    },
+    { id:'dana', label:'Dana, 5th Customer', scenario:'SCENARIO 5', photo:'m4-dana.png',
+      headline:'Gift shopping for friends',
+      situation:"Dana is picking out gifts for a few friends and hasn't mentioned any time pressure.",
+      customerQuote:"I'm buying gifts for my girlfriends.",
+      introChoices:[
+        {v:'a', good:true, text:"\"Since you're doing your gift shopping today, the Preferred Card could take $25 off your purchase.\""},
+        {v:'b', good:false, text:"\"You should really get this card today, it's the smart choice for gift shopping.\""}
+      ],
+      pushback:"Hmm… tempting. But I need to check again before I open another card.",
+      opensCard:false,
+      respondChoices:[
+        {v:'a', good:true, text:"\"No worries. Here's our brochure.\""},
+        {v:'b', good:false, text:"\"Oh, you want to spend smartly. This card is perfect for that!\""}
+      ]
+    }
+  ];
+
+  function choiceListHTML(groupKey, category, choices, opensCard){
+    const opensAttr = opensCard===undefined ? '' : ` data-opens-card="${opensCard}"`;
+    let html = `<div class="choice-list" data-single-select="${groupKey}" data-category="${category}"${opensAttr} data-scored="true">`;
+    const letters = ['A','B','C'];
+    choices.forEach((c,i)=>{
+      html += `<div class="choice-item">
+        <button class="choice" data-value="${c.v}" data-good="${c.good}"><span class="badge">${letters[i]}</span><span>${c.text}</span></button>
+        <div class="inline-feedback" data-feedback-for="${c.v}"></div>
+      </div>`;
+    });
+    html += `</div>`;
+    return html;
+  }
+
+  const m5Intro = document.querySelector('[data-screen="m5-intro"]');
+  VIGNETTES.forEach((v,idx)=>{
+    // Screen 1, The Customer
+    const s1 = document.createElement('section');
+    s1.className = 'screen'; s1.dataset.screen = `m4-${v.id}-pitch`;
+    s1.innerHTML = `
+      <div class="module-tag"><span class="dot"></span>Module 4 · ${v.label}</div>
+      <div class="card">
+        <div class="story-scenario-tag">${v.scenario}</div>
+        <div class="scenario-panel">
+          <div class="scenario-grid">
+            <div class="story-photo-slot" style="aspect-ratio:3/4;"><div class="missing-note">ADD PHOTO<br>assets/broadlane/${v.photo}</div></div>
+            <div>
+              <p class="cust-quote" data-audio-auto="assets/broadlane/m4-${v.id}.mp3">"${v.customerQuote}"</p>
+              <h3 style="font-size:1.1rem; margin-top:20px;">${v.headline}</h3>
+              <p style="margin-bottom:0;">${v.situation}</p>
+            </div>
+          </div>
+        </div>
+        <p class="section-label">HOW WOULD YOU INTRODUCE THE CARD?</p>
+        ${choiceListHTML(`m4-${v.id}-intro`, 'pitch', v.introChoices)}
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m4-${v.id}-intro">Next →</button></div>
+      </div>`;
+    m5Intro.parentNode.insertBefore(s1, m5Intro);
+
+    // Screen 2, Handle the Pushback
+    const s2 = document.createElement('section');
+    s2.className = 'screen'; s2.dataset.screen = `m4-${v.id}-pushback`;
+    const nextLabel = idx < VIGNETTES.length-1 ? 'Next Customer →' : 'On to the big one →';
+    s2.innerHTML = `
+      <div class="module-tag"><span class="dot"></span>Module 4 · ${v.label}</div>
+      <div class="card">
+        <div class="panel-head">💬 HANDLE THE PUSHBACK</div>
+        <p class="section-label" style="color:var(--rust);">CUSTOMER PUSHBACK</p>
+        <p class="cust-quote" data-audio-auto="assets/broadlane/m4-${v.id}-2.mp3">"${v.pushback}"</p>
+        <p class="section-label" style="margin-top:26px;">HOW DO YOU RESPOND?</p>
+        ${choiceListHTML(`m4-${v.id}-respond`, 'pushback', v.respondChoices, v.opensCard)}
+        <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m4-${v.id}-respond">${nextLabel}</button></div>
+      </div>`;
+    m5Intro.parentNode.insertBefore(s2, m5Intro);
+  });
+
+  const screens = Array.from(document.querySelectorAll('.screen'));
+  let current = 0;
+  const picks = {}; // groupKey -> {value, good}
+
+  // ---------- Course nav drawer, module titles, current step highlighted ----------
+  const order = ['welcome','m1','m2','m3','m4','m5','bonus','debrief','one-cue','end'];
+  const MODULE_LABELS = {
+    welcome:'Why This Matters', m1:'Know the Card', m2:'Build the Basket', m3:'Position the Card', m4:'Handle the Pushback',
+    m5:'The Decision Chain', bonus:'Bonus', debrief:'The Shift', 'one-cue':'One Cue'
+  };
+  const railWrap = document.getElementById('railSteps');
+  let moduleNum = 0;
+  order.forEach((o)=>{
+    if(!MODULE_LABELS[o]) return; // skip welcome/end, no numbered label for those
+    moduleNum++;
+    const d = document.createElement('div');
+    d.className='rail-item'; d.dataset.mod=o;
+    d.innerHTML = `<span class="rail-marker">${moduleNum}</span><span class="rail-item-text">${MODULE_LABELS[o]}</span>`;
+    railWrap.appendChild(d);
+  });
+  function groupOf(name){
+    return order.find(o => name===o || name.startsWith(o+'-') || name.startsWith(o+'_'));
+  }
+  function updateRail(){
+    const name = screens[current].dataset.screen;
+    const g = groupOf(name);
+    const idx = order.indexOf(g);
+    Array.from(railWrap.children).forEach((el)=>{
+      const elIdx = order.indexOf(el.dataset.mod);
+      const isDone = elIdx<idx;
+      el.classList.toggle('current', elIdx===idx);
+      el.classList.toggle('done', isDone);
+      const marker = el.querySelector('.rail-marker');
+      const stepNum = Array.from(railWrap.children).indexOf(el)+1;
+      marker.textContent = isDone ? '✓' : stepNum;
+    });
+  }
+
+  // ---------- Drawer open/close ----------
+  const railDrawer = document.getElementById('railDrawer');
+  const railBackdrop = document.getElementById('railBackdrop');
+  const railToggle = document.getElementById('railToggle');
+  const railClose = document.getElementById('railClose');
+  function openDrawer(){
+    railDrawer.classList.add('open'); railBackdrop.classList.add('open');
+    railDrawer.setAttribute('aria-hidden','false'); railToggle.setAttribute('aria-expanded','true');
+  }
+  function closeDrawer(){
+    railDrawer.classList.remove('open'); railBackdrop.classList.remove('open');
+    railDrawer.setAttribute('aria-hidden','true'); railToggle.setAttribute('aria-expanded','false');
+  }
+  railToggle.addEventListener('click', ()=>{ railDrawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+  railClose.addEventListener('click', closeDrawer);
+  railBackdrop.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeDrawer(); });
+
+  function showScreen(i){
+    screens.forEach((s,idx)=>s.classList.toggle('active', idx===i));
+    current=i; updateRail();
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(screens[i].dataset.screen==='debrief') renderDebrief();
+    // Customer audio plays automatically the moment a page opens, no button required.
+    screens[i].querySelectorAll('[data-audio-auto]').forEach(el=>{ playAudio(el.dataset.audioAuto); });
+  }
+  document.body.addEventListener('click',(e)=>{
+    if(e.target.matches('[data-next]') && !e.target.disabled && current<screens.length-1) showScreen(current+1);
+  });
+  showScreen(0);
+
+  // ---------- Rail navigation: click any module to jump straight to it, then close the drawer ----------
+  railWrap.addEventListener('click', (e)=>{
+    const step = e.target.closest('.rail-item');
+    if(!step) return;
+    const mod = step.dataset.mod;
+    const target = screens.findIndex(s=>groupOf(s.dataset.screen)===mod);
+    if(target>-1){ showScreen(target); closeDrawer(); }
+  });
+
+  // ---------- Customer audio: plays automatically, no button, no click needed ----------
+  // Learner-reply audio was removed entirely per course direction; only customer lines play.
+  function playAudio(src){
+    if(!src) return;
+    try{
+      const audio = new Audio(src);
+      audio.play().catch(()=>{ /* asset not yet attached, fail silently */ });
+    }catch(e){ /* ignore */ }
+  }
+
+  // m5-d1's narrated customer scene doesn't ship with an inline audio tag in the markup,
+  // so tag it the same way as the rest of the customer lines for the auto-play system.
+  (function tagRemainingCustomerAudio(){
+    const m5d1 = document.querySelector('[data-screen="m5-d1"] .photo-scene');
+    if(m5d1) m5d1.dataset.audioAuto = 'assets/broadlane/m5-d1-customer.mp3';
+  })();
+
+  // ---------- Manual narration player: play/pause toggle, icon stays a static play glyph, resumes from wherever it was paused ----------
+  (function initNarrationPlayers(){
+    document.querySelectorAll('[data-audio-player]').forEach(wrap=>{
+      const btn = wrap.querySelector('[data-audio-toggle]');
+      const src = wrap.dataset.audioSrc;
+      if(!btn || !src) return;
+      let audio = null;
+      function setPlayingState(isPlaying){
+        btn.setAttribute('aria-pressed', isPlaying ? 'true' : 'false');
+        btn.setAttribute('aria-label', isPlaying ? "Pause audio" : "Play audio");
+      }
+      btn.addEventListener('click', ()=>{
+        if(!audio){
+          audio = new Audio(src);
+          // currentTime is untouched by pause(), so clicking play again always resumes mid-line.
+          audio.addEventListener('ended', ()=>{ audio.currentTime = 0; setPlayingState(false); });
+        }
+        if(audio.paused){
+          audio.play().catch(()=>{ /* asset not yet attached, fail silently */ });
+          setPlayingState(true);
+        } else {
+          audio.pause();
+          setPlayingState(false);
+        }
+      });
+    });
+  })();
+
+  // ---------- Feedback text bank (group|value -> text) ----------
+  const FB = {
+    'm1-quiz|today-only':'Exactly right, keeps the answer honest and simple.',
+    'm1-quiz|every-time':'Careful, the $25 is a one-time, day-of-purchase credit. Good instinct to reassure, just keep the facts accurate.',
+    'm2b1-call|not-yet':"Good call, a small basket like this doesn't need a pitch. Restraint is a skill too.",
+    'm2b1-call|yes':"This basket's pretty light, mentioning the card here can feel like a stretch for what's in front of you.",
+    'm2b2-call|yes':"Right, there's enough here that $25 off actually feels tangible.",
+    'm2b2-call|not-yet':"There's enough in this basket that it's worth a mention, no harm in bringing it up.",
+    'm2b3-call|yes':'Exactly, high-dollar moments like this are exactly when the card earns its place in the conversation.',
+    'm2b3-call|not-yet':'This is actually a strong moment to mention it, the savings are meaningful here.',
+    'm3a-compare|tailored':"That's the one, specific to the item and the total, not a recited line.",
+    'm3a-compare|generic':'This one works, but notice how much more it lands once tied to the actual item and price.',
+    'm3b-1|b':"Right, they're curious, so a fuller pitch respects their interest.",
+    'm3b-1|a':"They're actually engaged here, a little more detail would serve them well.",
+    'm3b-2|a':'Right, one clear line, no elaboration, respects their time.',
+    'm3b-2|b':"They're rushed, a shorter, single line respects that better than more detail.",
+    'm3b-3|a':'Good call. You gave them the key benefit without pushing for more.',
+    'm3b-3|b':"Too much for this customer. They've already signaled they're not looking for a conversation.",
+    'm4-ella-intro|b':"Good positioning. You connected the card to something the customer already cares about: keeping today's spending down.",
+    'm4-ella-intro|a':'Good benefit, but you missed the opportunity to connect it to the customer\'s situation.',
+    'm4-ella-respond|a':'Good value framing. You gave them another reason the card could be worthwhile.',
+    'm4-ella-respond|b':"You're still focused on the same $25. The customer is questioning overall value, give them another reason.",
+    'm4-michelle-intro|a':'Good. You introduced a relevant benefit without assuming they need to switch.',
+    'm4-michelle-intro|b':"Don't rule yourself out, the customer hasn't said they're uninterested.",
+    'm4-michelle-respond|a':'Good response. Not every objection needs to be pushed.',
+    'm4-michelle-respond|b':"They've already told you they don't need another card, don't turn it into another pitch.",
+    'm4-randy-intro|a':'Good. You made the benefit relevant without opening up a long conversation.',
+    'm4-randy-intro|b':'That invites a longer conversation. Keep it brief when the customer is clearly in a hurry.',
+    'm4-randy-respond|a':"Good read. They've told you their priority is getting out quickly. Respect it.",
+    'm4-randy-respond|b':"That's still adding time. Don't turn the objection into another pitch.",
+    'm4-will-intro|a':'Good. You acknowledged their hesitation, matched the discount to their basket, and framed it as added value.',
+    'm4-will-intro|b':'Too vague. Pushing without addressing their hesitation feels like a generic sales pitch.',
+    'm4-will-respond|a':'Good approach. You directly answered their question with concrete, immediate math.',
+    'm4-will-respond|b':'Too pushy. Brushing past their skepticism destroys trust with a hesitant customer.',
+    'm4-dana-intro|a':'Good positioning. You made the benefit relevant without telling the customer what they should do.',
+    'm4-dana-intro|b':"Too prescriptive. Give the customer a reason to consider it, not a decision to make.",
+    'm4-dana-respond|a':"Good response. You're giving the customer space to decide without adding pressure.",
+    'm4-dana-respond|b':"Too pushy. You're telling the customer what to decide instead of respecting that they want to check first.",
+    'm5-d2|b':'Well balanced. It respects their calm demeanor and doesn\'t assume interest they haven\'t shown.',
+    'm5-d2|a':'A bit abrupt for a completely neutral customer.',
+    'm5-d2|c':'Asking "finding everything okay?" after they\'ve already set the item down can make them tune out.',
+    'm5-d3|a':'Spot on. You directly addressed both fears, time commitment and credit score impact.',
+    'm5-d3|b':'Too aggressive. This can make you seem untrustworthy.',
+    'm5-d3|c':'Giving them an easy out immediately closes the door.',
+    'bonus|a':'Spot on. You kept it brief and normalized the outcome without making it awkward.',
+    'bonus|b':'Too heavy-handed. Over-apologizing draws attention to it, and guessing about credit history crosses a line.'
+  };
+
+  // ---------- Single-select engine ----------
+  document.querySelectorAll('[data-single-select]').forEach(group=>{
+    const key = group.dataset.singleSelect;
+    const scored = group.dataset.scored==='true';
+    const category = group.dataset.category;
+    group.querySelectorAll('.choice').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const val = btn.dataset.value;
+        const good = btn.dataset.good==='true';
+        group.querySelectorAll('.choice').forEach(b=>{
+          b.classList.remove('picked','is-good','is-bad');
+        });
+        group.querySelectorAll('.inline-feedback').forEach(f=>f.classList.remove('show'));
+        btn.classList.add('picked', good?'is-good':'is-bad');
+        const fb = group.querySelector(`.inline-feedback[data-feedback-for="${val}"]`);
+        if(fb){ fb.textContent = FB[key+'|'+val] || (good?'Good call.':'Worth another look next time.'); fb.classList.add('show'); fb.classList.toggle('is-good', good); fb.classList.toggle('is-bad', !good); }
+
+        document.querySelectorAll(`[data-requires="${key}"]`).forEach(nb=>nb.disabled=false);
+
+        if(scored){ picks[key] = {value:val, good:good, category:category, opensCard: group.dataset.opensCard==='true', text: btn.textContent.trim()}; }
+        updateCardsCounter();
+
+        // Module 5 decision 3 outcome reveal, customer's follow-up line auto-plays once shown
+        if(key==='m5-d3'){
+          const outcomeEl = document.getElementById('m5d3-outcome');
+          outcomeEl.style.display = good ? 'flex' : 'none';
+          if(good) playAudio(outcomeEl.dataset.audioOnreveal);
+        }
+      });
+    });
+  });
+
+  // ---------- "On-target reads today" counter: counts a moment the learner both recognized
+  // a genuine opening (cues category, correctly said "yes") and a pushback conversation that
+  // was handled well enough to end in an actual card signup, per that scenario's story.
+  // Pushback moments where the right call is to respect a decline (Michelle, Randy, Dana,
+  // and the deliberate "not yet" read in m2b1) are correctly excluded, backing off well is
+  // good judgment, but it isn't a card opened, so it shouldn't inflate this count.
+  function computeTotalCards(){
+    let total = 0;
+    document.querySelectorAll('.choice-list[data-scored="true"]').forEach(group=>{
+      const category = group.dataset.category;
+      if(category==='pushback' && group.dataset.opensCard==='true'){ total++; return; }
+      if(category==='cues' && group.querySelector('.choice[data-value="yes"][data-good="true"]')) total++;
+    });
+    return total;
+  }
+  const totalCardsToday = computeTotalCards();
+  function updateCardsCounter(){
+    let n = 0;
+    Object.values(picks).forEach(p=>{
+      if(!p.good) return;
+      if(p.category==='cues' && p.value==='yes') n++;
+      else if(p.category==='pushback' && p.opensCard) n++;
+    });
+    const el = document.getElementById('cardsCounter');
+    if(el) el.textContent = `${n}/${totalCardsToday}`;
+  }
+  updateCardsCounter();
+
+  // ---------- Tabs (Module 1) ----------
+  document.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const wrap = btn.closest('.card');
+      wrap.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      wrap.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      wrap.querySelector(`[data-tab-panel="${btn.dataset.tab}"]`).classList.add('active');
+    });
+  });
+
+  // ---------- Module 2: static product tray (redesigned per brief, no click-to-build) ----------
+  function renderTray(prefix, items){
+    const tray = document.getElementById(prefix+'-tray');
+    const totalEl = document.getElementById(prefix+'-total');
+    let total = 0;
+    items.forEach(item=>{
+      total += item.price;
+      const row = document.createElement('div');
+      row.className = 'product-row';
+      row.innerHTML = `<div class="product-thumb"><img src="assets/broadlane/${item.img}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="thumb-fallback">IMG</span></div><div class="product-name">${item.name}</div><div class="product-price">$${item.price}</div>`;
+      tray.appendChild(row);
+    });
+    totalEl.textContent = `$${total}`;
+  }
+  renderTray('m2b1', [{name:'Socks',price:6,img:'socks.png'},{name:'Notebook',price:5,img:'notebook.png'},{name:'Hair ties',price:4,img:'hair_ties.png'}]);
+  renderTray('m2b2', [{name:'Jeans',price:38,img:'jeans.png'},{name:'T-shirt',price:15,img:'t_shirt.png'},{name:'Belt',price:12,img:'belt.png'}]);
+  renderTray('m2b3', [{name:'Jewelry set',price:145,img:'jewelry_set.png'},{name:'Gift box',price:12,img:'gift_box.png'}]);
+
+  // ---------- Module 3A build-a-line ----------
+  const builtLineEl = document.getElementById('m3a-built');
+  const chipBank = document.getElementById('m3a-chips');
+  let builtText='';
+  chipBank.querySelectorAll('.chip').forEach(chip=>{
+    chip.addEventListener('click', ()=>{
+      if(chip.classList.contains('used')) return;
+      chip.classList.add('used'); builtText += chip.dataset.chip;
+      builtLineEl.textContent = builtText;
+    });
+  });
+  document.getElementById('m3a-reset').addEventListener('click', ()=>{
+    builtText=''; builtLineEl.textContent='Tap phrases below to start building your line…';
+    chipBank.querySelectorAll('.chip').forEach(c=>c.classList.remove('used'));
+  });
+
+  // ---------- Module 5 slider ----------
+  const slider = document.getElementById('m5-slider');
+  const readout = document.getElementById('m5-slider-readout');
+  function sliderText(v){
+    if(v<30) return 'Closed off, keep any mention very light, if at all';
+    if(v<70) return 'Neutral, worth a brief, well-placed mention';
+    return 'Wide open, a fuller pitch would land fine here';
+  }
+  slider.addEventListener('input', ()=>{ readout.textContent = sliderText(+slider.value); });
+
+  // ---------- Debrief: score dial + animated breakdown bars + synthesized coaching text ----------
+  const CATS = [
+    {key:'cues', label:'Understanding the Cues', icon:'👁️'},
+    {key:'pitch', label:'Making the Pitch', icon:'📣'},
+    {key:'pushback', label:'Handling Pushback', icon:'💬'},
+    {key:'decline', label:'Deliver a Decline', icon:'🪪'}
+  ];
+  const PRAISE = {
+    cues: "You read the room well, recognizing when a basket or moment actually called for a card mention, and when it didn't.",
+    pitch: "You were strongest when you tailored what you said to what was actually in front of the customer, instead of reaching for a generic line.",
+    pushback: "You listened past the first objection and responded to what the customer was really asking, rather than repeating the same point.",
+    decline: "You kept declined applications light and matter-of-fact, and moved the conversation forward without dwelling on it."
+  };
+  const GROWTH = {
+    cues: "At times a mention landed regardless of how open the customer actually seemed, pause and read the moment before deciding to bring the card up at all.",
+    pitch: "A few pitches leaned on the same general benefit rather than connecting to what the customer was actually buying, tie the line to their basket next time.",
+    pushback: "Some responses repeated the same point instead of addressing what the customer was really pushing back on, acknowledge the concern, then offer something new.",
+    decline: "A response or two added more explanation than the moment needed, keep it brief and matter-of-fact and move straight back to checkout."
+  };
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animateNumber(el, to, duration, onFrame){
+    if(prefersReducedMotion){ el.textContent = to; if(onFrame) onFrame(to); return; }
+    const start = performance.now();
+    function tick(now){
+      const t = Math.min(1, (now-start)/duration);
+      const eased = 1 - Math.pow(1-t, 3);
+      const val = Math.round(eased*to);
+      el.textContent = val;
+      if(onFrame) onFrame(val);
+      if(t<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  let debriefRendered = false;
+  function renderDebrief(){
+    const all = Object.values(picks);
+
+    // category breakdown, computed from actual scored picks (never hard-coded)
+    const catData = CATS.map(cat=>{
+      const items = all.filter(p=>p.category===cat.key);
+      const catCorrect = items.filter(p=>p.good).length;
+      const pct = items.length ? Math.round((catCorrect/items.length)*100) : 0;
+      return {...cat, pct, count: items.length};
+    });
+
+    // Overall score is the average of the 4 category percentages, not a raw correct/total
+    // across every pick, so a category with fewer reps never outweighs one with more.
+    const scoredCats = catData.filter(c=>c.count>0);
+    const score = scoredCats.length ? Math.round(scoredCats.reduce((sum,c)=>sum+c.pct,0)/scoredCats.length) : 0;
+
+    const scoreEl = document.getElementById('dialScore');
+    const verdictEl = document.getElementById('dialVerdict');
+    const arc = document.getElementById('dialArc');
+    arc.style.transition = prefersReducedMotion ? 'none' : 'stroke-dashoffset 1.1s cubic-bezier(.22,.9,.35,1)';
+    const circumference = 515;
+    verdictEl.textContent = score>=85 ? 'Great work!' : score>=65 ? 'Solid shift.' : 'Good start, room to grow.';
+    animateNumber(scoreEl, score, 1100, (val)=>{
+      arc.style.strokeDashoffset = circumference - (circumference*val/100);
+    });
+
+    const breakdownList = document.getElementById('breakdownList');
+    breakdownList.innerHTML='';
+    catData.forEach((cat, i)=>{
+      const row = document.createElement('div');
+      row.className='breakdown-row';
+      row.innerHTML = `
+        <div class="row-top"><span class="icon">${cat.icon}</span><span class="label">${cat.label}</span><span class="pct" id="pct-${cat.key}">0%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="bar-${cat.key}"></div></div>`;
+      breakdownList.appendChild(row);
+      const pctEl = row.querySelector(`#pct-${cat.key}`);
+      const barEl = row.querySelector(`#bar-${cat.key}`);
+      const delay = i*180;
+      setTimeout(()=>{
+        animateNumber(pctEl, cat.pct, 900, (val)=>{ pctEl.textContent = val+'%'; });
+        requestAnimationFrame(()=>{ barEl.style.width = cat.pct+'%'; });
+      }, prefersReducedMotion ? 0 : delay);
+      if(prefersReducedMotion){ pctEl.textContent = cat.pct+'%'; barEl.style.width = cat.pct+'%'; }
+    });
+
+    // synthesized coaching summary, behaviors and patterns only, never raw answer text
+    const withData = catData.filter(c=>c.count>0);
+    const strongest = withData.slice().sort((a,b)=>b.pct-a.pct)[0];
+    const weakest = withData.slice().sort((a,b)=>a.pct-b.pct)[0];
+    const goodEl = document.getElementById('goodSummary');
+    const growEl = document.getElementById('growSummary');
+    if(strongest){
+      goodEl.textContent = PRAISE[strongest.key] + (strongest.pct>=90 ? ' That consistency is exactly what turns a script into a real conversation.' : '');
+    } else {
+      goodEl.textContent = 'Every shift has a first rep, the patterns will click with practice.';
+    }
+    if(weakest && weakest.pct<100){
+      growEl.textContent = GROWTH[weakest.key];
+    } else {
+      growEl.textContent = "Nothing to flag here, every category was a strong, consistent read this shift.";
+    }
+  }
+
+  // ---------- Your One Cue: interactive single-selection commitment activity ----------
+  (function initCueActivity(){
+    const rows = Array.from(document.querySelectorAll('[data-cue-row]'));
+    const confirm = document.getElementById('cueConfirm');
+    const confirmSituation = document.getElementById('cueConfirmSituation');
+    const confirmAction = document.getElementById('cueConfirmAction');
+    const finishBtn = document.getElementById('cueFinishBtn');
+    function selectRow(row){
+      rows.forEach(r=>r.classList.remove('selected'));
+      row.classList.add('selected');
+      confirmSituation.textContent = row.querySelector('.situation').textContent;
+      confirmAction.textContent = row.querySelector('.action').textContent;
+      confirm.classList.add('show');
+      finishBtn.disabled = false;
+    }
+    rows.forEach(row=>{
+      row.addEventListener('click', ()=>selectRow(row));
+      row.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); selectRow(row); } });
+    });
+  })();
+
+})();
+</script>
+</body>
+</html>
