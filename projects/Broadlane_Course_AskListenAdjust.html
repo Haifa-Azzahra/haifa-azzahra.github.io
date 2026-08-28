@@ -582,7 +582,7 @@ button{ font-family:inherit; cursor:pointer; }
       <span></span><span></span><span></span>
     </button>
     <div class="rail-brand">
-      <img class="brand-logo" src="assets/broadlane/broadlane-logo.png" alt="Broadlane" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <img class="brand-logo" src="/assets/broadlane/broadlane-logo.PNG" alt="Broadlane" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
       <span class="brand-logo-fallback">BROADLANE</span>
       <span class="brand-sub">&middot; Ask, Listen, Adjust</span>
     </div>
@@ -605,7 +605,7 @@ button{ font-family:inherit; cursor:pointer; }
     <section class="screen" data-screen="welcome">
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: welcome-hero.mp4, the register right before opening, quiet/warm morning light -->
-        <video autoplay muted loop playsinline><source src="assets/broadlane/welcome-hero.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline><source src="/assets/broadlane/welcome-hero.mp4" type="video/mp4"></video>
         <span class="asset-missing-badge">Add: assets/broadlane/welcome-hero.mp4</span>
         <div class="video-overlay"><div class="video-caption">The register, right before opening. Quiet, ready, welcoming.</div></div>
       </div>
@@ -644,7 +644,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="card no-pad brenda-chat-card">
         <div class="brenda-chat-presence">
           <div class="brenda-chat-portrait">
-            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="/assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
           </div>
           <div class="brenda-chat-presence-body">
@@ -654,7 +654,7 @@ button{ font-family:inherit; cursor:pointer; }
           </div>
         </div>
         <div class="brenda-briefing">
-          <div class="briefing-audio briefing-audio-top" data-audio-player data-audio-src="assets/broadlane/welcome-brenda-briefing.mp3">
+          <div class="briefing-audio briefing-audio-top" data-audio-player data-audio-src="/assets/broadlane/welcome-brenda-briefing.mp3">
             <button type="button" class="briefing-audio-btn" data-audio-toggle aria-label="Play audio" aria-pressed="false">
               <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
             </button>
@@ -712,7 +712,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="card">
         <h2>Before you can talk about it, know it.</h2>
         <p>A customer's about to ask you something about the card. Let's make sure you've got warm, simple answers ready.</p>
-        <div class="photo-scene" data-audio-auto="assets/broadlane/m1-intro-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Oh, what's this card you guys have?"</p></div>
+        <div class="photo-scene" data-audio-auto="/assets/broadlane/m1-intro-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Oh, what's this card you guys have?"</p></div>
         <div class="nav-row"><span></span><button class="btn btn-primary" data-next>See the card details →</button></div>
       </div>
     </section>
@@ -730,7 +730,8 @@ button{ font-family:inherit; cursor:pointer; }
           <span class="eyebrow">Broadlane Preferred Card</span>
           <h2 class="serif-accent" style="font-size:1.4rem;">Save More on Every Visit</h2>
           <div class="inline-image-slot">
-            <div class="missing-note">ADD IMAGE<br>assets/broadlane/m1-save-more.png<br><small>Preferred Card product shot or lifestyle image</small></div>
+            <img src="/assets/broadlane/m1-save-more.PNG" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div class="missing-note" style="display:none;">ADD IMAGE<br>assets/broadlane/m1-save-more.png<br><small>Preferred Card product shot or lifestyle image</small></div>
           </div>
         </div>
         <div class="tab-panel" data-tab-panel="works">
@@ -752,7 +753,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 1 · Quick Check</div>
       <div class="card">
         <h2>Quick check</h2>
-        <div class="photo-scene" data-audio-auto="assets/broadlane/m1-quiz-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Does the $25 off apply next time I shop too?"</p></div>
+        <div class="photo-scene" data-audio-auto="/assets/broadlane/m1-quiz-customer.mp3"><p style="margin:0;"><strong>Customer</strong> — "Does the $25 off apply next time I shop too?"</p></div>
         <div class="choice-list" data-single-select="m1-quiz" data-category="pitch" data-scored="true">
           <div class="choice-item">
             <button class="choice" data-value="today-only" data-good="true"><span class="badge">A</span><span>"The $25 is just for today. After that, it's all about the rewards program building up."</span></button>
@@ -772,7 +773,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 2 · Build the Basket</div>
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: module2-checkout-lane.mp4, items crossing a checkout belt, close-up hands, natural light -->
-        <video autoplay muted loop playsinline><source src="assets/broadlane/module2-checkout-lane.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline><source src="/assets/broadlane/module2-checkout-lane.mp4" type="video/mp4"></video>
         <span class="asset-missing-badge">Add: assets/broadlane/module2-checkout-lane.mp4</span>
         <div class="video-overlay"><div class="video-caption">Before you say a word about the card, look at what's in the basket.</div></div>
       </div>
@@ -921,9 +922,9 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 1</div>
       <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
         <div class="story-left">
-          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b1-customer.png</div></div>
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><img src="/assets/broadlane/m3b1-customer.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/m3b1-customer.png</div></div>
           <p class="customer-context">Browsing the card display, curious</p>
-          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-1-customer.mp3">"So how does this card work, and what do I get with it?"</p>
+          <p class="cust-quote" data-audio-auto="/assets/broadlane/m3b-1-customer.mp3">"So how does this card work, and what do I get with it?"</p>
         </div>
         <div class="story-right">
           <div class="panel-body">
@@ -948,9 +949,9 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 2</div>
       <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
         <div class="story-left">
-          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b2-customer.png</div></div>
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><img src="/assets/broadlane/m3b2-customer.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/m3b2-customer.png</div></div>
           <p class="customer-context">Checking phone, glancing at the door</p>
-          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-2-customer.mp3">"Sorry, I'm in a bit of a hurry."</p>
+          <p class="cust-quote" data-audio-auto="/assets/broadlane/m3b-2-customer.mp3">"Sorry, I'm in a bit of a hurry."</p>
         </div>
         <div class="story-right">
           <div class="panel-body">
@@ -975,9 +976,9 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 3 · Part B, Customer 3</div>
       <div class="story-grid" style="grid-template-columns:1fr 1.15fr;">
         <div class="story-left">
-          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><div class="missing-note">ADD PHOTO<br>assets/broadlane/m3b3-customer.png</div></div>
+          <div class="photo-slot customer" style="aspect-ratio:3/4;"><span class="who-label">Customer</span><img src="/assets/broadlane/m3b3-customer.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/m3b3-customer.png</div></div>
           <p class="customer-context">Holding a competitor's store card, says little</p>
-          <p class="cust-quote" data-audio-auto="assets/broadlane/m3b-3-customer.mp3">"I already have a card. I'm good."</p>
+          <p class="cust-quote" data-audio-auto="/assets/broadlane/m3b-3-customer.mp3">"I already have a card. I'm good."</p>
         </div>
         <div class="story-right">
           <div class="panel-body">
@@ -1017,7 +1018,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="module-tag"><span class="dot"></span>Module 5 · The Decision Chain</div>
       <div class="bg-video-wrap">
         <!-- VIDEO SLOT: module5-branching.mp4, one continuous checkout interaction, coat purchase, calm/natural -->
-        <video autoplay muted loop playsinline><source src="assets/broadlane/module5-branching.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline><source src="/assets/broadlane/module5-branching.mp4" type="video/mp4"></video>
         <span class="asset-missing-badge">Add: assets/broadlane/module5-branching.mp4</span>
         <div class="video-overlay"><div class="video-caption">One customer. Three decisions that build on each other.</div></div>
       </div>
@@ -1072,10 +1073,10 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="card">
         <div class="scenario-panel">
           <div class="scenario-grid">
-            <div class="story-photo-slot" style="aspect-ratio:3/4;"><div class="missing-note">ADD PHOTO<br>assets/broadlane/m5-d3-customer.png</div></div>
+            <div class="story-photo-slot" style="aspect-ratio:3/4;"><img src="/assets/broadlane/m5-d3-customer.png" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/m5-d3-customer.png</div></div>
             <div>
               <p class="customer-context">Customer pausing, phone in hand, weighing it over</p>
-              <p class="cust-quote" data-audio-auto="assets/broadlane/m5-d3-customer.mp3">The customer gives a non-committal shrug: "I mean, I guess. Is it one of those things where it takes forever to sign up and ruins my credit score?"</p>
+              <p class="cust-quote" data-audio-auto="/assets/broadlane/m5-d3-customer.mp3">The customer gives a non-committal shrug: "I mean, I guess. Is it one of those things where it takes forever to sign up and ruins my credit score?"</p>
             </div>
           </div>
         </div>
@@ -1094,7 +1095,7 @@ button{ font-family:inherit; cursor:pointer; }
             <div class="inline-feedback" data-feedback-for="c"></div>
           </div>
         </div>
-        <div class="outcome-note" id="m5d3-outcome" style="display:none;" data-audio-onreveal="assets/broadlane/m5-d3-outcome.mp3">
+        <div class="outcome-note" id="m5d3-outcome" style="display:none;" data-audio-onreveal="/assets/broadlane/m5-d3-outcome.mp3">
           <span>The customer gives a small nod, looks back at the register screen: <em>"Alright, if it's just a soft check, let's see if I qualify so I can grab that discount."</em></span>
         </div>
         <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m5-d3">Bonus Round →</button></div>
@@ -1125,14 +1126,14 @@ button{ font-family:inherit; cursor:pointer; }
     <section class="screen" data-screen="debrief">
       <div class="bg-video-wrap" style="aspect-ratio:16/6;">
         <!-- VIDEO SLOT: debrief-endofshift.mp4, same checkout counter, quiet, register closed, dim warm light -->
-        <video autoplay muted loop playsinline><source src="assets/broadlane/debrief-endofshift.mp4" type="video/mp4"></video>
+        <video autoplay muted loop playsinline><source src="/assets/broadlane/debrief-endofshift.mp4" type="video/mp4"></video>
         <span class="asset-missing-badge">Add: assets/broadlane/debrief-endofshift.mp4</span>
         <div class="video-overlay"><div class="video-caption">End of shift. Register closed. Quiet.</div></div>
       </div>
       <div class="card no-pad shift-debrief">
         <div class="shift-debrief-brenda">
           <div class="shift-debrief-avatar">
-            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="/assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
           </div>
           <div>
@@ -1179,7 +1180,7 @@ button{ font-family:inherit; cursor:pointer; }
         <h2>One small cue. Big impact.</h2>
         <div class="mentor-banner">
           <div class="avatar-wrap">
-            <img src="assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <img src="/assets/broadlane/brenda-avatar.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/brenda-avatar.png</div>
             <span class="manager-badge">Manager</span>
           </div>
@@ -1328,9 +1329,9 @@ button{ font-family:inherit; cursor:pointer; }
         <div class="story-scenario-tag">${v.scenario}</div>
         <div class="scenario-panel">
           <div class="scenario-grid">
-            <div class="story-photo-slot" style="aspect-ratio:3/4;"><div class="missing-note">ADD PHOTO<br>assets/broadlane/${v.photo}</div></div>
+            <div class="story-photo-slot" style="aspect-ratio:3/4;"><img src="/assets/broadlane/${v.photo}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="missing-note" style="display:none;">ADD PHOTO<br>assets/broadlane/${v.photo}</div></div>
             <div>
-              <p class="cust-quote" data-audio-auto="assets/broadlane/m4-${v.id}.mp3">"${v.customerQuote}"</p>
+              <p class="cust-quote" data-audio-auto="/assets/broadlane/m4-${v.id}.mp3">"${v.customerQuote}"</p>
               <h3 style="font-size:1.1rem; margin-top:20px;">${v.headline}</h3>
               <p style="margin-bottom:0;">${v.situation}</p>
             </div>
@@ -1351,7 +1352,7 @@ button{ font-family:inherit; cursor:pointer; }
       <div class="card">
         <div class="panel-head">💬 HANDLE THE PUSHBACK</div>
         <p class="section-label" style="color:var(--rust);">CUSTOMER PUSHBACK</p>
-        <p class="cust-quote" data-audio-auto="assets/broadlane/m4-${v.id}-2.mp3">"${v.pushback}"</p>
+        <p class="cust-quote" data-audio-auto="/assets/broadlane/m4-${v.id}-2.mp3">"${v.pushback}"</p>
         <p class="section-label" style="margin-top:26px;">HOW DO YOU RESPOND?</p>
         ${choiceListHTML(`m4-${v.id}-respond`, 'pushback', v.respondChoices, v.opensCard)}
         <div class="nav-row"><span></span><button class="btn btn-primary" data-next disabled data-requires="m4-${v.id}-respond">${nextLabel}</button></div>
@@ -1451,7 +1452,7 @@ button{ font-family:inherit; cursor:pointer; }
   // so tag it the same way as the rest of the customer lines for the auto-play system.
   (function tagRemainingCustomerAudio(){
     const m5d1 = document.querySelector('[data-screen="m5-d1"] .photo-scene');
-    if(m5d1) m5d1.dataset.audioAuto = 'assets/broadlane/m5-d1-customer.mp3';
+    if(m5d1) m5d1.dataset.audioAuto = '/assets/broadlane/m5-d1-customer.mp3';
   })();
 
   // ---------- Manual narration player: play/pause toggle, icon stays a static play glyph, resumes from wherever it was paused ----------
@@ -1610,7 +1611,7 @@ button{ font-family:inherit; cursor:pointer; }
       total += item.price;
       const row = document.createElement('div');
       row.className = 'product-row';
-      row.innerHTML = `<div class="product-thumb"><img src="assets/broadlane/${item.img}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="thumb-fallback">IMG</span></div><div class="product-name">${item.name}</div><div class="product-price">$${item.price}</div>`;
+      row.innerHTML = `<div class="product-thumb"><img src="/assets/broadlane/${item.img}" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="thumb-fallback">IMG</span></div><div class="product-name">${item.name}</div><div class="product-price">$${item.price}</div>`;
       tray.appendChild(row);
     });
     totalEl.textContent = `$${total}`;
